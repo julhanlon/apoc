@@ -1,12 +1,21 @@
 import React, { useState } from "react";
 import { ResponsiveBar } from "@nivo/bar";
 import { Button, Card } from "@material-ui/core";
-import Typography from "@material-ui/core/Typography";
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Modal from "../Modal";
 import "./BarChart.css"
 
 export default (props) => {
+
   const [axis, setAxis] = useState("vertical");
+  const [show, setShow] = useState(true)
+
+  const showCard = () => {
+    setShow(!show)
+}
 
   const changeAxis = (e) => {
     //   console.log(e.currentTarget.value)
@@ -24,8 +33,10 @@ export default (props) => {
 
   return (
     <>
-    <div>
-      <Card id = "barCard" style = {{width: "780px", height: "530px"}}>
+    <div style = {{height: "540px", width: "780px"}}>
+    <FormControlLabel control={<Checkbox id = "checkbox" onClick={showCard} checked = {show}  />}  />
+    {show &&  <Card id = "barCard" style = {{width: "780px", height: "530px"}}>
+     
       <Typography variant="h4" component="h4">
      <p style={{textAlign: "center" }}>Air Quality Index</p>
      </Typography>
@@ -154,7 +165,7 @@ export default (props) => {
       />
 </div>
     
-      </Card>
+      </Card>}
     </div>
     </>
   );

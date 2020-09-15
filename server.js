@@ -12,7 +12,7 @@ require("dotenv").config();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+app.use("/static", express.static("media"))
 const CovidRoutes = require("./routes/covid-routes");
 const WeatherRoutes = require("./routes/weather-routes");
 const userRoutes = require("./routes/user-routes");

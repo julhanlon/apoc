@@ -9,13 +9,14 @@ const Danger = (props) => {
           height: "45%",
           width: "45%",
           marginBottom: "50px",
-          background: "grey",
+          // background: "grey",
         }}
       >
         <GaugeChart
           id="gauge-chart2"
           nrOfLevels={30}
-          percent={props.danger / 100}
+          hideText = {true}
+          percent={props.danger/100}
         />
       </div>
     </>

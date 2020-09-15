@@ -10,7 +10,7 @@ router.get("/test", (req, res) => {
 //////////////////// REGISTER ///////////////////////////
 router.post("/register", async (req, res) => {
   try {
-    let { email, password, displayName, passwordCheck, firstName, lastName, profilePic } = req.body;
+    let { email, password, displayName, passwordCheck, firstName, lastName, profilePic, location, phone } = req.body;
     //validate//
     if (!email || !password || !passwordCheck)
       return res.status(400).json({ msg: "Not all fields have been entered." });
@@ -39,7 +39,9 @@ router.post("/register", async (req, res) => {
       displayName,
       firstName,
       lastName,
-      profilePic
+      profilePic,
+      location,
+      phone,
     });
     const savedUser = await newUser.save();
     console.log(savedUser);

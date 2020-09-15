@@ -58,13 +58,7 @@ const Home = () => {
       mapStorage = JSON.parse(mapStorage);
       console.log(mapStorage.length);
       if (mapStorage.length > 0)
-        buttonSubmit(
-          mapStorage[0].city,
-          mapStorage[0].state_name,
-          mapStorage[0].county,
-          mapStorage[0].lat,
-          mapStorage[0].lng
-        );
+        buttonSubmit(mapStorage[0].city, mapStorage[0].state_name, mapStorage[0].county, mapStorage[0].lat, mapStorage[0].lng);
     }
   }, []);
   const handleAuxButton = (e) => {
@@ -83,17 +77,19 @@ const Home = () => {
       API.getMapData(city, state_name, county, lat, lng)
         .then((res) => {
           var mapObj = res.data.data[0];
-          let recentSearches = localStorage.getItem("mapStorage");
-          recentSearches = recentSearches ? JSON.parse(recentSearches) : [];
+          let recentSearches = localStorage.getItem("mapStorage")
+          recentSearches = recentSearches ? JSON.parse(recentSearches) : []
           if (recentSearches.length === 0) {
-            localStorage.setItem("mapStorage", JSON.stringify([mapObj]));
-          } else if (recentSearches.length < 5) {
-            recentSearches.unshift(mapObj);
-            localStorage.setItem("mapStorage", JSON.stringify(recentSearches));
-          } else {
-            recentSearches.unshift(mapObj);
-            recentSearches.pop();
-            localStorage.setItem("mapStorage", JSON.stringify(recentSearches));
+            localStorage.setItem("mapStorage", JSON.stringify([mapObj]))
+          }
+          else if (recentSearches.length < 5) {
+            recentSearches.unshift(mapObj)
+            localStorage.setItem("mapStorage", JSON.stringify(recentSearches))
+          }
+          else {
+            recentSearches.unshift(mapObj)
+            recentSearches.pop()
+            localStorage.setItem("mapStorage", JSON.stringify(recentSearches))
           }
           resolve(mapObj);
         })
@@ -160,11 +156,11 @@ const Home = () => {
         });
     });
   };
+  
   const loadEarthquakes = (city, state_name, lat, lng) => {
     return new Promise((resolve, reject) => {
       API.getEarthquakeData(city, state_name, lat, lng)
         .then((res) => {
-          // console.log(res.data);
           resolve(res.data);
         })
         .catch((err) => {
@@ -262,7 +258,6 @@ const Home = () => {
       scoreObj.eq * 0.3 +
       scoreObj.weather * 0.1 +
       scoreObj.air * 0.3;
-    console.log(danger);
     setDangerData(danger);
   };
 
@@ -288,7 +283,6 @@ const Home = () => {
       )
     )
       .then((values) => {
-        console.log(values);
         if (values.length !== 6) {
           setLoadingInfo(false);
           return;
@@ -314,7 +308,7 @@ const Home = () => {
         setLoadingInfo(false);
       });
   };
-  console.log("danger", dangerData);
+  
   return (
     <div className="page">
       <>
@@ -357,22 +351,24 @@ const Home = () => {
               </Card>
             </div>
             <div className="mapAndFeed" style={{ marginTop: "60px" }}>
-              <div style={{ width: "50%", marginLeft: "20px" }}>
+              <div style={{ width: "50%", marginLeft: "35px" }}>
                 {allData.mapp && (
                   <MyMap mapObj={allData.mapp} eqData={allData.eq} />
                 )}
               </div>
-              <div style={{ width: "50%", marginLeft: "20px" }}>
+              <div style={{ width: "45%"}}>
                 {allData.mapp && (
                   <FeedList mapInfo={allData.mapp} feedData={allData.feed} />
                 )}
               </div>
             </div>
 
-            <div style={{ marginTop: "60px" }}>
-              {allData.mapp && <Chart data={allData.covid} />}
+            <div style={{ display: "flex", justifyContent: "center", marginTop: "60px" }}>
+              {allData.mapp && < Chart
+                data={allData.covid}
+              />}
             </div>
-            <div className="weather" style={{ marginTop: "60px" }}>
+            <div className="weather" style={{ marginTop: "60px", marginBottom: "50px" }}>
               {/* <div style = {{display: "flex", justifyContent: "center"}}> */}
               {allData.weather && <Weather weatherObj={allData.weather} />}
               {allData.weather && <FiveDay weatherObj={allData.weather} />}

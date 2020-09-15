@@ -19,7 +19,7 @@ const convertDateFormat = (date) => {
   let day = date.getDate().toString();
   return `${month.length === 1 ? "0" + month : month}/${
     day.length === 1 ? "0" + day : day
-  }`;
+    }`;
 };
 
 const weatherIcon = (icon) => {
@@ -65,9 +65,9 @@ const FiveDay = (props) => {
               </Typography>
               <div id="fiveDay">
                 <Typography
-                  variant="caption"
+                  variant="h5"
                   component="h4"
-                  size="1.3rem"
+                  size="1.4rem"
                   color="textSecondary"
                 >
                   {convertDateFormat(new Date(props.weatherObj.day2))}:{" "}

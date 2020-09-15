@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { ResponsiveLine } from "@nivo/line";
 import { Button, Card } from "@material-ui/core";
-import Typography from "@material-ui/core/Typography";
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { shadows } from '@material-ui/system';
 import "./Chart.css"
 
@@ -20,10 +23,15 @@ const titleStyle = {
 export default (props) => {
   const [numDays, setNumDays] = useState(maxDays);
   const [showArea, setshowArea] = useState("false");
+  const [show, setShow] = useState(true)
+
+
+  const showCard = () => {
+    setShow(!show)
+}
+
 
   const changeNumber = (e) => {
-    // setNumDays({numDays, [e.target.name]: e.target.value});
-    // console.log(e.currentTarget.value)
     var numberDays = parseInt(e.currentTarget.value);
     setNumDays(numberDays);
   };
@@ -66,12 +74,15 @@ export default (props) => {
   ];
   return (
     <>
+    <div style = {{ height: "670px", width: "100%"}}>
+    <FormControlLabel style = {{marginLeft: "30px"}} control={<Checkbox id = "checkbox" onClick={showCard} checked = {show}  />}  />
     <div style = {{display: "flex", justifyContent: "center"}}>
-    <Card id = "chartCard" boxShadow = {10} >
+    {show && <Card id = "chartCard" >
     <Typography variant="h5" component="h5">
         <p style={titleStyle}>Covid Chart</p>
       </Typography>
-      <div style={{ marginLeft: "50px" }}>
+      <div style={{display: "flex", justifyContent: "space-around" }}>
+        <div>
         <Button
           variant="contained"
           color="primary"
@@ -103,6 +114,7 @@ export default (props) => {
         >
           2 Months
         </Button>
+        </div>
         <div style={{ float: "right", marginRight: "10px" }}>
           <Button
             variant="contained"
@@ -126,7 +138,7 @@ export default (props) => {
         </div>
       </div>
 
-      <div style={{ height: "500px" }}>
+      <div style={{ height: "500px", display: "flex", justifyContent: "center"}}>
         <ResponsiveLine
           data={data}
           enableArea={showArea === "true"}
@@ -198,7 +210,9 @@ export default (props) => {
           ]}
         />
       </div>
-    </Card>
+    </Card>}
+    </div>
+  
     </div>
 
 

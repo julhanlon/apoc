@@ -60,7 +60,7 @@ const Weather = (props) => {
               <h4> UVI: {props.weatherObj.uvi}</h4>
               <h4> Humidity: {props.weatherObj.humidity}</h4>
               <h4> Wind_speed: {props.weatherObj.wind_speed}</h4>
-              <div>{weatherIcon(props.weatherObj.todayIcon)}</div>
+              <div id = "icon">{weatherIcon(props.weatherObj.todayIcon)}</div>
             </CardContent>
           </Card>
         )}

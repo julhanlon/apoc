@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import ModalEq from "./ModalEq"
 import "./MyMap.css";
 
 const useStyles = makeStyles({
@@ -121,9 +122,13 @@ const MyMap = (props) => {
       <div style = {{ height: "670px", width: "100%"}}>
       <FormControlLabel style = {{marginLeft: "30px"}} control={<Checkbox id = "checkbox" onClick={showCard} checked = {show}  />}  />
       {show && <Card id="mapCard">
-          <Typography variant="h4" component="h4">
+        <div style = {{display: "flex", justifyContent: "center"}}>
+        <Typography variant="h4" component="h4">
             <p style={{ textAlign: "center" }}>Earthquakes</p>
           </Typography>
+          <ModalEq/>
+        </div>
+       
           <div style={{ display: "flex", justifyContent: "space-around" }}>
             <div className={classes.root}>
               <Typography id="discrete-slider-small-steps" gutterBottom>

@@ -83,7 +83,7 @@ const FeedList = (props) => {
       />{" "}
       Feed
       {show && (
-        <Card id="feedCard" variant="outlined">
+        <Card id="feedCard">
           <CardContent>
             <div
               style={
@@ -99,7 +99,7 @@ const FeedList = (props) => {
               }
             >
               {titleArr}
-              <Input
+              <Input id = "inputFeed"
                 name="text"
                 type="text"
                 placeholder="add comment"

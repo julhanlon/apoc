@@ -12,6 +12,7 @@ import Weather from "../Weather/Weather";
 import FiveDay from "../Weather/FiveDay";
 import MyMap from "../mapsAndCharts/MyMap";
 import CityName from "../CityName";
+import SearchChips from "../SearchChips";
 import ThemeProvider from "../ThemeProvider";
 import "./Home.css";
 const maxDays = 60;
@@ -51,14 +52,26 @@ const Home = () => {
   const [eqData, setEqData] = useState([]);
   const [dangerData, setDangerData] = useState(null);
   const [allData, setAllData] = useState(initData);
+  const [recentCities, setRecentCities] = useState([]);
+
+  // const recentSearchesBtn = (city, state_name, county, lat, lng) => {
+  //   setCities;
+  // };
 
   React.useEffect(() => {
     let mapStorage = localStorage.getItem("mapStorage");
     if (mapStorage) {
       mapStorage = JSON.parse(mapStorage);
+      setRecentCities(mapStorage);
       console.log(mapStorage.length);
       if (mapStorage.length > 0)
-        buttonSubmit(mapStorage[0].city, mapStorage[0].state_name, mapStorage[0].county, mapStorage[0].lat, mapStorage[0].lng);
+        buttonSubmit(
+          mapStorage[0].city,
+          mapStorage[0].state_name,
+          mapStorage[0].county,
+          mapStorage[0].lat,
+          mapStorage[0].lng
+        );
     }
   }, []);
   const handleAuxButton = (e) => {
@@ -77,20 +90,7 @@ const Home = () => {
       API.getMapData(city, state_name, county, lat, lng)
         .then((res) => {
           var mapObj = res.data.data[0];
-          let recentSearches = localStorage.getItem("mapStorage")
-          recentSearches = recentSearches ? JSON.parse(recentSearches) : []
-          if (recentSearches.length === 0) {
-            localStorage.setItem("mapStorage", JSON.stringify([mapObj]))
-          }
-          else if (recentSearches.length < 5) {
-            recentSearches.unshift(mapObj)
-            localStorage.setItem("mapStorage", JSON.stringify(recentSearches))
-          }
-          else {
-            recentSearches.unshift(mapObj)
-            recentSearches.pop()
-            localStorage.setItem("mapStorage", JSON.stringify(recentSearches))
-          }
+
           resolve(mapObj);
         })
         .catch((err) => {
@@ -156,7 +156,7 @@ const Home = () => {
         });
     });
   };
-  
+
   const loadEarthquakes = (city, state_name, lat, lng) => {
     return new Promise((resolve, reject) => {
       API.getEarthquakeData(city, state_name, lat, lng)
@@ -263,6 +263,7 @@ const Home = () => {
 
   const buttonSubmit = (city, state_name, county, lat, lng) => {
     setLoadingInfo(true);
+    setRecentCities(null);
     setSuggestionsData(null);
     Promise.all(
       [
@@ -287,15 +288,31 @@ const Home = () => {
           setLoadingInfo(false);
           return;
         }
-        if (!values[0].success && values[0].message && values[0].message.data) {
+        if (!values[2].success && values[2].message && values[2].message.data) {
           setLoadingInfo(false);
-          setSuggestionsData(values[0].message.data.data);
+          setSuggestionsData(values[2].message.data.data);
           return;
         }
         let dataObj = initData;
         if (values[0].success) dataObj.air = values[0].data;
         if (values[1].success) dataObj.covid = values[1].data;
-        if (values[2].success) dataObj.mapp = values[2].data;
+        if (values[2].success) {
+          let recentSearches = localStorage.getItem("mapStorage");
+          recentSearches = recentSearches ? JSON.parse(recentSearches) : [];
+          if (recentSearches.length === 0) {
+            recentSearches.push(values[2].data);
+            localStorage.setItem("mapStorage", JSON.stringify(recentSearches));
+          } else if (recentSearches.length < 5) {
+            recentSearches.unshift(values[2].data);
+            localStorage.setItem("mapStorage", JSON.stringify(recentSearches));
+          } else {
+            recentSearches.unshift(values[2].data);
+            recentSearches.pop();
+            localStorage.setItem("mapStorage", JSON.stringify(recentSearches));
+          }
+          setRecentCities(recentSearches);
+          dataObj.mapp = values[2].data;
+        }
         if (values[3].success) dataObj.eq = values[3].data;
         if (values[4].success) dataObj.feed = values[4].data;
         if (values[5].success) dataObj.weather = values[5].data;
@@ -308,7 +325,7 @@ const Home = () => {
         setLoadingInfo(false);
       });
   };
-  
+
   return (
     <div className="page">
       <>
@@ -319,6 +336,7 @@ const Home = () => {
           buttonSubmit={buttonSubmit}
           loadingInfo={loadingInfo}
         />
+        {recentCities && <SearchChips options={recentCities} />}
         {suggestions ? (
           <SuggestionsButton
             handleAuxButton={handleAuxButton}
@@ -356,19 +374,26 @@ const Home = () => {
                   <MyMap mapObj={allData.mapp} eqData={allData.eq} />
                 )}
               </div>
-              <div style={{ width: "45%"}}>
+              <div style={{ width: "45%", height: "50vh" }}>
                 {allData.mapp && (
                   <FeedList mapInfo={allData.mapp} feedData={allData.feed} />
                 )}
               </div>
             </div>
 
-            <div style={{ display: "flex", justifyContent: "center", marginTop: "60px" }}>
-              {allData.mapp && < Chart
-                data={allData.covid}
-              />}
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: "60px",
+              }}
+            >
+              {allData.mapp && <Chart data={allData.covid} />}
             </div>
-            <div className="weather" style={{ marginTop: "60px", marginBottom: "50px" }}>
+            <div
+              className="weather"
+              style={{ marginTop: "60px", marginBottom: "50px" }}
+            >
               {/* <div style = {{display: "flex", justifyContent: "center"}}> */}
               {allData.weather && <Weather weatherObj={allData.weather} />}
               {allData.weather && <FiveDay weatherObj={allData.weather} />}

@@ -17,6 +17,7 @@ const styles = {
   border: "1px solid",
   padding: "10px",
   margin: "10px",
+  marginTop: "20px",
 };
 
 const FeedList = (props) => {
@@ -27,6 +28,7 @@ const FeedList = (props) => {
   useEffect(() => {
     setFeedItems(props.feedData);
   }, [props.feedData]);
+  console.log(props.feedData);
 
   function changeText(e) {
     setText(e.target.value);
@@ -56,16 +58,29 @@ const FeedList = (props) => {
       setText("");
     }
   }
-
+  console.log(feedItems);
+  let location = () => <div>{feedItems[0].location.city}</div>;
+  // let feedTitle = props.feedData.map((item, index) => (
+  //   <container key={index}>
+  //     {item.location.city}, {item.location.state_name}
+  //   </container>
+  // ));
   let titleArr = feedItems.map((item, index) => (
-    <div key={index} style={styles}>
+    <container key={index}>
       <h3>
         {item.location.city}, {item.location.state_name}
       </h3>
-      <p>{item.author.id ? item.author.id.displayName || "" : ""}</p>
-      <p style={styles}>{item.text}</p>
-      <p>{item.date}</p>
-    </div>
+      <container>
+        <div key={index} style={styles}>
+          <h3>
+            {item.location.city}, {item.location.state_name}
+          </h3>
+          <p>{item.author.id ? item.author.id.displayName || "" : ""}</p>
+          <p style={styles}>{item.text}</p>
+          <p>{item.date}</p>
+        </div>
+      </container>
+    </container>
   ));
 
   return (
@@ -74,12 +89,16 @@ const FeedList = (props) => {
         control={<Checkbox id="checkbox" onClick={showCard} checked={show} />}
       />{" "}
       Feed
+      <div>{location}</div>
       {show && (
         <Card id="mapCard" variant="outlined">
           <CardContent>
+            asdlfads
+            {/* {feedTitle} */}
             <div
               style={
                 // { display: "flex", justifyContent: "space-around" }
+
                 {
                   border: "1px solid",
                   height: "400px",
@@ -90,6 +109,7 @@ const FeedList = (props) => {
                 }
               }
             >
+              {" "}
               {titleArr}
               <input
                 name="text"
@@ -98,7 +118,6 @@ const FeedList = (props) => {
                 onChange={changeText}
                 value={text}
               />
-
               <button type="submit" onClick={handleSubmit}>
                 Submit
               </button>

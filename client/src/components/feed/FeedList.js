@@ -1,23 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { Card } from "@material-ui/core";
+import { Card, Button, Input } from "@material-ui/core";
 //import ShowCard from "./ShowCard";
 import CardContent from "@material-ui/core/CardContent";
-
+import Typography from "@material-ui/core/Typography";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-
 import API from "../../utils/API";
+import "./FeedList.css"
 
 const convertDate = (date) => {
-  let d = date;
-  return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+  let isoDate = date;
+  return (isoDate.split("T")[0]);
 };
 
-const styles = {
-  border: "1px solid",
-  padding: "10px",
-  margin: "10px",
-};
+
 
 const FeedList = (props) => {
   const [feedItems, setFeedItems] = useState([]);
@@ -58,13 +54,25 @@ const FeedList = (props) => {
   }
 
   let titleArr = feedItems.map((item, index) => (
-    <div key={index} style={styles}>
-      <h3>
-        {item.location.city}, {item.location.state_name}
-      </h3>
+    <div key={index} id = "commentCard">
+    <Card id = "cardd">
+      <div style = {{display: "flex", justifyContent: "space-between", marginRight: "10px" , marginLeft: "10px"}}>
+      <Typography variant="p" component="p">
       <p>{item.author.id ? item.author.id.displayName || "" : ""}</p>
-      <p style={styles}>{item.text}</p>
-      <p>{item.date}</p>
+      </Typography>
+      <Typography variant="p" component="p">
+      <p>{convertDate(item.date)}</p>
+      </Typography>
+      </div>
+      <div style = {{marginLeft: "10px"}}>
+      <Typography variant="p" component="p">
+      <p >{item.text}</p>
+      </Typography>
+      </div>
+    
+    
+    </Card>
+     
     </div>
   ));
 
@@ -75,7 +83,7 @@ const FeedList = (props) => {
       />{" "}
       Feed
       {show && (
-        <Card id="mapCard" variant="outlined">
+        <Card id="feedCard" variant="outlined">
           <CardContent>
             <div
               style={
@@ -91,7 +99,7 @@ const FeedList = (props) => {
               }
             >
               {titleArr}
-              <input
+              <Input
                 name="text"
                 type="text"
                 placeholder="add comment"
@@ -99,9 +107,9 @@ const FeedList = (props) => {
                 value={text}
               />
 
-              <button type="submit" onClick={handleSubmit}>
+              <Button  size = "small" onClick={handleSubmit}>
                 Submit
-              </button>
+              </Button>
             </div>
           </CardContent>
         </Card>

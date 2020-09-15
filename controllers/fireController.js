@@ -33,41 +33,35 @@ module.exports = {
         url:
           "https://eonet.sci.gsfc.nasa.gov/api/v2.1/categories/8?status=open",
       });
-      console.log(
-        "Obj return from fireController; FIRES URL: ",
-        fires.data.events
-      );
+      let fireArr = fires.data.events;
+      // console.log("Obj return from fireController; FIRES URL: ", fireArr);
       let result = [];
 
-      const titleArr = (arr) => arr.map((item) => item.geometries[0]);
+      fireArr.map((item) => {
+        let fLat = item.geometries[0].coordinates[0];
+        let fLng = item.geometries[0].coordinates[1];
+        // let ftime = item.geometries[0].date;
+        // let converted = convertDateFormat(time);
 
-      console.log("TITLE", titleArr(fires.data.events));
-      // let array = fires.data || [];
-      // array.map((feature) => {
-      //   let eqLat = feature.geometries[0].coordinates[1];
-      //   let eqLng = feature.geometries[0].coordinates[0];
-      //   var time = new Date(geometries[0].time);
-      //   let converted = convertDateFormat(time);
+        let distance = findDistByLatLng(
+          degToRad(lat),
+          degToRad(lng),
+          degToRad(fLat),
+          degToRad(fLng)
+        );
 
-      //   let distance = findDistByLatLng(
-      //     degToRad(lat),
-      //     degToRad(lng),
-      //     degToRad(eqLat),
-      //     degToRad(eqLng)
-      //   );
-      //   console.log(distance);
+        if (distance <= d) {
+          const fireObj = {
+            distance: distance,
+            title: item.title,
+            time: item.geometries[0].date,
+            lat: fLat,
+            lng: fLng,
+          };
+          result.push(fireObj);
+        }
+      });
 
-      //   if (distance <= d) {
-      //     const eqObj = {
-      //       distance: distance,
-      //       time: converted,
-      //       title: feature.title,
-      //       lat: eqLat,
-      //       lng: eqLng,
-      //     };
-      //     result.push(eqObj);
-      //   }
-      // });
       console.log("n=", result.length, "fire objects");
       return result;
     } catch (error) {

@@ -9,29 +9,29 @@ router.get("/api/fires", async (req, res) => {
     return res.status(400).json({ msg: "Please enter city and state" });
 
   try {
-    // const dbCityInfo = await controller.db.findInfoFromCity(city, state_name);
-    // console.log("FROM FIRE ROUTES", dbCityInfo);
+    // var dat = await controller.fires.getFireData(
+    //   -119.605436006,
+    //   37.841271365,
+    //   d
+    // );
+    // console.log(dat);
 
-    var data = await controller.fires.getFireData(
-      -119.605436006,
-      37.841271365,
-      d
-    );
+    const dbCityInfo = await controller.db.findInfoFromCity(city, state_name);
+    console.log("FROM FIRE ROUTES", dbCityInfo);
+    // console.log("FROM FIRE ROUTES", dbCityInfo.data[0].lat);
 
-    console.log(data);
+    if (dbCityInfo.data.length >= 1) {
+      var data =
+        (await controller.fires.getFireData(
+          dbCityInfo.data[0].lat,
+          dbCityInfo.data[0].lng,
+          d
+        )) || [];
 
-    // if (dbCityInfo.data.length >= 1) {
-    //   var data =
-    //     (await controller.fires.getFireData(
-    //       dbcityInfo.data[0].lat,
-    //       dbcityInfo.data[0].lng
-    //     )) || [];
-
-    // console.log(data);
-    return res.json({ data });
-    // } else {
-    //   return res.status(400).json({ data: [] });
-    // }
+      return res.json({ data });
+    } else {
+      return res.status(400).json({ data: [] });
+    }
   } catch (error) {
     return res.status(500).json({ msg: "no data found" });
   }

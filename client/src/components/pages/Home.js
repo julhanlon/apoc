@@ -15,6 +15,7 @@ import CityName from "../CityName";
 import AuthButtons from "../auth/AuthButtons";
 import ThemeProvider from "../ThemeProvider";
 import "./Home.css";
+
 const maxDays = 60;
 const SuggestionsButton = (props) => {
   var array = props.options;

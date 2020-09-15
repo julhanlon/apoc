@@ -5,6 +5,7 @@ import { Input, Button } from "@material-ui/core";
 import Header from "../Header";
 import { useUserContext } from "../context/UserContext";
 import ErrorNotice from ".././misc/ErrorNotice";
+import RegisterButton from "./ResigterButton"
 import "./Login.css"
 
 const divStyle = {
@@ -40,7 +41,8 @@ export default function Login() {
   };
   return (
     <>
-      <Header />
+    <RegisterButton/>
+      <Header/>
       <div className="page" style={divStyle}>
         <div id = "login">
           <div>

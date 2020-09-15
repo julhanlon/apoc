@@ -5,7 +5,7 @@ import { InputLabel, Container } from '@material-ui/core';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import { Card } from '@material-ui/core';
-import AuthButtons from "../auth/AuthButtons";
+import ProfileButtons from "../auth/ProfileButtons";
 
 
 import "./Profile.css"
@@ -128,7 +128,7 @@ const Profile = () => {
 
   return (
     <div>
-<AuthButtons  />
+<ProfileButtons  />
       <Container >
         <div style={{ display: "flex", justifyContent: "center" }}>
           <Card id="profileCard" style={{ height: "600px", maginTop: "20px", width: "500px", marginTop: "60px" }}>

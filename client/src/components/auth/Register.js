@@ -1,14 +1,13 @@
 import Axios from "axios";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-
+import Header from "../Header";
+import LoginButtons from "./LoginButtons"
 import { useUserContext } from "../context/UserContext";
 import ErrorNotice from ".././misc/ErrorNotice";
 import { Input, Button } from "@material-ui/core";
+import "./Register.css"
 
-const divStyle = {
-  marginLeft: "60px",
-};
 
 export default function Register() {
   const [email, setEmail] = useState();
@@ -41,12 +40,16 @@ export default function Register() {
     }
   };
   return (
-    <div className="page" style={divStyle}>
+    <>
+    <LoginButtons/>
+    <Header/>
+    <div >
       {/* <h2>Register</h2> */}
       {error && (
         <ErrorNotice message={error} clearError={() => setError(undefined)} />
       )}
-      <form className="form" onSubmit={submit} style = {{marginTop: "60px"}}>
+      <div id = "form">
+      <form className="form" onSubmit={submit} >
         <label htmlFor="register-email">Email</label>
         <Input
           id="register-email"
@@ -79,6 +82,9 @@ export default function Register() {
           Register
         </Button>
       </form>
+      </div>
+  
     </div>
+    </>
   );
 }

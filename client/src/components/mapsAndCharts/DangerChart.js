@@ -14,12 +14,12 @@ const [dangerValue, setDangerValue] = useState("");
           height: "45%",
           width: "45%",
           marginBottom: "50px",
-          // background: "grey",
         }}
       >
         <GaugeChart
           id="gauge-chart2"
           nrOfLevels={30}
+          colors={["#edd134","#FFC371","#FF5F6D"]} 
           hideText = {true}
           percent={props.danger/100}
         />

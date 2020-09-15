@@ -10,13 +10,13 @@ const buttonStyle = {
 };
 
 
-const LoginButtons = () => {
+const RegisterButton = () => {
     const { userData, setUserData } = useUserContext();
 
     const history = useHistory();
 
     const register = () => history.push("/register");
-    const login = () => history.push("/login");
+
 
 
 
@@ -32,14 +32,10 @@ const LoginButtons = () => {
                             Register
     </Button>
 
-                        <Button variant="contained" color="secondary" size="small" style={buttonStyle} onClick={login}>
-                            Log in
-    </Button>
                     </>
                 )}
         </nav>
     );
 };
 
-export default LoginButtons;
-
+export default RegisterButton;

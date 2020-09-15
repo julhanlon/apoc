@@ -10,10 +10,8 @@ import Fire from "../ProfilePage/images/fire.png"
 
 const convertDate = (date) => {
   let isoDate = date;
-  return (isoDate.split("T")[0]);
+  return isoDate.split("T")[0];
 };
-
-
 
 const FeedList = (props) => {
   const [feedItems, setFeedItems] = useState([]);
@@ -23,6 +21,7 @@ const FeedList = (props) => {
   useEffect(() => {
     setFeedItems(props.feedData);
   }, [props.feedData]);
+  console.log(props.feedData);
 
   function changeText(e) {
     setText(e.target.value);
@@ -52,7 +51,13 @@ const FeedList = (props) => {
       setText("");
     }
   }
-
+  console.log(feedItems);
+  let location = () => <div>{feedItems[0].location.city}</div>;
+  // let feedTitle = props.feedData.map((item, index) => (
+  //   <container key={index}>
+  //     {item.location.city}, {item.location.state_name}
+  //   </container>
+  // ));
   let titleArr = feedItems.map((item, index) => (
     <div key={index} id = "commentCard">
     <Card id = "cardd">
@@ -88,12 +93,15 @@ const FeedList = (props) => {
         control={<Checkbox id="checkbox" onClick={showCard} checked={show} />}
       />{" "}
       Feed
+      <div>{location}</div>
       {show && (
         <Card id="feedCard">
           <CardContent>
+            {/* {feedTitle} */}
             <div
               style={
                 // { display: "flex", justifyContent: "space-around" }
+
                 {
                   border: "1px solid",
                   height: "600px",
@@ -104,16 +112,17 @@ const FeedList = (props) => {
                 }
               }
             >
+              {" "}
               {titleArr}
-              <Input id = "inputFeed"
+              <Input
+                id="inputFeed"
                 name="text"
                 type="text"
                 placeholder="add comment"
                 onChange={changeText}
                 value={text}
               />
-
-              <Button  size = "small" onClick={handleSubmit}>
+              <Button size="small" onClick={handleSubmit}>
                 Submit
               </Button>
             </div>

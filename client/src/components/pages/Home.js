@@ -12,6 +12,7 @@ import Weather from "../Weather/Weather";
 import FiveDay from "../Weather/FiveDay";
 import MyMap from "../mapsAndCharts/MyMap";
 import CityName from "../CityName";
+import SearchChips from "../SearchChips";
 import AuthButtons from "../auth/AuthButtons";
 import "./Home.css";
 
@@ -46,23 +47,34 @@ const initDanger = {
   air: { show: true, score: 0 },
   covid: { show: true, score: 0 },
   eq: { show: true, score: 0 },
-  weather: { show: true, score: 0 }
+  weather: { show: true, score: 0 },
 };
-
 
 const Home = () => {
   const [loadingInfo, setLoadingInfo] = useState(false);
   const [suggestions, setSuggestionsData] = useState(null);
   const [dangerData, setDangerData] = useState(initDanger);
   const [allData, setAllData] = useState(initData);
+  const [recentCities, setRecentCities] = useState([]);
+
+  // const recentSearchesBtn = (city, state_name, county, lat, lng) => {
+  //   setCities;
+  // };
 
   React.useEffect(() => {
     let mapStorage = localStorage.getItem("mapStorage");
     if (mapStorage) {
       mapStorage = JSON.parse(mapStorage);
+      setRecentCities(mapStorage);
       console.log(mapStorage.length);
       if (mapStorage.length > 0)
-        buttonSubmit(mapStorage[0].city, mapStorage[0].state_name, mapStorage[0].county, mapStorage[0].lat, mapStorage[0].lng);
+        buttonSubmit(
+          mapStorage[0].city,
+          mapStorage[0].state_name,
+          mapStorage[0].county,
+          mapStorage[0].lat,
+          mapStorage[0].lng
+        );
     }
   }, []);
   const handleAuxButton = (e) => {
@@ -81,20 +93,7 @@ const Home = () => {
       API.getMapData(city, state_name, county, lat, lng)
         .then((res) => {
           var mapObj = res.data.data[0];
-          let recentSearches = localStorage.getItem("mapStorage")
-          recentSearches = recentSearches ? JSON.parse(recentSearches) : []
-          if (recentSearches.length === 0) {
-            localStorage.setItem("mapStorage", JSON.stringify([mapObj]))
-          }
-          else if (recentSearches.length < 5) {
-            recentSearches.unshift(mapObj)
-            localStorage.setItem("mapStorage", JSON.stringify(recentSearches))
-          }
-          else {
-            recentSearches.unshift(mapObj)
-            recentSearches.pop()
-            localStorage.setItem("mapStorage", JSON.stringify(recentSearches))
-          }
+
           resolve(mapObj);
         })
         .catch((err) => {
@@ -226,39 +225,39 @@ const Home = () => {
       }
     }
     if (allData.weather) {
-    let weatherDanger = allData.weather.temp;
-    if (weatherDanger <= 273 || weatherDanger >= 313) {
-      scoreObj.weather = 100;
-    } else if (weatherDanger <= 295 && weatherDanger < 313) {
-      scoreObj.weather = 75;
-    } else if (weatherDanger > 273 || weatherDanger < 295) {
-      scoreObj.weather = 50;
+      let weatherDanger = allData.weather.temp;
+      if (weatherDanger <= 273 || weatherDanger >= 313) {
+        scoreObj.weather = 100;
+      } else if (weatherDanger <= 295 && weatherDanger < 313) {
+        scoreObj.weather = 75;
+      } else if (weatherDanger > 273 || weatherDanger < 295) {
+        scoreObj.weather = 50;
+      }
     }
-  }
-  if (allData.eq && allData.eq.length > 0) {
-    let eqDanger = allData.eq.length;
-    if (eqDanger >= 200) {
-      scoreObj.eq = 100;
-    } else if (eqDanger >= 100 && eqDanger < 200) {
-      scoreObj.eq = 75;
-    } else if (eqDanger >= 50 && eqDanger < 100) {
-      scoreObj.eq = 50;
-    } else if (eqDanger < 50) {
-      scoreObj.eq = 25;
+    if (allData.eq && allData.eq.length > 0) {
+      let eqDanger = allData.eq.length;
+      if (eqDanger >= 200) {
+        scoreObj.eq = 100;
+      } else if (eqDanger >= 100 && eqDanger < 200) {
+        scoreObj.eq = 75;
+      } else if (eqDanger >= 50 && eqDanger < 100) {
+        scoreObj.eq = 50;
+      } else if (eqDanger < 50) {
+        scoreObj.eq = 25;
+      }
     }
-  }
-  if (allData.air) {
-    let airDanger = allData.air.aqi;
-    if (airDanger >= 200) {
-      scoreObj.air = 100;
-    } else if (airDanger >= 150 && airDanger < 200) {
-      scoreObj.air = 75;
-    } else if (airDanger >= 75 && airDanger < 150) {
-      scoreObj.air = 50;
-    } else if (airDanger < 75) {
-      scoreObj.air = 25;
+    if (allData.air) {
+      let airDanger = allData.air.aqi;
+      if (airDanger >= 200) {
+        scoreObj.air = 100;
+      } else if (airDanger >= 150 && airDanger < 200) {
+        scoreObj.air = 75;
+      } else if (airDanger >= 75 && airDanger < 150) {
+        scoreObj.air = 50;
+      } else if (airDanger < 75) {
+        scoreObj.air = 25;
+      }
     }
-  } 
     let danger =
       scoreObj.covid * 0.3 +
       scoreObj.eq * 0.3 +
@@ -267,9 +266,9 @@ const Home = () => {
     setDangerData(danger);
   };
 
-
   const buttonSubmit = (city, state_name, county, lat, lng) => {
     setLoadingInfo(true);
+    setRecentCities(null);
     setSuggestionsData(null);
     Promise.all(
       [
@@ -302,7 +301,23 @@ const Home = () => {
         let dataObj = initData;
         if (values[0].success) dataObj.air = values[0].data;
         if (values[1].success) dataObj.covid = values[1].data;
-        if (values[2].success) dataObj.mapp = values[2].data;
+        if (values[2].success) {
+          let recentSearches = localStorage.getItem("mapStorage");
+          recentSearches = recentSearches ? JSON.parse(recentSearches) : [];
+          if (recentSearches.length === 0) {
+            recentSearches.push(values[2].data);
+            localStorage.setItem("mapStorage", JSON.stringify(recentSearches));
+          } else if (recentSearches.length < 5) {
+            recentSearches.unshift(values[2].data);
+            localStorage.setItem("mapStorage", JSON.stringify(recentSearches));
+          } else {
+            recentSearches.unshift(values[2].data);
+            recentSearches.pop();
+            localStorage.setItem("mapStorage", JSON.stringify(recentSearches));
+          }
+          setRecentCities(recentSearches);
+          dataObj.mapp = values[2].data;
+        }
         if (values[3].success) dataObj.eq = values[3].data;
         if (values[4].success) dataObj.feed = values[4].data;
         if (values[5].success) dataObj.weather = values[5].data;
@@ -319,21 +334,22 @@ const Home = () => {
   return (
     <div className="page">
       <>
-      <AuthButtons />
+        <AuthButtons />
         <Header />
-        <div style = {{marginTop: "60px"}}>
-        <Search
-          className="search"
-          buttonSubmit={buttonSubmit}
-          loadingInfo={loadingInfo}
-        />
-        {suggestions ? (
-          <SuggestionsButton
-            handleAuxButton={handleAuxButton}
-            options={suggestions}
+        <div style={{ marginTop: "60px" }}>
+          <Search
+            className="search"
+            buttonSubmit={buttonSubmit}
+            loadingInfo={loadingInfo}
           />
-        ) : null}
-         </div>
+          {recentCities && <SearchChips options={recentCities} />}
+          {suggestions ? (
+            <SuggestionsButton
+              handleAuxButton={handleAuxButton}
+              options={suggestions}
+            />
+          ) : null}
+        </div>
         <div id="loader">{loadingInfo ? <Loading /> : null}</div>
         {!loadingInfo ? (
           <>
@@ -372,12 +388,19 @@ const Home = () => {
               </div>
             </div>
 
-            <div style={{ display: "flex", justifyContent: "center", marginTop: "60px" }}>
-              {allData.mapp && < Chart
-                data={allData.covid}
-              />}
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: "60px",
+              }}
+            >
+              {allData.mapp && <Chart data={allData.covid} />}
             </div>
-            <div className="weather" style={{ marginTop: "60px", marginBottom: "50px" }}>
+            <div
+              className="weather"
+              style={{ marginTop: "60px", marginBottom: "50px" }}
+            >
               {/* <div style = {{display: "flex", justifyContent: "center"}}> */}
               {allData.weather && <Weather weatherObj={allData.weather} />}
               {allData.weather && <FiveDay weatherObj={allData.weather} />}

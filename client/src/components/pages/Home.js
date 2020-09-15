@@ -12,6 +12,7 @@ import Weather from "../Weather/Weather";
 import FiveDay from "../Weather/FiveDay";
 import MyMap from "../mapsAndCharts/MyMap";
 import CityName from "../CityName";
+import AuthButtons from "../auth/AuthButtons";
 import ThemeProvider from "../ThemeProvider";
 import "./Home.css";
 const maxDays = 60;
@@ -40,16 +41,19 @@ const initData = {
   feed: [],
   weather: null,
 };
+
+const initDanger = {
+  air: { show: true, score: 0 },
+  covid: { show: true, score: 0 },
+  eq: { show: true, score: 0 },
+  weather: { show: true, score: 0 }
+};
+
+
 const Home = () => {
-  const [covidData, setCovidData] = useState([]);
   const [loadingInfo, setLoadingInfo] = useState(false);
-  const [weatherData, setWeatherData] = useState(null);
-  const [airData, setAirData] = useState(null);
   const [suggestions, setSuggestionsData] = useState(null);
-  const [mapInfo, setMapInfo] = useState(null);
-  const [feedData, setFeed] = useState([]);
-  const [eqData, setEqData] = useState([]);
-  const [dangerData, setDangerData] = useState(null);
+  const [dangerData, setDangerData] = useState(initDanger);
   const [allData, setAllData] = useState(initData);
 
   React.useEffect(() => {
@@ -263,6 +267,7 @@ const Home = () => {
     setDangerData(danger);
   };
 
+
   const buttonSubmit = (city, state_name, county, lat, lng) => {
     setLoadingInfo(true);
     setSuggestionsData(null);
@@ -314,8 +319,9 @@ const Home = () => {
   return (
     <div className="page">
       <>
-        {/* <ThemeProvider> */}
+      <AuthButtons />
         <Header />
+        <div style = {{marginTop: "60px"}}>
         <Search
           className="search"
           buttonSubmit={buttonSubmit}
@@ -327,6 +333,7 @@ const Home = () => {
             options={suggestions}
           />
         ) : null}
+         </div>
         <div id="loader">{loadingInfo ? <Loading /> : null}</div>
         {!loadingInfo ? (
           <>

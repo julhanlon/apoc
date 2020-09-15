@@ -1,7 +1,12 @@
-import React from "react";
+import React, {useState} from "react";
 import GaugeChart from "react-gauge-chart";
 
 const Danger = (props) => {
+
+
+
+const [dangerValue, setDangerValue] = useState("");
+
   return (
     <>
       <div

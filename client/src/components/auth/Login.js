@@ -2,13 +2,15 @@ import Axios from "axios";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Input, Button } from "@material-ui/core";
-
+import Header from "../Header";
 import { useUserContext } from "../context/UserContext";
 import ErrorNotice from ".././misc/ErrorNotice";
+import "./Login.css"
 
 const divStyle = {
-  marginTop: "60px",
-  marginLeft: "60px",
+  marginTop: "170px",
+  display: "flex",
+  justifyContent: "center",
 };
 
 export default function Login() {
@@ -37,29 +39,41 @@ export default function Login() {
     }
   };
   return (
-    <div className="page" style={divStyle}>
-      <form className="form" onSubmit={submit}>
-        <label htmlFor="login-email">Email</label>
-        <Input
-          id="login-email"
-          type="email"
-          onChange={(e) => setEmail(e.target.value)}
-        />
+    <>
+      <Header />
+      <div className="page" style={divStyle}>
+        <div id = "login">
+          <div>
+            <form className="form" onSubmit={submit}>
 
-        <label htmlFor="login-password">Password</label>
-        <Input
-          id="login-password"
-          type="password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
+              <label htmlFor="login-email">Email:  </label>
+              <Input
+                id="login-email"
+                type="email"
+                onChange={(e) => setEmail(e.target.value)}
+              />
 
-        <Button variant="contained" color="primary" size = "small" type="submit" value="Log in">
-          Login
-        </Button>
-      </form>
-      {error && (
-        <ErrorNotice message={error} clearError={() => setError(undefined)} />
-      )}
-    </div>
+              <label htmlFor="login-password">Password: </label>
+              <Input
+                id="login-password"
+                type="password"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+
+              <Button variant="contained" color="primary" size="small" type="submit" value="Log in">
+                Login
+     </Button>
+            </form>
+          </div>
+          <div>
+            <p>forget your password?</p>
+          </div>
+        </div>
+
+        {error && (
+          <ErrorNotice message={error} clearError={() => setError(undefined)} />
+        )}
+      </div>
+    </>
   );
 }

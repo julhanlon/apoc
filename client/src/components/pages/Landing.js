@@ -1,26 +1,29 @@
 import React, { useState } from "react";
 import ParticlesBg from "particles-bg";
 import { Typography } from "@material-ui/core";
-// import "./style.css";
+import LoginButtons from "../auth/LoginButtons";
+import "./Landing.css"
+
 
 const Landing = () => {
   const [name, setName] = useState("React");
 
   let config = {
-    num: [4, 7],
-    rps: 0.5,
+    num: [4, 6],
+    rps: 0.6,
     radius: [5, 40],
-    life: [1.5, 3],
+    life: [1.5, 20],
     v: [2, 3],
     tha: [-40, 40],
     alpha: [0.6, 0],
-    scale: [0.1, 0.4],
+    scale: [0.1, 0.2],
     position: "all",
+    type: "ball",
     // body: "import some image",
-    color: ["random", "#ff0000"],
-    cross: "dead",
-    // emitter: "follow",
-    random: 15,
+    color: ["#c9c7c1", "‎#94928e"],
+    // cross: "dead",
+    emitter: "follow",
+    random: 5,
   };
 
   if (Math.random() > 0.85) {
@@ -41,7 +44,9 @@ const Landing = () => {
   }
 
   return (
-    <div>
+    <>
+    <LoginButtons/>
+    <div style = {{display: "flex" , justifyContent: "center", alignItems: "center", marginTop: "150px" }}>
       <Typography variant="h1" component="h1">
         <span className="title">APOCALYPSE</span>
         <span className="title blink">. . . ?</span>
@@ -49,6 +54,7 @@ const Landing = () => {
 
       <ParticlesBg type="custom" config={config} bg={true} />
     </div>
+    </>
   );
 };
 

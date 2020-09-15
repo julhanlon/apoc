@@ -41,25 +41,33 @@ const Weather = (props) => {
 
   return (
     <>
-      <div style={{ height: "540px", width: "300px" }}>
+      <div style={{ height: "540px", width: "330px" }}>
         <FormControlLabel
           control={<Checkbox id="checkbox" onClick={showCard} checked={show} />}
         />
         {show && (
           <Card
             id="card"
-            style={{ width: "300px", height: "530px" }}
+            style={{ width: "320px", height: "530px" }}
             variant="outlined"
           >
             {/* <FormControlLabel control={<Checkbox onClick={showCard} checked = {show}  />}  /> */}
-            <CardContent>
+            <CardContent id = "cardContent">
               <Typography variant="h4" component="h4">
-                <p style={{ textAlign: "center" }}>Current Weather</p>
+                <p>Current Weather</p>
               </Typography>
-              <h4> Temp: {tempConversion(props.weatherObj.temp)}°F</h4>
-              <h4> UVI: {props.weatherObj.uvi}</h4>
-              <h4> Humidity: {props.weatherObj.humidity}</h4>
-              <h4> Wind_speed: {props.weatherObj.wind_speed}</h4>
+              <Typography variant="h5" component="h5" size = "1.4rem" color="textSecondary">
+              <p> Temp: {tempConversion(props.weatherObj.temp)}°F</p>
+              </Typography>
+              <Typography variant="h5" component="h4" size = "1.4rem" color="textSecondary">
+              <p> UVI: {props.weatherObj.uvi}</p>
+              </Typography>
+              <Typography variant="h5" component="h4" size = "1.4rem" color="textSecondary">
+              <p> Humidity: {props.weatherObj.humidity}%</p>
+              </Typography>
+              <Typography variant="h5" component="h5" size = "1.4rem" color="textSecondary">
+              <p> Wind Speed: {props.weatherObj.wind_speed} mph</p>
+              </Typography>
               <div id = "icon">{weatherIcon(props.weatherObj.todayIcon)}</div>
             </CardContent>
           </Card>

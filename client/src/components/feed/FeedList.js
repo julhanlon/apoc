@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Card, Button, Input } from "@material-ui/core";
-//import ShowCard from "./ShowCard";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import API from "../../utils/API";
 import "./FeedList.css"
+import Fire from "../ProfilePage/images/fire.png"
 
 const convertDate = (date) => {
   let isoDate = date;
@@ -56,14 +56,20 @@ const FeedList = (props) => {
   let titleArr = feedItems.map((item, index) => (
     <div key={index} id = "commentCard">
     <Card id = "cardd">
-      <div style = {{display: "flex", justifyContent: "space-between", marginRight: "10px" , marginLeft: "10px"}}>
+      <div style = {{display: "flex", justifyContent: "space-between"}}>
+        <div style = {{display: "flex", justifyContent: "center"}}>
+        <img id = "feedImage" src={Fire} alt = "icon"/>
       <Typography variant="p" component="p">
       <p>{item.author.id ? item.author.id.displayName || "" : ""}</p>
       </Typography>
+        </div>
+      <div style = {{display: "flex", justifyContent: "space-between", marginRight: "10px" , marginLeft: "10px"}}>
       <Typography variant="p" component="p">
       <p>{convertDate(item.date)}</p>
       </Typography>
       </div>
+      </div>
+    
       <div style = {{marginLeft: "10px"}}>
       <Typography variant="p" component="p">
       <p >{item.text}</p>

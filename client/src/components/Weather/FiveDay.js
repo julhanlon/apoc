@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, Paper } from "@material-ui/core";
+import { Card } from "@material-ui/core";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -84,16 +84,20 @@ const FiveDay = (props) => {
                   {tempConversion(props.weatherObj.weather3)}°F{" "}
                   {weatherIcon(props.weatherObj.main3)}
                 </Typography>
-                <Typography
-                  variant="h5"
-                  component="h4"
-                  size="1.4rem"
-                  color="textSecondary"
-                >
-                  {convertDateFormat(new Date(props.weatherObj.day4))}:{" "}
-                  {tempConversion(props.weatherObj.weather4)}°F{" "}
+                <div style = {{display: "flex", justifyContent: "space-between", marginTop: "8px" }}>
+                  <div >
+                    <Typography
+                      variant="h5"
+                      component="h4"
+                      size="1.4rem"
+                      color="textSecondary"
+                    >
+                      {convertDateFormat(new Date(props.weatherObj.day4))}:{" "}
+                      {tempConversion(props.weatherObj.weather4)}°F{" "}
+                    </Typography>
+                  </div>
                   {weatherIcon(props.weatherObj.main4)}
-                </Typography>
+                </div>
                 <Typography
                   variant="h5"
                   component="h4"

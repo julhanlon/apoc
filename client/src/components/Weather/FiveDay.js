@@ -73,15 +73,43 @@ const FiveDay = (props) => {
                   {convertDateFormat(new Date(props.weatherObj.day2))}:{" "}
                   {tempConversion(props.weatherObj.weather2)}°F{" "}
                   {weatherIcon(props.weatherObj.main2)}
+                </Typography>
+                <Typography
+                  variant="h5"
+                  component="h4"
+                  size="1.4rem"
+                  color="textSecondary"
+                >
                   {convertDateFormat(new Date(props.weatherObj.day3))}:{" "}
                   {tempConversion(props.weatherObj.weather3)}°F{" "}
                   {weatherIcon(props.weatherObj.main3)}
+                </Typography>
+                <Typography
+                  variant="h5"
+                  component="h4"
+                  size="1.4rem"
+                  color="textSecondary"
+                >
                   {convertDateFormat(new Date(props.weatherObj.day4))}:{" "}
                   {tempConversion(props.weatherObj.weather4)}°F{" "}
                   {weatherIcon(props.weatherObj.main4)}
+                </Typography>
+                <Typography
+                  variant="h5"
+                  component="h4"
+                  size="1.4rem"
+                  color="textSecondary"
+                >
                   {convertDateFormat(new Date(props.weatherObj.day5))}:{" "}
                   {tempConversion(props.weatherObj.weather5)}°F{" "}
                   {weatherIcon(props.weatherObj.main5)}
+                </Typography>
+                <Typography
+                  variant="h5"
+                  component="h4"
+                  size="1.4rem"
+                  color="textSecondary"
+                >
                   {convertDateFormat(new Date(props.weatherObj.day6))}:{" "}
                   {tempConversion(props.weatherObj.weather6)}°F{" "}
                   {weatherIcon(props.weatherObj.main6)}

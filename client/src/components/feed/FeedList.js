@@ -1,23 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Card } from "@material-ui/core";
+import { Card, Button, Input } from "@material-ui/core";
 //import ShowCard from "./ShowCard";
 import CardContent from "@material-ui/core/CardContent";
-
+import Typography from "@material-ui/core/Typography";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-
 import API from "../../utils/API";
+import "./FeedList.css";
 
 const convertDate = (date) => {
-  let d = date;
-  return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
-};
-
-const styles = {
-  border: "1px solid",
-  padding: "10px",
-  margin: "10px",
-  marginTop: "20px",
+  let isoDate = date;
+  return isoDate.split("T")[0];
 };
 
 const FeedList = (props) => {
@@ -66,32 +59,41 @@ const FeedList = (props) => {
   //   </container>
   // ));
   let titleArr = feedItems.map((item, index) => (
-    <container key={index}>
-      <h3>
-        {item.location.city}, {item.location.state_name}
-      </h3>
-      <container>
-        <div key={index} style={styles}>
-          <h3>
-            {item.location.city}, {item.location.state_name}
-          </h3>
-          <p>{item.author.id ? item.author.id.displayName || "" : ""}</p>
-          <p style={styles}>{item.text}</p>
-          <p>{item.date}</p>
+    <div key={index} id="commentCard">
+      <Card id="cardd">
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginRight: "10px",
+            marginLeft: "10px",
+          }}
+        >
+          <Typography variant="p" component="p">
+            <p>{item.author.id ? item.author.id.displayName || "" : ""}</p>
+          </Typography>
+          <Typography variant="p" component="p">
+            <p>{convertDate(item.date)}</p>
+          </Typography>
         </div>
-      </container>
-    </container>
+        <div style={{ marginLeft: "10px" }}>
+          <Typography variant="p" component="p">
+            <p>{item.text}</p>
+          </Typography>
+        </div>
+      </Card>
+    </div>
   ));
 
   return (
-    <div style={{ width: "90%", height: "400px" }}>
+    <div style={{ width: "90%", height: "670px" }}>
       <FormControlLabel
         control={<Checkbox id="checkbox" onClick={showCard} checked={show} />}
       />{" "}
       Feed
       <div>{location}</div>
       {show && (
-        <Card id="mapCard" variant="outlined">
+        <Card id="feedCard">
           <CardContent>
             asdlfads
             {/* {feedTitle} */}
@@ -101,7 +103,7 @@ const FeedList = (props) => {
 
                 {
                   border: "1px solid",
-                  height: "400px",
+                  height: "600px",
                   overflow: "scroll",
                   // display: "flex",
                   flexDirection: "column",
@@ -111,16 +113,17 @@ const FeedList = (props) => {
             >
               {" "}
               {titleArr}
-              <input
+              <Input
+                id="inputFeed"
                 name="text"
                 type="text"
                 placeholder="add comment"
                 onChange={changeText}
                 value={text}
               />
-              <button type="submit" onClick={handleSubmit}>
+              <Button size="small" onClick={handleSubmit}>
                 Submit
-              </button>
+              </Button>
             </div>
           </CardContent>
         </Card>

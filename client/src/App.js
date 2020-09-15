@@ -10,12 +10,12 @@ import Landing from "./components/pages/Landing";
 import Profile from "./components/ProfilePage/Profile";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PublicRoute from "./components/PublicRoute";
-import ThemeProvider from "./components/ThemeProvider"
+
 
 //chaning above line to the following line
 import { UserProvider } from "./components/context/UserContext";
 
-import AuthButtons from "./components/auth/AuthButtons";
+// import AuthButtons from "./components/auth/AuthButtons";
 import "./App.css";
 
 const NotFound = () => (
@@ -32,7 +32,6 @@ function App() {
     <div className="App">
       <UserProvider>
         <BrowserRouter>
-        <AuthButtons  />
           <div className="container">
             <Switch>
               <Route exact path="/" component={Landing} />

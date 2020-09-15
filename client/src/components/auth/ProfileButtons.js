@@ -10,7 +10,7 @@ const buttonStyle = {
 };
 
 
-const AuthButtons = () => {
+const ProfileButtons = () => {
   const { userData, setUserData } = useUserContext();
 
   const history = useHistory();
@@ -34,9 +34,11 @@ const AuthButtons = () => {
         <>     <Button style={{ float: 'right', marginRight: "20px" }} variant="contained" size="small" color="primary" onClick={logout}>
           Log Out
     </Button>
-          <Button style={{ float: 'right', marginRight: "20px" }} variant="contained" size="small" color="primary" onClick={profile}>
-            Profile
+
+          <Button style={{ float: 'right', marginRight: "20px" }} variant="contained" size="small" color="primary" onClick={main}>
+            Dashboard
      </Button>
+
         </>
       ) : (
           <>
@@ -53,5 +55,4 @@ const AuthButtons = () => {
   );
 };
 
-export default AuthButtons;
-
+export default ProfileButtons;

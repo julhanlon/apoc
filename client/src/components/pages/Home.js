@@ -13,8 +13,10 @@ import FiveDay from "../Weather/FiveDay";
 import MyMap from "../mapsAndCharts/MyMap";
 import CityName from "../CityName";
 import SearchChips from "../SearchChips";
+import AuthButtons from "../auth/AuthButtons";
 import ThemeProvider from "../ThemeProvider";
 import "./Home.css";
+
 const maxDays = 60;
 const SuggestionsButton = (props) => {
   var array = props.options;
@@ -41,16 +43,18 @@ const initData = {
   feed: [],
   weather: null,
 };
+
+const initDanger = {
+  air: { show: true, score: 0 },
+  covid: { show: true, score: 0 },
+  eq: { show: true, score: 0 },
+  weather: { show: true, score: 0 },
+};
+
 const Home = () => {
-  const [covidData, setCovidData] = useState([]);
   const [loadingInfo, setLoadingInfo] = useState(false);
-  const [weatherData, setWeatherData] = useState(null);
-  const [airData, setAirData] = useState(null);
   const [suggestions, setSuggestionsData] = useState(null);
-  const [mapInfo, setMapInfo] = useState(null);
-  const [feedData, setFeed] = useState([]);
-  const [eqData, setEqData] = useState([]);
-  const [dangerData, setDangerData] = useState(null);
+  const [dangerData, setDangerData] = useState(initDanger);
   const [allData, setAllData] = useState(initData);
   const [recentCities, setRecentCities] = useState([]);
 
@@ -209,49 +213,51 @@ const Home = () => {
   };
   const dangerLevel = () => {
     let scoreObj = { covid: 0, weather: 0, eq: 0, air: 0 };
-    let CovidDanger = allData.covid[allData.covid.length - 1].totalDeaths;
-    if (CovidDanger <= 1000) {
-      scoreObj.covid = 25;
-    } else if (1000 < CovidDanger && CovidDanger < 2000) {
-      scoreObj.covid = 50;
-    } else if (4000 > CovidDanger && CovidDanger >= 2000) {
-      scoreObj.covid = 75;
-    } else if (CovidDanger >= 4000) {
-      scoreObj.covid = 100;
-    } else if (1000 < CovidDanger && CovidDanger < 2000) {
-      scoreObj.covid = 50;
-    } else if (4000 > CovidDanger && CovidDanger >= 2000) {
-      scoreObj.covid = 75;
-    } else if (CovidDanger >= 4000) {
-      scoreObj.covid = 100;
+    if (allData.covid.length > 0) {
+      let CovidDanger = allData.covid[allData.covid.length - 1].totalDeaths;
+      if (CovidDanger <= 1000) {
+        scoreObj.covid = 25;
+      } else if (1000 < CovidDanger && CovidDanger < 2000) {
+        scoreObj.covid = 50;
+      } else if (4000 > CovidDanger && CovidDanger >= 2000) {
+        scoreObj.covid = 75;
+      } else if (CovidDanger >= 4000) {
+        scoreObj.covid = 100;
+      }
     }
-    let weatherDanger = allData.weather.temp;
-    if (weatherDanger <= 273 || weatherDanger >= 313) {
-      scoreObj.weather = 100;
-    } else if (weatherDanger <= 295 && weatherDanger < 313) {
-      scoreObj.weather = 75;
-    } else if (weatherDanger > 273 || weatherDanger < 295) {
-      scoreObj.weather = 50;
+    if (allData.weather) {
+      let weatherDanger = allData.weather.temp;
+      if (weatherDanger <= 273 || weatherDanger >= 313) {
+        scoreObj.weather = 100;
+      } else if (weatherDanger <= 295 && weatherDanger < 313) {
+        scoreObj.weather = 75;
+      } else if (weatherDanger > 273 || weatherDanger < 295) {
+        scoreObj.weather = 50;
+      }
     }
-    let eqDanger = allData.eq.length;
-    if (eqDanger >= 200) {
-      scoreObj.eq = 100;
-    } else if (eqDanger >= 100 && eqDanger < 200) {
-      scoreObj.eq = 75;
-    } else if (eqDanger >= 50 && eqDanger < 100) {
-      scoreObj.eq = 50;
-    } else if (eqDanger < 50) {
-      scoreObj.eq = 25;
+    if (allData.eq && allData.eq.length > 0) {
+      let eqDanger = allData.eq.length;
+      if (eqDanger >= 200) {
+        scoreObj.eq = 100;
+      } else if (eqDanger >= 100 && eqDanger < 200) {
+        scoreObj.eq = 75;
+      } else if (eqDanger >= 50 && eqDanger < 100) {
+        scoreObj.eq = 50;
+      } else if (eqDanger < 50) {
+        scoreObj.eq = 25;
+      }
     }
-    let airDanger = allData.air.aqi;
-    if (airDanger >= 200) {
-      scoreObj.air = 100;
-    } else if (airDanger >= 150 && airDanger < 200) {
-      scoreObj.air = 75;
-    } else if (airDanger >= 75 && airDanger < 150) {
-      scoreObj.air = 50;
-    } else if (airDanger < 75) {
-      scoreObj.air = 25;
+    if (allData.air) {
+      let airDanger = allData.air.aqi;
+      if (airDanger >= 200) {
+        scoreObj.air = 100;
+      } else if (airDanger >= 150 && airDanger < 200) {
+        scoreObj.air = 75;
+      } else if (airDanger >= 75 && airDanger < 150) {
+        scoreObj.air = 50;
+      } else if (airDanger < 75) {
+        scoreObj.air = 25;
+      }
     }
     let danger =
       scoreObj.covid * 0.3 +
@@ -329,20 +335,22 @@ const Home = () => {
   return (
     <div className="page">
       <>
-        {/* <ThemeProvider> */}
+        <AuthButtons />
         <Header />
-        <Search
-          className="search"
-          buttonSubmit={buttonSubmit}
-          loadingInfo={loadingInfo}
-        />
-        {recentCities && <SearchChips options={recentCities} />}
-        {suggestions ? (
-          <SuggestionsButton
-            handleAuxButton={handleAuxButton}
-            options={suggestions}
+        <div style={{ marginTop: "60px" }}>
+          <Search
+            className="search"
+            buttonSubmit={buttonSubmit}
+            loadingInfo={loadingInfo}
           />
-        ) : null}
+          {recentCities && <SearchChips options={recentCities} />}
+          {suggestions ? (
+            <SuggestionsButton
+              handleAuxButton={handleAuxButton}
+              options={suggestions}
+            />
+          ) : null}
+        </div>
         <div id="loader">{loadingInfo ? <Loading /> : null}</div>
         {!loadingInfo ? (
           <>
@@ -374,7 +382,7 @@ const Home = () => {
                   <MyMap mapObj={allData.mapp} eqData={allData.eq} />
                 )}
               </div>
-              <div style={{ width: "45%", height: "50vh" }}>
+              <div style={{ width: "45%" }}>
                 {allData.mapp && (
                   <FeedList mapInfo={allData.mapp} feedData={allData.feed} />
                 )}

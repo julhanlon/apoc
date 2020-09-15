@@ -1,0 +1,25 @@
+#commentCard {
+    height: 135px;
+    width: 350px;
+    margin-top: 8px;
+    margin-left: 20px;
+}
+
+
+#cardd {
+    background-color: #f5dac9;
+    border-radius: 15px;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  }
+
+
+  #feedCard {
+  
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.25), 0 8px 8px rgba(0,0,0,0.22);
+  }
+
+
+  #inputFeed {
+      margin-left: 30px;
+  }

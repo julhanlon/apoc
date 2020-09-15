@@ -17,7 +17,7 @@ const buttonStyle = {
 const titleStyle = {
   fontSize: "2rem",
   borderTop: "2px dashed light-red",
-  marginLeft: "60px"
+ textAlign: "center"
 };
 
 export default (props) => {
@@ -81,8 +81,8 @@ export default (props) => {
     <Typography variant="h5" component="h5">
         <p style={titleStyle}>Covid Chart</p>
       </Typography>
-      <div style={{display: "flex", justifyContent: "space-around" }}>
-        <div>
+      <div style={{display: "flex", justifyContent: "space-between" }}>
+        <div style = {{marginLeft: "10px"}}> 
         <Button
           variant="contained"
           color="primary"

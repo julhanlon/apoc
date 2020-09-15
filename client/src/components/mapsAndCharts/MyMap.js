@@ -3,6 +3,9 @@ import { Map, Marker, Popup, TileLayer, CircleMarker } from "react-leaflet";
 import { Button, Slider, Card } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import ModalEq from "./ModalEq"
 import "./MyMap.css";
 
 const useStyles = makeStyles({
@@ -57,6 +60,7 @@ const MyMap = (props) => {
   const classes = useStyles();
   const [sliderValue, setSliderValue] = useState(0);
   const [sliderValue2, setSliderValue2] = useState(100);
+  const [show, setShow] = useState(true)
   const [magValue, setMag] = useState(2.5);
   const [radiusValue, setRadius] = useState(1000);
   const [mapData, setMapData] = useState({
@@ -79,6 +83,11 @@ const MyMap = (props) => {
     setRadius(newRadiusValue);
     setSliderValue2(newValue);
   };
+
+  const showCard = () => {
+    setShow(!show)
+}
+
 
   const eqColor = (value) => {
     if (value >= 2.5 && value < 3.0) {
@@ -110,11 +119,16 @@ const MyMap = (props) => {
 
   return (
     <>
-      <div>
-        <Card id="mapCard">
-          <Typography variant="h4" component="h4">
+      <div style = {{ height: "670px", width: "100%"}}>
+      <FormControlLabel style = {{marginLeft: "30px"}} control={<Checkbox id = "checkbox" onClick={showCard} checked = {show}  />}  />
+      {show && <Card id="mapCard">
+        <div style = {{display: "flex", justifyContent: "center"}}>
+        <Typography variant="h4" component="h4">
             <p style={{ textAlign: "center" }}>Earthquakes</p>
           </Typography>
+          <ModalEq/>
+        </div>
+       
           <div style={{ display: "flex", justifyContent: "space-around" }}>
             <div className={classes.root}>
               <Typography id="discrete-slider-small-steps" gutterBottom>
@@ -160,7 +174,7 @@ const MyMap = (props) => {
               {markers}
             </Map>
           </div>
-        </Card>
+        </Card>}
       </div>
     </>
   );

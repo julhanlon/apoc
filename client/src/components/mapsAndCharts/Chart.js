@@ -81,7 +81,7 @@ export default (props) => {
     <Typography variant="h5" component="h5">
         <p style={titleStyle}>Covid Chart</p>
       </Typography>
-      <div style={{display: "flex", justifyContent: "space-around" }}>
+      <div style={{display: "flex", justifyContent: "between" }}>
         <div>
         <Button
           variant="contained"

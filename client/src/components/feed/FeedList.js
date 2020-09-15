@@ -69,7 +69,7 @@ const FeedList = (props) => {
   ));
 
   return (
-    <div style={{ width: "90%", height: "400px" }}>
+    <div style={{ width: "90%", height: "670px" }}>
       <FormControlLabel
         control={<Checkbox id="checkbox" onClick={showCard} checked={show} />}
       />{" "}
@@ -82,7 +82,7 @@ const FeedList = (props) => {
                 // { display: "flex", justifyContent: "space-around" }
                 {
                   border: "1px solid",
-                  height: "400px",
+                  height: "600px",
                   overflow: "scroll",
                   // display: "flex",
                   flexDirection: "column",

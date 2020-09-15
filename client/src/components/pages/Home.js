@@ -156,7 +156,7 @@ const Home = () => {
         });
     });
   };
-  
+
   const loadEarthquakes = (city, state_name, lat, lng) => {
     return new Promise((resolve, reject) => {
       API.getEarthquakeData(city, state_name, lat, lng)
@@ -209,22 +209,19 @@ const Home = () => {
   };
   const dangerLevel = () => {
     let scoreObj = { covid: 0, weather: 0, eq: 0, air: 0 };
-    let CovidDanger = allData.covid[allData.covid.length - 1].totalDeaths;
-    if (CovidDanger <= 1000) {
-      scoreObj.covid = 25;
-    } else if (1000 < CovidDanger && CovidDanger < 2000) {
-      scoreObj.covid = 50;
-    } else if (4000 > CovidDanger && CovidDanger >= 2000) {
-      scoreObj.covid = 75;
-    } else if (CovidDanger >= 4000) {
-      scoreObj.covid = 100;
-    } else if (1000 < CovidDanger && CovidDanger < 2000) {
-      scoreObj.covid = 50;
-    } else if (4000 > CovidDanger && CovidDanger >= 2000) {
-      scoreObj.covid = 75;
-    } else if (CovidDanger >= 4000) {
-      scoreObj.covid = 100;
+    if (allData.covid.length > 0) {
+      let CovidDanger = allData.covid[allData.covid.length - 1].totalDeaths;
+      if (CovidDanger <= 1000) {
+        scoreObj.covid = 25;
+      } else if (1000 < CovidDanger && CovidDanger < 2000) {
+        scoreObj.covid = 50;
+      } else if (4000 > CovidDanger && CovidDanger >= 2000) {
+        scoreObj.covid = 75;
+      } else if (CovidDanger >= 4000) {
+        scoreObj.covid = 100;
+      }
     }
+    if (allData.weather) {
     let weatherDanger = allData.weather.temp;
     if (weatherDanger <= 273 || weatherDanger >= 313) {
       scoreObj.weather = 100;
@@ -233,6 +230,8 @@ const Home = () => {
     } else if (weatherDanger > 273 || weatherDanger < 295) {
       scoreObj.weather = 50;
     }
+  }
+  if (allData.eq && allData.eq.length > 0) {
     let eqDanger = allData.eq.length;
     if (eqDanger >= 200) {
       scoreObj.eq = 100;
@@ -243,6 +242,8 @@ const Home = () => {
     } else if (eqDanger < 50) {
       scoreObj.eq = 25;
     }
+  }
+  if (allData.air) {
     let airDanger = allData.air.aqi;
     if (airDanger >= 200) {
       scoreObj.air = 100;
@@ -253,6 +254,7 @@ const Home = () => {
     } else if (airDanger < 75) {
       scoreObj.air = 25;
     }
+  } 
     let danger =
       scoreObj.covid * 0.3 +
       scoreObj.eq * 0.3 +
@@ -287,9 +289,9 @@ const Home = () => {
           setLoadingInfo(false);
           return;
         }
-        if (!values[0].success && values[0].message && values[0].message.data) {
+        if (!values[2].success && values[2].message && values[2].message.data) {
           setLoadingInfo(false);
-          setSuggestionsData(values[0].message.data.data);
+          setSuggestionsData(values[2].message.data.data);
           return;
         }
         let dataObj = initData;
@@ -308,7 +310,7 @@ const Home = () => {
         setLoadingInfo(false);
       });
   };
-  
+
   return (
     <div className="page">
       <>
@@ -356,7 +358,7 @@ const Home = () => {
                   <MyMap mapObj={allData.mapp} eqData={allData.eq} />
                 )}
               </div>
-              <div style={{ width: "45%"}}>
+              <div style={{ width: "45%" }}>
                 {allData.mapp && (
                   <FeedList mapInfo={allData.mapp} feedData={allData.feed} />
                 )}

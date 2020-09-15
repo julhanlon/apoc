@@ -95,7 +95,6 @@ const FeedList = (props) => {
       {show && (
         <Card id="feedCard">
           <CardContent>
-            asdlfads
             {/* {feedTitle} */}
             <div
               style={

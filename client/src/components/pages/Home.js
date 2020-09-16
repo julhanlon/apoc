@@ -71,19 +71,15 @@ const Home = () => {
           state_name: mapStorage[0].state_name,
           county: mapStorage[0].county,
           lat: mapStorage[0].lat,
-          lng: mapStorage[0].lng,
+          lng: mapStorage[0].lng
         });
     }
   }, []);
+
   React.useEffect(() => {
     let exec = true;
     const buttonSubmit = (city, state_name, county, lat, lng) => {
-      if (
-        !city ||
-        !state_name ||
-        city.trim() === "" ||
-        state_name.trim() === ""
-      )
+      if (!city || !state_name || city.trim() === "" || state_name.trim() === "")
         return;
       setLoadingInfo(true);
       setSuggestionsData(null);
@@ -111,11 +107,7 @@ const Home = () => {
             setLoadingInfo(false);
             return;
           }
-          if (
-            !values[2].success &&
-            values[2].message &&
-            values[2].message.data
-          ) {
+          if (!values[2].success && values[2].message && values[2].message.data) {
             setLoadingInfo(false);
             setSuggestionsData(values[2].message.data.data);
             return;
@@ -128,23 +120,14 @@ const Home = () => {
             recentSearches = recentSearches ? JSON.parse(recentSearches) : [];
             if (recentSearches.length === 0) {
               recentSearches.push(values[2].data);
-              localStorage.setItem(
-                "mapStorage",
-                JSON.stringify(recentSearches)
-              );
+              localStorage.setItem("mapStorage", JSON.stringify(recentSearches));
             } else if (recentSearches.length < 5) {
               recentSearches.unshift(values[2].data);
-              localStorage.setItem(
-                "mapStorage",
-                JSON.stringify(recentSearches)
-              );
+              localStorage.setItem("mapStorage", JSON.stringify(recentSearches));
             } else {
               recentSearches.unshift(values[2].data);
               recentSearches.pop();
-              localStorage.setItem(
-                "mapStorage",
-                JSON.stringify(recentSearches)
-              );
+              localStorage.setItem("mapStorage", JSON.stringify(recentSearches));
             }
             dataObj.mapp = values[2].data;
           }
@@ -160,6 +143,8 @@ const Home = () => {
           setLoadingInfo(false);
         });
     };
+
+
     //map Data function
     const loadMapData = (city, state_name, county, lat, lng) => {
       return new Promise((resolve, reject) => {
@@ -281,7 +266,9 @@ const Home = () => {
           });
       });
     };
+
     const dangerLevel = (allData) => {
+
       let scoreObj = { covid: -1, weather: -1, eq: -1, air: -1 };
       if (allData.covid.length > 0) {
         let CovidDanger = allData.covid[allData.covid.length - 1].totalDeaths;
@@ -333,16 +320,19 @@ const Home = () => {
         air: { score: scoreObj.air, show: true },
         covid: { score: scoreObj.covid, show: true },
         eq: { score: scoreObj.eq, show: true },
-        weather: { score: scoreObj.weather, show: true },
+        weather: { score: scoreObj.weather, show: true }
       };
       setDangerData(dangerObj);
     };
-    let { city, state_name, county, lat, lng } = submitData;
-    buttonSubmit(city, state_name, county, lat, lng);
+
+    let { city, state_name, county, lat, lng } = submitData
+    buttonSubmit(city, state_name, county, lat, lng)
     return function () {
       exec = false;
-    };
-  }, [submitData]);
+    }
+  }, [submitData])
+
+
   const handleAuxButton = (e) => {
     let value = suggestions[e.currentTarget.dataset.index];
     setSubmitData({
@@ -350,17 +340,23 @@ const Home = () => {
       state_name: value.state_name,
       county: value.county,
       lat: value.lat,
-      lng: value.lng,
+      lng: value.lng
     });
   };
+
+
+
   const showCard = (attribute) => {
     let showAttribute = dangerData[attribute].show;
     let obj = {
       ...dangerData,
-      [attribute]: { ...dangerData[attribute], show: !showAttribute },
-    };
-    setDangerData(obj);
-  };
+      [attribute]: { ...dangerData[attribute], show: !showAttribute }
+    }
+    setDangerData(obj)
+  }
+
+
+
   return (
     <div className="page">
       <>
@@ -410,12 +406,7 @@ const Home = () => {
             <div className="mapAndFeed" style={{ marginTop: "60px" }}>
               <div style={{ width: "45%", marginLeft: "35px" }}>
                 {allData.mapp && (
-                  <MyMap
-                    mapObj={allData.mapp}
-                    showCard={showCard}
-                    show={dangerData.eq.show}
-                    eqData={allData.eq}
-                  />
+                  <MyMap mapObj={allData.mapp} showCard={showCard} show={dangerData.eq.show} eqData={allData.eq} />
                 )}
               </div>
               <div style={{ width: "50%" }}>
@@ -431,35 +422,19 @@ const Home = () => {
                 marginTop: "60px",
               }}
             >
-              {allData.mapp && (
-                <Chart
-                  showCard={showCard}
-                  show={dangerData.covid.show}
-                  data={allData.covid}
-                />
-              )}
+              {allData.mapp && <Chart showCard={showCard} show={dangerData.covid.show} data={allData.covid} />}
             </div>
             <div
               className="weather"
               style={{ marginTop: "60px", marginBottom: "50px" }}
             >
               {/* <div style = {{display: "flex", justifyContent: "center"}}> */}
-              {allData.weather && (
-                <Weather
-                  showCard={showCard}
-                  show={dangerData.weather.show}
-                  weatherObj={allData.weather}
-                />
-              )}
+              {allData.weather && <Weather showCard={showCard} show={dangerData.weather.show} weatherObj={allData.weather} />}
               {allData.weather && <FiveDay weatherObj={allData.weather} />}
               {/* </div> */}
               {allData.air && (
                 <div>
-                  <BarChart
-                    showCard={showCard}
-                    show={dangerData.air.show}
-                    airObj={allData.air}
-                  />
+                  <BarChart showCard={showCard} show={dangerData.air.show} airObj={allData.air} />
                 </div>
               )}
             </div>

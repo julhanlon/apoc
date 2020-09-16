@@ -17,8 +17,13 @@ const Search = (props) => {
   };
 
   const buttonSubmit = () => {
-    console.log(input);
-    props.buttonSubmit(input.city, input.state_name, null)
+    props.buttonSubmit({
+      city: input.city, 
+      state_name: input.state_name,
+      county: null,
+      lat: null, 
+      lng: null,
+    })
     setInput({city: "", state_name: ""});
   }
  

@@ -90,7 +90,9 @@ const FeedList = (props) => {
   return (
     <div style={{ width: "90%", height: "670px" }}>
       <FormControlLabel
-        control={<Checkbox id="checkbox" onClick={showCard} checked={show} />}
+        control={<Checkbox id="checkbox" onClick={showCard} defaultChecked
+        color="default"
+        inputProps={{ 'aria-label': 'checkbox with default color' }} size = "small" checked={show} />}
       />{" "}
       Feed
       <div>{location}</div>

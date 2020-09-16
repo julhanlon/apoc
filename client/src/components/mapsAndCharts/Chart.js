@@ -71,7 +71,9 @@ export default (props) => {
   return (
     <>
     <div style = {{ height: "670px", width: "100%"}}>
-    <FormControlLabel style = {{marginLeft: "30px"}} control={<Checkbox id = "checkbox" onClick={showCard} checked = {show}  />}  />
+    <FormControlLabel style = {{marginLeft: "30px"}} control={<Checkbox id = "checkbox" onClick={showCard} defaultChecked
+          color="default"
+          inputProps={{ 'aria-label': 'checkbox with default color' }} size = "small" checked = {show}  />}  />
     <div style = {{display: "flex", justifyContent: "center"}}>
     {show && <Card id = "chartCard" >
     <Typography variant="h4" component="h4">

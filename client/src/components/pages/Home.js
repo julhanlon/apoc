@@ -409,7 +409,7 @@ const Home = () => {
                   <MyMap mapObj={allData.mapp} showCard={showCard} show={dangerData.eq.show} eqData={allData.eq} />
                 )}
               </div>
-              <div style={{ width: "50%" }}>
+              <div style={{ width: "45%", marginRight: "40px"}}>
                 {allData.mapp && (
                   <FeedList mapInfo={allData.mapp} feedData={allData.feed} />
                 )}

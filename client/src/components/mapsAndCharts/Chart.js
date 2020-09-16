@@ -4,9 +4,27 @@ import { Button, Card } from "@material-ui/core";
 import Typography from '@material-ui/core/Typography';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { makeStyles } from '@material-ui/core/styles';
 import "./Chart.css"
 
 const maxDays = 60;
+
+const useStyles = makeStyles({
+  root: {
+    background: 'linear-gradient(45deg, #f03030 20%, #FF8E53 90%)',
+    borderRadius: 15,
+    border: 0,
+    color: 'white',
+    height: 33,
+    padding: '0 15px',
+    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+  },
+  label: {
+    textTransform: 'capitalize',
+  },
+});
+
+
 
 const buttonStyle = {
   marginRight: "10px",
@@ -17,6 +35,8 @@ const titleStyle = {
 };
 
 export default (props) => {
+
+  const classes = useStyles();
   const [numDays, setNumDays] = useState(maxDays);
   const [showArea, setshowArea] = useState("false");
   // const [show, setShow] = useState(true)
@@ -82,6 +102,10 @@ export default (props) => {
       <div style={{display: "flex", justifyContent: "space-between" }}>
         <div style = {{marginLeft: "10px"}}> 
         <Button
+       classes={{
+        root: classes.root, // class name, e.g. `classes-nesting-root-x`
+        label: classes.label, // class name, e.g. `classes-nesting-label-x`
+      }}
           variant="contained"
           color="primary"
           size="small"
@@ -92,7 +116,10 @@ export default (props) => {
         >
           1 Week
         </Button>
-        <Button
+        <Button   classes={{
+        root: classes.root, // class name, e.g. `classes-nesting-root-x`
+        label: classes.label, // class name, e.g. `classes-nesting-label-x`
+      }}
           variant="contained"
           color="primary"
           size="small"
@@ -103,6 +130,10 @@ export default (props) => {
           1 Month
         </Button>
         <Button
+          classes={{
+            root: classes.root, // class name, e.g. `classes-nesting-root-x`
+            label: classes.label, // class name, e.g. `classes-nesting-label-x`
+          }}
           variant="contained"
           color="primary"
           size="small"
@@ -115,6 +146,11 @@ export default (props) => {
         </div>
         <div style={{ float: "right", marginRight: "10px" }}>
           <Button
+            classes={{
+              root: classes.root, // class name, e.g. `classes-nesting-root-x`
+              label: classes.label, // class name, e.g. `classes-nesting-label-x`
+            }}
+          color = "orange"
             variant="contained"
             color="primary"
             size="small"
@@ -125,6 +161,10 @@ export default (props) => {
             Area
           </Button>
           <Button
+          classes={{
+            root: classes.root, // class name, e.g. `classes-nesting-root-x`
+            label: classes.label, // class name, e.g. `classes-nesting-label-x`
+          }}
             variant="contained"
             color="primary"
             size="small"

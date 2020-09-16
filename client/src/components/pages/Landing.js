@@ -6,7 +6,6 @@ import "./Landing.css"
 
 
 const Landing = () => {
-  const [name, setName] = useState("React");
 
   let config = {
     num: [4, 6],

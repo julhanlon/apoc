@@ -56,19 +56,19 @@ const Weather = (props) => {
             {/* <FormControlLabel control={<Checkbox onClick={showCard} checked = {show}  />}  /> */}
             <CardContent id = "cardContent">
               <Typography variant="h4" component="h4">
-                <p>Current Weather</p>
+                <h4>Current Weather</h4>
               </Typography>
               <Typography variant="h5" component="h5" size = "1.4rem" color="textSecondary">
-              <p> Temp: {tempConversion(props.weatherObj.temp)}°F</p>
+              <h6> Temp: {tempConversion(props.weatherObj.temp)}°F</h6>
               </Typography>
               <Typography variant="h5" component="h4" size = "1.4rem" color="textSecondary">
-              <p> UVI: {props.weatherObj.uvi}</p>
+              <h6> UVI: {props.weatherObj.uvi}</h6>
               </Typography>
               <Typography variant="h5" component="h4" size = "1.4rem" color="textSecondary">
-              <p> Humidity: {props.weatherObj.humidity}%</p>
+              <h6> Humidity: {props.weatherObj.humidity}%</h6>
               </Typography>
               <Typography variant="h5" component="h5" size = "1.4rem" color="textSecondary">
-              <p> Wind Speed: {props.weatherObj.wind_speed} mph</p>
+              <h6> Wind Speed: {props.weatherObj.wind_speed} mph</h6>
               </Typography>
               <div id = "icon">{weatherIcon(props.weatherObj.todayIcon)}</div>
             </CardContent>

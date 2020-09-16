@@ -3,11 +3,25 @@ import PropTypes from 'prop-types';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import { makeStyles } from '@material-ui/core/styles';
+
+
+const useStyles = makeStyles({
+  root: {
+  
+    color: 'linear-gradient(45deg, #f03030 30%, #FF8E53 90%)',
+ 
+  },
+
+});
+
 
 function CircularProgressWithLabel(props) {
+  const classes = useStyles();
   return (
     <Box position="relative" display="inline-flex">
-      <CircularProgress size="14rem" variant="static" {...props} />
+      <CircularProgress     color = "secondary"
+           size="14rem" variant="static" {...props} />
       <Box
         top={0}
         left={0}

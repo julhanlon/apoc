@@ -88,7 +88,7 @@ const FeedList = (props) => {
   ));
 
   return (
-    <div style={{ width: "90%", height: "670px" }}>
+    <div style={{ width: "100%", height: "670px"}}>
       <FormControlLabel
         control={<Checkbox id="checkbox" onClick={showCard} defaultChecked
         color="default"
@@ -116,7 +116,9 @@ const FeedList = (props) => {
             >
               {" "}
               {titleArr}
-              <Input
+             
+            </div>
+            <Input
                 id="inputFeed"
                 name="text"
                 type="text"
@@ -127,7 +129,6 @@ const FeedList = (props) => {
               <Button size="small" onClick={handleSubmit}>
                 Submit
               </Button>
-            </div>
           </CardContent>
         </Card>
       )}

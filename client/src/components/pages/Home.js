@@ -14,7 +14,6 @@ import MyMap from "../mapsAndCharts/MyMap";
 import CityName from "../CityName";
 import SearchChips from "../SearchChips";
 import AuthButtons from "../auth/AuthButtons";
-import ThemeProvider from "../ThemeProvider";
 import "./Home.css";
 
 const maxDays = 60;
@@ -371,12 +370,12 @@ const Home = () => {
               </Card>
             </div>
             <div className="mapAndFeed" style={{ marginTop: "60px" }}>
-              <div style={{ width: "50%", marginLeft: "35px" }}>
+              <div style={{ width: "45%", marginLeft: "35px" }}>
                 {allData.mapp && (
                   <MyMap mapObj={allData.mapp} eqData={allData.eq} />
                 )}
               </div>
-              <div style={{ width: "45%" }}>
+              <div style={{ width: "50%" }}>
                 {allData.mapp && (
                   <FeedList mapInfo={allData.mapp} feedData={allData.feed} />
                 )}

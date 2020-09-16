@@ -7,8 +7,8 @@
 
 
 #cardd {
-    background-color: #f5dac9;
-    border-radius: 15px;
+    background-color: #ede4df;
+    border-radius: 10px;
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
   }
 
@@ -16,10 +16,19 @@
   #feedCard {
   
     border-radius: 20px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.25), 0 8px 8px rgba(0,0,0,0.22);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.25), 0 7px 7px rgba(0,0,0,0.22);
   }
 
 
   #inputFeed {
       margin-left: 30px;
   }
+
+
+  #feedImage {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    border: 1px solid #000;
+    margin: 10px;
+}

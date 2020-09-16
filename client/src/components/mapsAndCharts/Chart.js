@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { ResponsiveLine } from "@nivo/line";
 import { Button, Card } from "@material-ui/core";
-import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { shadows } from '@material-ui/system';
 import "./Chart.css"
 
 const maxDays = 60;
@@ -15,8 +13,6 @@ const buttonStyle = {
 };
 
 const titleStyle = {
-  fontSize: "2rem",
-  borderTop: "2px dashed light-red",
  textAlign: "center"
 };
 
@@ -78,7 +74,7 @@ export default (props) => {
     <FormControlLabel style = {{marginLeft: "30px"}} control={<Checkbox id = "checkbox" onClick={showCard} checked = {show}  />}  />
     <div style = {{display: "flex", justifyContent: "center"}}>
     {show && <Card id = "chartCard" >
-    <Typography variant="h5" component="h5">
+    <Typography variant="h4" component="h4">
         <p style={titleStyle}>Covid Chart</p>
       </Typography>
       <div style={{display: "flex", justifyContent: "space-between" }}>

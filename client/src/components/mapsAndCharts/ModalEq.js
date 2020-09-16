@@ -55,9 +55,9 @@ export default function TransitionsModal() {
         <Fade in={open}>
           <div className={classes.paper}>
             <h2 id="transition-modal-title">Earthquake Legend</h2>
-            <p id="good">Magnitude 3 or less</p>
-            <p id="moderate">Magnitude between 4.5 and 3</p>
-            <p id="unhealthyForSensitive">Magnitude above 4.5</p>
+            <p id="small">Magnitude 3 or less</p>
+            <p id="medium">Magnitude between 3 and 4.5</p>
+            <p id="large">Magnitude above 4.5</p>
           </div>
         </Fade>
       </Modal>

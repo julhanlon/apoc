@@ -11,9 +11,9 @@ const [dangerValue, setDangerValue] = useState("");
     <>
       <div
         style={{
-          height: "45%",
-          width: "45%",
-          marginBottom: "50px",
+          height: "530px",
+          width: "730px",
+          marginBottom: "20px",
         }}
       >
         <GaugeChart

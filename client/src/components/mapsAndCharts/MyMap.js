@@ -60,7 +60,7 @@ const MyMap = (props) => {
   const classes = useStyles();
   const [sliderValue, setSliderValue] = useState(0);
   const [sliderValue2, setSliderValue2] = useState(100);
-  const [show, setShow] = useState(true)
+  // const [show, setShow] = useState(true)
   const [magValue, setMag] = useState(2.5);
   const [radiusValue, setRadius] = useState(1000);
   const [mapData, setMapData] = useState({
@@ -85,7 +85,7 @@ const MyMap = (props) => {
   };
 
   const showCard = () => {
-    setShow(!show)
+    props.showCard("eq")
   }
 
 
@@ -120,10 +120,10 @@ const MyMap = (props) => {
   return (
     <>
       <div style={{ height: "670px", width: "100%" }}>
-        <FormControlLabel style={{ marginLeft: "30px" }} control={<Checkbox id="checkbox" onClick={showCard} defaultChecked
+        <FormControlLabel style={{ marginLeft: "30px" }} control={<Checkbox id="checkbox" onClick={showCard} 
           color="default"
-          inputProps={{ 'aria-label': 'checkbox with default color' }} size="small" checked={show} />} />Earthquakes
-        {show && <Card id="mapCard">
+          inputProps={{ 'aria-label': 'checkbox with default color' }} size="small" checked={props.show} />} />Earthquakes
+        {props.show && <Card id="mapCard">
           <div style={{ display: "flex", justifyContent: "center" }}>
             <Typography variant="h4" component="h4">
               <p style={{ textAlign: "center" }}>Earthquakes</p>

@@ -86,7 +86,7 @@ const FiveDay = (props) => {
                   {tempConversion(props.weatherObj.weather3)}°F{" "}
                   {weatherIcon(props.weatherObj.main3)}
                 </Typography>
-                <div style = {{display: "flex", justifyContent: "space-between", marginTop: "8px" }}>
+                <div style = {{display: "flex", justifyContent: "space-between", marginTop: "8px", width: "80%" }}>
                   <div >
                     <Typography
                       variant="h5"

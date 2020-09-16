@@ -3,40 +3,39 @@ import Chip from "@material-ui/core/Chip";
 import FaceIcon from "@material-ui/icons/Face";
 
 const SearchChips = (props) => {
-  const [recentCities, setCities] = useState({ city: "", state_name: "" });
+  const [recentCities, setCities] = useState([]);
+
+  React.useEffect(() => {
+    function getFromLocalStorage() {
+      let mapStorage = localStorage.getItem("mapStorage");
+      return mapStorage ? JSON.parse(mapStorage) : [];
+    }
+    setCities(getFromLocalStorage());
+  }, []);
 
   const handleDelete = () => {
     console.info("You clicked the delete icon.");
   };
 
-  const handleClick = () => {
-    console.info("Youxs clicked the Chip.");
+  const handleClick = (e) => {
+    let { city, state_name, county, lat, lng } = recentCities[
+      e.currentTarget.dataset.index
+    ];
+    props.buttonSubmit(city, state_name, county, lat, lng);
   };
 
-  // var array = props.options;
-  var array = [{ city: "berkeley" }, { city: "san francisco" }];
-
-  let chips = props.options.map((item, index) => {
+  let chips = recentCities.map((item, index) => {
     return (
-      <div>
-        {/* <Button
-          onClick={props.handleAuxButton}
-          variant="outlined"
-          color="secondary"
-          key={index}
-        >
-          Recent Searches
-        </Button> */}
-
+      <div key={index} style={{ size: "sizeSmall" }}>
         <Chip
+          size="small"
           data-index={index}
           label={`${item.city}, ${item.state_name}`}
-          icon={<FaceIcon />}
-          // value={item}
-          label={`${item.city}, ${item.state_name}`}
+          // icon={<FaceIcon />}
           onClick={handleClick}
           onDelete={handleDelete}
           color="primary"
+          variant="outlined"
         />
       </div>
     );

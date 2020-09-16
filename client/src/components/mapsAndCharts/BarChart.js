@@ -34,7 +34,9 @@ export default (props) => {
   return (
     <>
     <div style = {{height: "540px", width: "780px"}}>
-    <FormControlLabel control={<Checkbox id = "checkbox" onClick={showCard} checked = {show}  />}  />
+    <FormControlLabel control={<Checkbox id = "checkbox" onClick={showCard} defaultChecked
+          color="default"
+          inputProps={{ 'aria-label': 'checkbox with default color' }} size = "small" checked = {show}  />}  />
     {show &&  <Card id = "barCard" style = {{width: "780px", height: "530px"}}>
      
       <Typography variant="h4" component="h4">

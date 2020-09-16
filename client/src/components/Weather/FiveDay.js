@@ -51,7 +51,9 @@ const FiveDay = (props) => {
     <>
       <div style={{ height: "540px", width: "520px" }}>
         <FormControlLabel
-          control={<Checkbox onClick={showCard} checked={show} />}
+          control={<Checkbox onClick={showCard} defaultChecked
+          color="default"
+          inputProps={{ 'aria-label': 'checkbox with default color' }} size = "small" checked={show} />}
         />
         {show && (
           <Card

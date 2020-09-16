@@ -43,7 +43,9 @@ const Weather = (props) => {
     <>
       <div style={{ height: "540px", width: "330px" }}>
         <FormControlLabel
-          control={<Checkbox id="checkbox" onClick={showCard} checked={show} />}
+          control={<Checkbox id="checkbox" onClick={showCard}  defaultChecked
+          color="default"
+          inputProps={{ 'aria-label': 'checkbox with default color' }} size = "small" checked={show} />}
         />
         {show && (
           <Card

@@ -86,7 +86,7 @@ const MyMap = (props) => {
 
   const showCard = () => {
     setShow(!show)
-}
+  }
 
 
   const eqColor = (value) => {
@@ -119,16 +119,18 @@ const MyMap = (props) => {
 
   return (
     <>
-      <div style = {{ height: "670px", width: "100%"}}>
-      <FormControlLabel style = {{marginLeft: "30px"}} control={<Checkbox id = "checkbox" onClick={showCard} checked = {show}  />}  />
-      {show && <Card id="mapCard">
-        <div style = {{display: "flex", justifyContent: "center"}}>
-        <Typography variant="h4" component="h4">
-            <p style={{ textAlign: "center" }}>Earthquakes</p>
-          </Typography>
-          <ModalEq/>
-        </div>
-       
+      <div style={{ height: "670px", width: "100%" }}>
+        <FormControlLabel style={{ marginLeft: "30px" }} control={<Checkbox id="checkbox" onClick={showCard} defaultChecked
+          color="default"
+          inputProps={{ 'aria-label': 'checkbox with default color' }} size="small" checked={show} />} />
+        {show && <Card id="mapCard">
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <Typography variant="h4" component="h4">
+              <p style={{ textAlign: "center" }}>Earthquakes</p>
+            </Typography>
+            <ModalEq />
+          </div>
+
           <div style={{ display: "flex", justifyContent: "space-around" }}>
             <div className={classes.root}>
               <Typography id="discrete-slider-small-steps" gutterBottom>

@@ -21,7 +21,7 @@ const SearchChips = (props) => {
     let { city, state_name, county, lat, lng } = recentCities[
       e.currentTarget.dataset.index
     ];
-    props.buttonSubmit(city, state_name, county, lat, lng);
+    props.buttonSubmit({city, state_name, county, lat, lng});
   };
 
   let chips = recentCities.map((item, index) => {

@@ -67,25 +67,86 @@ const Home = () => {
       mapStorage = JSON.parse(mapStorage);
       console.log(mapStorage.length);
       if (mapStorage.length > 0)
-        buttonSubmit(
-          mapStorage[0].city,
-          mapStorage[0].state_name,
-          mapStorage[0].county,
-          mapStorage[0].lat,
-          mapStorage[0].lng
-        );
+        setSubmitData({
+          city: mapStorage[0].city,
+          state_name: mapStorage[0].state_name,
+          county: mapStorage[0].county,
+          lat: mapStorage[0].lat,
+          lng: mapStorage[0].lng
+        });
     }
   }, []);
-  const handleAuxButton = (e) => {
-    let value = suggestions[e.currentTarget.dataset.index];
-    buttonSubmit(
-      value.city,
-      value.state_name,
-      value.county,
-      value.lat,
-      value.lng
-    );
-  };
+
+  React.useEffect(() => {
+    let exec = true;
+    const buttonSubmit = (city, state_name, county, lat, lng) => {
+      if (!city || !state_name || city.trim() === "" || state_name.trim() === "")
+      return;
+      setLoadingInfo(true);
+      setSuggestionsData(null);
+      Promise.all(
+        [
+          loadAirData(city, state_name, lat, lng),
+          loadCovidData(city, state_name, county),
+          loadMapData(city, state_name, county, lat, lng),
+          loadEarthquakes(city, state_name, lat, lng),
+          loadFeedData(city, state_name, county),
+          loadWeatherData(city, state_name, lat, lng),
+        ].map((promise) =>
+          promise
+            .then((ok) => {
+              return { success: true, data: ok };
+            })
+            .catch((err) => {
+              return { success: false, message: err };
+            })
+        )
+      )
+        .then((values) => {
+          if (!exec) return;
+          if (values.length !== 6) {
+            setLoadingInfo(false);
+            return;
+          }
+          if (!values[2].success && values[2].message && values[2].message.data) {
+            setLoadingInfo(false);
+            setSuggestionsData(values[2].message.data.data);
+            return;
+          }
+          let dataObj = initData;
+          if (values[0].success) dataObj.air = values[0].data;
+          if (values[1].success) dataObj.covid = values[1].data;
+          if (values[2].success) {
+            let recentSearches = localStorage.getItem("mapStorage");
+            recentSearches = recentSearches ? JSON.parse(recentSearches) : [];
+            if (recentSearches.length === 0) {
+              recentSearches.push(values[2].data);
+              localStorage.setItem("mapStorage", JSON.stringify(recentSearches));
+            } else if (recentSearches.length < 5) {
+              recentSearches.unshift(values[2].data);
+              localStorage.setItem("mapStorage", JSON.stringify(recentSearches));
+            } else {
+              recentSearches.unshift(values[2].data);
+              recentSearches.pop();
+              localStorage.setItem("mapStorage", JSON.stringify(recentSearches));
+            }
+            dataObj.mapp = values[2].data;
+          }
+          if (values[3].success) dataObj.eq = values[3].data;
+          if (values[4].success) dataObj.feed = values[4].data;
+          if (values[5].success) dataObj.weather = values[5].data;
+        
+          dangerLevel(dataObj);
+          setAllData(dataObj);
+          setLoadingInfo(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          setLoadingInfo(false);
+        });
+    };
+
+
   //map Data function
   const loadMapData = (city, state_name, county, lat, lng) => {
     return new Promise((resolve, reject) => {
@@ -100,6 +161,7 @@ const Home = () => {
         });
     });
   };
+
   //covid function
   const loadCovidData = (city, state_name, county) => {
     return new Promise((resolve, reject) => {
@@ -269,6 +331,27 @@ const Home = () => {
     setDangerData(dangerObj);
   };
 
+  let { city, state_name, county, lat, lng} = submitData
+  buttonSubmit(city, state_name, county, lat, lng)
+return function () {
+  exec = false;
+}
+  },[submitData])
+
+
+  const handleAuxButton = (e) => {
+    let value = suggestions[e.currentTarget.dataset.index];
+    setSubmitData({
+      city: value.city,
+      state_name: value.state_name,
+      county: value.county,
+      lat: value.lat,
+      lng: value.lng
+  });
+  };
+
+
+ 
   const showCard = (attribute) => {
     let showAttribute = dangerData[attribute].show;
     let obj = {
@@ -278,69 +361,7 @@ const Home = () => {
     setDangerData(obj)
   }
 
-  const buttonSubmit = (city, state_name, county, lat, lng) => {
-    setLoadingInfo(true);
-    setSuggestionsData(null);
-    Promise.all(
-      [
-        loadAirData(city, state_name, lat, lng),
-        loadCovidData(city, state_name, county),
-        loadMapData(city, state_name, county, lat, lng),
-        loadEarthquakes(city, state_name, lat, lng),
-        loadFeedData(city, state_name, county),
-        loadWeatherData(city, state_name, lat, lng),
-      ].map((promise) =>
-        promise
-          .then((ok) => {
-            return { success: true, data: ok };
-          })
-          .catch((err) => {
-            return { success: false, message: err };
-          })
-      )
-    )
-      .then((values) => {
-        if (values.length !== 6) {
-          setLoadingInfo(false);
-          return;
-        }
-        if (!values[2].success && values[2].message && values[2].message.data) {
-          setLoadingInfo(false);
-          setSuggestionsData(values[2].message.data.data);
-          return;
-        }
-        let dataObj = initData;
-        if (values[0].success) dataObj.air = values[0].data;
-        if (values[1].success) dataObj.covid = values[1].data;
-        if (values[2].success) {
-          let recentSearches = localStorage.getItem("mapStorage");
-          recentSearches = recentSearches ? JSON.parse(recentSearches) : [];
-          if (recentSearches.length === 0) {
-            recentSearches.push(values[2].data);
-            localStorage.setItem("mapStorage", JSON.stringify(recentSearches));
-          } else if (recentSearches.length < 5) {
-            recentSearches.unshift(values[2].data);
-            localStorage.setItem("mapStorage", JSON.stringify(recentSearches));
-          } else {
-            recentSearches.unshift(values[2].data);
-            recentSearches.pop();
-            localStorage.setItem("mapStorage", JSON.stringify(recentSearches));
-          }
-          dataObj.mapp = values[2].data;
-        }
-        if (values[3].success) dataObj.eq = values[3].data;
-        if (values[4].success) dataObj.feed = values[4].data;
-        if (values[5].success) dataObj.weather = values[5].data;
-      
-        dangerLevel(dataObj);
-        setAllData(dataObj);
-        setLoadingInfo(false);
-      })
-      .catch((err) => {
-        console.log(err);
-        setLoadingInfo(false);
-      });
-  };
+ 
 
   return (
     <div className="page">
@@ -350,11 +371,11 @@ const Home = () => {
         <div style={{ marginTop: "60px" }}>
           <Search
             className="search"
-            buttonSubmit={buttonSubmit}
+            buttonSubmit={setSubmitData}
             loadingInfo={loadingInfo}
           />
           <div className="QueryBtnsBox">
-            {<SearchChips buttonSubmit={buttonSubmit} />}
+            {<SearchChips buttonSubmit={setSubmitData} />}
             {suggestions ? (
               <SuggestionsButton
                 handleAuxButton={handleAuxButton}

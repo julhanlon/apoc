@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Header from "../Header";
-import DangerChart from "../mapsAndCharts/DangerChart";
+// import DangerChart from "../mapsAndCharts/DangerChart";
 import Search from "./Search";
 import Chart from "../mapsAndCharts/Chart";
 import BarChart from "../mapsAndCharts/BarChart";
@@ -56,17 +56,11 @@ const Home = () => {
   const [suggestions, setSuggestionsData] = useState(null);
   const [dangerData, setDangerData] = useState(initDanger);
   const [allData, setAllData] = useState(initData);
-  const [recentCities, setRecentCities] = useState([]);
-
-  // const recentSearchesBtn = (city, state_name, county, lat, lng) => {
-  //   setCities;
-  // };
 
   React.useEffect(() => {
     let mapStorage = localStorage.getItem("mapStorage");
     if (mapStorage) {
       mapStorage = JSON.parse(mapStorage);
-      setRecentCities(mapStorage);
       console.log(mapStorage.length);
       if (mapStorage.length > 0)
         buttonSubmit(
@@ -269,7 +263,6 @@ const Home = () => {
 
   const buttonSubmit = (city, state_name, county, lat, lng) => {
     setLoadingInfo(true);
-    setRecentCities(null);
     setSuggestionsData(null);
     Promise.all(
       [
@@ -316,7 +309,6 @@ const Home = () => {
             recentSearches.pop();
             localStorage.setItem("mapStorage", JSON.stringify(recentSearches));
           }
-          setRecentCities(recentSearches);
           dataObj.mapp = values[2].data;
         }
         if (values[3].success) dataObj.eq = values[3].data;
@@ -343,13 +335,15 @@ const Home = () => {
             buttonSubmit={buttonSubmit}
             loadingInfo={loadingInfo}
           />
-          {recentCities && <SearchChips options={recentCities} />}
-          {suggestions ? (
-            <SuggestionsButton
-              handleAuxButton={handleAuxButton}
-              options={suggestions}
-            />
-          ) : null}
+          <div className="QueryBtnsBox">
+            {<SearchChips buttonSubmit={buttonSubmit} />}
+            {suggestions ? (
+              <SuggestionsButton
+                handleAuxButton={handleAuxButton}
+                options={suggestions}
+              />
+            ) : null}
+          </div>
         </div>
         <div id="loader">{loadingInfo ? <Loading /> : null}</div>
         {!loadingInfo ? (
@@ -372,7 +366,7 @@ const Home = () => {
                   {allData.mapp && (
                     <CityName id="cityName" mapObj={allData.mapp} />
                   )}
-                  {dangerData && <DangerChart danger={dangerData} />}
+                  {/* {dangerData && <DangerChart danger={dangerData} />} */}
                 </div>
               </Card>
             </div>

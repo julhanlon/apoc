@@ -10,11 +10,19 @@ const SearchChips = (props) => {
       let mapStorage = localStorage.getItem("mapStorage");
       return mapStorage ? JSON.parse(mapStorage) : [];
     }
+
     setCities(getFromLocalStorage());
   }, []);
 
-  const handleDelete = () => {
-    console.info("You clicked the delete icon.");
+  React.useEffect(() => {
+    localStorage.setItem("mapStorage", JSON.stringify(recentCities));
+  }, [recentCities]);
+
+  const handleDelete = (e) => {
+    var index = e.currentTarget.dataset.index;
+    var arr = recentCities;
+    arr.splice(index, 1);
+    setCities(arr);
   };
 
   const handleClick = (e) => {

@@ -19,7 +19,7 @@ const convertDateFormat = (date) => {
   let day = date.getDate().toString();
   return `${month.length === 1 ? "0" + month : month}/${
     day.length === 1 ? "0" + day : day
-    }`;
+  }`;
 };
 
 const weatherIcon = (icon) => {

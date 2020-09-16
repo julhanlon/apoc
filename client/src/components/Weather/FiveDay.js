@@ -19,7 +19,7 @@ const convertDateFormat = (date) => {
   let day = date.getDate().toString();
   return `${month.length === 1 ? "0" + month : month}/${
     day.length === 1 ? "0" + day : day
-    }`;
+  }`;
 };
 
 const weatherIcon = (icon) => {
@@ -51,21 +51,37 @@ const FiveDay = (props) => {
     <>
       <div style={{ height: "540px", width: "520px" }}>
         <FormControlLabel
-          control={<Checkbox onClick={showCard} defaultChecked
-          color="default"
-          inputProps={{ 'aria-label': 'checkbox with default color' }} size = "small" checked={show} />}
-        /> 5 Day Forescast
+          control={
+            <Checkbox
+              onClick={showCard}
+              defaultChecked
+              color="default"
+              inputProps={{ "aria-label": "checkbox with default color" }}
+              size="small"
+              checked={show}
+            />
+          }
+        />{" "}
+        5 Day Forescast
         {show && (
           <Card
             id="card"
             style={{ width: "520px", height: "530px" }}
             variant="outlined"
           >
-            <CardContent>
+            <CardContent id="fiveDay">
               <Typography variant="h4" component="h4">
                 <p>5 Day Forecast</p>
               </Typography>
-              <div id="fiveDay">
+              <div>
+                {/* <div
+                  id="fiveDay"
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    marginTop: "8px",
+                  }}
+                > */}
                 <Typography
                   variant="h5"
                   component="h4"
@@ -86,20 +102,26 @@ const FiveDay = (props) => {
                   {tempConversion(props.weatherObj.weather3)}°F{" "}
                   {weatherIcon(props.weatherObj.main3)}
                 </Typography>
-                <div style = {{display: "flex", justifyContent: "space-between", marginTop: "8px" }}>
-                  <div >
-                    <Typography
-                      variant="h5"
-                      component="h4"
-                      size="1.4rem"
-                      color="textSecondary"
-                    >
-                      {convertDateFormat(new Date(props.weatherObj.day4))}:{" "}
-                      {tempConversion(props.weatherObj.weather4)}°F{" "}
-                    </Typography>
-                  </div>
+
+                <Typography
+                  variant="h5"
+                  component="h4"
+                  size="1.4rem"
+                  color="textSecondary"
+                >
+                  {/* <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      marginTop: "8px",
+                    }}
+                  > */}
+                  {convertDateFormat(new Date(props.weatherObj.day4))}:{" "}
+                  {tempConversion(props.weatherObj.weather4)}°F
                   {weatherIcon(props.weatherObj.main4)}
-                </div>
+                  {/* </div> */}
+                </Typography>
+
                 <Typography
                   variant="h5"
                   component="h4"
@@ -121,6 +143,7 @@ const FiveDay = (props) => {
                   {weatherIcon(props.weatherObj.main6)}
                 </Typography>
               </div>
+              {/* </div> */}
             </CardContent>
           </Card>
         )}

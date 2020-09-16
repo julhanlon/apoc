@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Header from "../Header";
-// import DangerChart from "../mapsAndCharts/DangerChart";
+import DangerChart from "../mapsAndCharts/DangerChart";
 import Search from "./Search";
 import Chart from "../mapsAndCharts/Chart";
 import BarChart from "../mapsAndCharts/BarChart";
@@ -324,7 +324,7 @@ const Home = () => {
   };
 
   return (
-    <div className="page">
+    <div>
       <>
         <AuthButtons />
         <Header />
@@ -365,7 +365,7 @@ const Home = () => {
                   {allData.mapp && (
                     <CityName id="cityName" mapObj={allData.mapp} />
                   )}
-                  {/* {dangerData && <DangerChart danger={dangerData} />} */}
+                  {dangerData && <DangerChart danger={dangerData} />}
                 </div>
               </Card>
             </div>

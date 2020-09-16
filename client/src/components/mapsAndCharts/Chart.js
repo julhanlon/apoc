@@ -19,11 +19,11 @@ const titleStyle = {
 export default (props) => {
   const [numDays, setNumDays] = useState(maxDays);
   const [showArea, setshowArea] = useState("false");
-  const [show, setShow] = useState(true)
+  // const [show, setShow] = useState(true)
 
 
   const showCard = () => {
-    setShow(!show)
+    props.showCard("covid")
 }
 
 
@@ -71,11 +71,11 @@ export default (props) => {
   return (
     <>
     <div style = {{ height: "670px", width: "100%"}}>
-    <FormControlLabel style = {{marginLeft: "30px"}} control={<Checkbox id = "checkbox" onClick={showCard} defaultChecked
+    <FormControlLabel style = {{marginLeft: "30px"}} control={<Checkbox id = "checkbox" onClick={showCard} 
           color="default"
-          inputProps={{ 'aria-label': 'checkbox with default color' }} size = "small" checked = {show}  />}  />Covid
+          inputProps={{ 'aria-label': 'checkbox with default color' }} size = "small" checked = {props.show}  />}  />Covid
     <div style = {{display: "flex", justifyContent: "center"}}>
-    {show && <Card id = "chartCard" >
+    {props.show && <Card id = "chartCard" >
     <Typography variant="h4" component="h4">
         <p style={titleStyle}>Covid Chart</p>
       </Typography>

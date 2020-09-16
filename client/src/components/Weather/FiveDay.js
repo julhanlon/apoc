@@ -102,6 +102,7 @@ const FiveDay = (props) => {
                   {tempConversion(props.weatherObj.weather3)}°F{" "}
                   {weatherIcon(props.weatherObj.main3)}
                 </Typography>
+<<<<<<< HEAD
 
                 <Typography
                   variant="h5"
@@ -118,6 +119,20 @@ const FiveDay = (props) => {
                   > */}
                   {convertDateFormat(new Date(props.weatherObj.day4))}:{" "}
                   {tempConversion(props.weatherObj.weather4)}°F
+=======
+                <div style = {{display: "flex", justifyContent: "space-between", marginTop: "8px", width: "80%" }}>
+                  <div >
+                    <Typography
+                      variant="h5"
+                      component="h4"
+                      size="1.4rem"
+                      color="textSecondary"
+                    >
+                      {convertDateFormat(new Date(props.weatherObj.day4))}:{" "}
+                      {tempConversion(props.weatherObj.weather4)}°F{" "}
+                    </Typography>
+                  </div>
+>>>>>>> f267efd33fcd89b4e9ca55fd631b7c86179e8f16
                   {weatherIcon(props.weatherObj.main4)}
                   {/* </div> */}
                 </Typography>

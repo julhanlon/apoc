@@ -50,11 +50,16 @@ const initDanger = {
   weather: { show: true, score: 0 },
 };
 
+const initSubmitData = {
+  city: null, state_name: null, county: null, lat: null, lng: null
+};
+
 const Home = () => {
   const [loadingInfo, setLoadingInfo] = useState(false);
   const [suggestions, setSuggestionsData] = useState(null);
   const [dangerData, setDangerData] = useState(initDanger);
   const [allData, setAllData] = useState(initData);
+  const [submitData, setSubmitData] = useState(initSubmitData)
 
   React.useEffect(() => {
     let mapStorage = localStorage.getItem("mapStorage");
@@ -204,8 +209,10 @@ const Home = () => {
         });
     });
   };
-  const dangerLevel = () => {
-    let scoreObj = { covid: 0, weather: 0, eq: 0, air: 0 };
+
+  const dangerLevel = (allData) => {
+
+    let scoreObj = { covid: -1, weather: -1, eq: -1, air: -1 };
     if (allData.covid.length > 0) {
       let CovidDanger = allData.covid[allData.covid.length - 1].totalDeaths;
       if (CovidDanger <= 1000) {
@@ -252,13 +259,24 @@ const Home = () => {
         scoreObj.air = 25;
       }
     }
-    let danger =
-      scoreObj.covid * 0.3 +
-      scoreObj.eq * 0.3 +
-      scoreObj.weather * 0.1 +
-      scoreObj.air * 0.3;
-    setDangerData(danger);
+
+    let dangerObj = {
+      air: { score: scoreObj.air, show: true },
+      covid: { score: scoreObj.covid, show: true },
+      eq: { score: scoreObj.eq, show: true },
+      weather: { score: scoreObj.weather, show: true }
+    };
+    setDangerData(dangerObj);
   };
+
+  const showCard = (attribute) => {
+    let showAttribute = dangerData[attribute].show;
+    let obj = {
+      ...dangerData,
+      [attribute]: { ...dangerData[attribute], show: !showAttribute }
+    }
+    setDangerData(obj)
+  }
 
   const buttonSubmit = (city, state_name, county, lat, lng) => {
     setLoadingInfo(true);
@@ -313,8 +331,9 @@ const Home = () => {
         if (values[3].success) dataObj.eq = values[3].data;
         if (values[4].success) dataObj.feed = values[4].data;
         if (values[5].success) dataObj.weather = values[5].data;
+      
+        dangerLevel(dataObj);
         setAllData(dataObj);
-        dangerLevel();
         setLoadingInfo(false);
       })
       .catch((err) => {
@@ -372,7 +391,7 @@ const Home = () => {
             <div className="mapAndFeed" style={{ marginTop: "60px" }}>
               <div style={{ width: "45%", marginLeft: "35px" }}>
                 {allData.mapp && (
-                  <MyMap mapObj={allData.mapp} eqData={allData.eq} />
+                  <MyMap mapObj={allData.mapp} showCard = {showCard} show = {dangerData.eq.show} eqData={allData.eq} />
                 )}
               </div>
               <div style={{ width: "50%" }}>
@@ -389,19 +408,19 @@ const Home = () => {
                 marginTop: "60px",
               }}
             >
-              {allData.mapp && <Chart data={allData.covid} />}
+              {allData.mapp && <Chart showCard = {showCard} show = {dangerData.covid.show} data={allData.covid} />}
             </div>
             <div
               className="weather"
               style={{ marginTop: "60px", marginBottom: "50px" }}
             >
               {/* <div style = {{display: "flex", justifyContent: "center"}}> */}
-              {allData.weather && <Weather weatherObj={allData.weather} />}
+              {allData.weather && <Weather showCard = {showCard} show = {dangerData.weather.show} weatherObj={allData.weather} />}
               {allData.weather && <FiveDay weatherObj={allData.weather} />}
               {/* </div> */}
               {allData.air && (
                 <div>
-                  <BarChart airObj={allData.air} />
+                  <BarChart showCard = {showCard} show = {dangerData.air.show} airObj={allData.air} />
                 </div>
               )}
             </div>

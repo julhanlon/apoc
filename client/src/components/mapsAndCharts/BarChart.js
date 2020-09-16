@@ -11,10 +11,10 @@ import "./BarChart.css"
 export default (props) => {
 
   const [axis, setAxis] = useState("vertical");
-  const [show, setShow] = useState(true)
+  // const [show, setShow] = useState(true)
 
   const showCard = () => {
-    setShow(!show)
+    props.showCard("air")
 }
 
   const changeAxis = (e) => {
@@ -34,10 +34,10 @@ export default (props) => {
   return (
     <>
     <div style = {{height: "540px", width: "780px"}}>
-    <FormControlLabel control={<Checkbox id = "checkbox" onClick={showCard} defaultChecked
+    <FormControlLabel control={<Checkbox id = "checkbox" onClick={showCard} 
           color="default"
-          inputProps={{ 'aria-label': 'checkbox with default color' }} size = "small" checked = {show}  />}  /> Air Quality
-    {show &&  <Card id = "barCard" style = {{width: "780px", height: "530px"}}>
+          inputProps={{ 'aria-label': 'checkbox with default color' }} size = "small" checked = {props.show}  />}  /> Air Quality
+    {props.show &&  <Card id = "barCard" style = {{width: "780px", height: "530px"}}>
      
       <Typography variant="h4" component="h4">
      <p style={{textAlign: "center" }}>Air Quality Index</p>

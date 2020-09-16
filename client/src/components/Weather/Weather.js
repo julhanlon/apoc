@@ -33,21 +33,21 @@ const weatherIcon = (icon) => {
 };
 
 const Weather = (props) => {
-  const [show, setShow] = useState(true);
+  // const [show, setShow] = useState(true);
 
   const showCard = () => {
-    setShow(!show);
+    props.showCard("weather");
   };
 
   return (
     <>
       <div style={{ height: "540px", width: "330px" }}>
         <FormControlLabel
-          control={<Checkbox id="checkbox" onClick={showCard}  defaultChecked
+          control={<Checkbox id="checkbox" onClick={showCard}  
           color="default"
-          inputProps={{ 'aria-label': 'checkbox with default color' }} size = "small" checked={show} />}
+          inputProps={{ 'aria-label': 'checkbox with default color' }} size = "small" checked={props.show} />}
         /> Weather
-        {show && (
+        {props.show && (
           <Card
             id="card"
             style={{ width: "320px", height: "530px" }}

@@ -71,7 +71,6 @@ const Home = () => {
           state_name: mapStorage[0].state_name,
           county: mapStorage[0].county,
           lat: mapStorage[0].lat,
-<<<<<<< HEAD
           lng: mapStorage[0].lng
         });
     }
@@ -81,21 +80,6 @@ const Home = () => {
     let exec = true;
     const buttonSubmit = (city, state_name, county, lat, lng) => {
       if (!city || !state_name || city.trim() === "" || state_name.trim() === "")
-=======
-          lng: mapStorage[0].lng,
-        });
-    }
-  }, []);
-  React.useEffect(() => {
-    let exec = true;
-    const buttonSubmit = (city, state_name, county, lat, lng) => {
-      if (
-        !city ||
-        !state_name ||
-        city.trim() === "" ||
-        state_name.trim() === ""
-      )
->>>>>>> 8de69bab9807dc9e6f3fd3bd6227a5c895b516a2
         return;
       setLoadingInfo(true);
       setSuggestionsData(null);
@@ -123,15 +107,7 @@ const Home = () => {
             setLoadingInfo(false);
             return;
           }
-<<<<<<< HEAD
           if (!values[2].success && values[2].message && values[2].message.data) {
-=======
-          if (
-            !values[2].success &&
-            values[2].message &&
-            values[2].message.data
-          ) {
->>>>>>> 8de69bab9807dc9e6f3fd3bd6227a5c895b516a2
             setLoadingInfo(false);
             setSuggestionsData(values[2].message.data.data);
             return;
@@ -144,7 +120,6 @@ const Home = () => {
             recentSearches = recentSearches ? JSON.parse(recentSearches) : [];
             if (recentSearches.length === 0) {
               recentSearches.push(values[2].data);
-<<<<<<< HEAD
               localStorage.setItem("mapStorage", JSON.stringify(recentSearches));
             } else if (recentSearches.length < 5) {
               recentSearches.unshift(values[2].data);
@@ -153,35 +128,12 @@ const Home = () => {
               recentSearches.unshift(values[2].data);
               recentSearches.pop();
               localStorage.setItem("mapStorage", JSON.stringify(recentSearches));
-=======
-              localStorage.setItem(
-                "mapStorage",
-                JSON.stringify(recentSearches)
-              );
-            } else if (recentSearches.length < 5) {
-              recentSearches.unshift(values[2].data);
-              localStorage.setItem(
-                "mapStorage",
-                JSON.stringify(recentSearches)
-              );
-            } else {
-              recentSearches.unshift(values[2].data);
-              recentSearches.pop();
-              localStorage.setItem(
-                "mapStorage",
-                JSON.stringify(recentSearches)
-              );
->>>>>>> 8de69bab9807dc9e6f3fd3bd6227a5c895b516a2
             }
             dataObj.mapp = values[2].data;
           }
           if (values[3].success) dataObj.eq = values[3].data;
           if (values[4].success) dataObj.feed = values[4].data;
           if (values[5].success) dataObj.weather = values[5].data;
-<<<<<<< HEAD
-
-=======
->>>>>>> 8de69bab9807dc9e6f3fd3bd6227a5c895b516a2
           dangerLevel(dataObj);
           setAllData(dataObj);
           setLoadingInfo(false);
@@ -191,21 +143,14 @@ const Home = () => {
           setLoadingInfo(false);
         });
     };
-<<<<<<< HEAD
 
 
-=======
->>>>>>> 8de69bab9807dc9e6f3fd3bd6227a5c895b516a2
     //map Data function
     const loadMapData = (city, state_name, county, lat, lng) => {
       return new Promise((resolve, reject) => {
         API.getMapData(city, state_name, county, lat, lng)
           .then((res) => {
             var mapObj = res.data.data[0];
-<<<<<<< HEAD
-
-=======
->>>>>>> 8de69bab9807dc9e6f3fd3bd6227a5c895b516a2
             resolve(mapObj);
           })
           .catch((err) => {
@@ -213,10 +158,6 @@ const Home = () => {
           });
       });
     };
-<<<<<<< HEAD
-
-=======
->>>>>>> 8de69bab9807dc9e6f3fd3bd6227a5c895b516a2
     //covid function
     const loadCovidData = (city, state_name, county) => {
       return new Promise((resolve, reject) => {
@@ -275,10 +216,6 @@ const Home = () => {
           });
       });
     };
-<<<<<<< HEAD
-
-=======
->>>>>>> 8de69bab9807dc9e6f3fd3bd6227a5c895b516a2
     const loadEarthquakes = (city, state_name, lat, lng) => {
       return new Promise((resolve, reject) => {
         API.getEarthquakeData(city, state_name, lat, lng)
@@ -329,13 +266,9 @@ const Home = () => {
           });
       });
     };
-<<<<<<< HEAD
 
     const dangerLevel = (allData) => {
 
-=======
-    const dangerLevel = (allData) => {
->>>>>>> 8de69bab9807dc9e6f3fd3bd6227a5c895b516a2
       let scoreObj = { covid: -1, weather: -1, eq: -1, air: -1 };
       if (allData.covid.length > 0) {
         let CovidDanger = allData.covid[allData.covid.length - 1].totalDeaths;
@@ -383,15 +316,10 @@ const Home = () => {
           scoreObj.air = 25;
         }
       }
-<<<<<<< HEAD
-
-=======
->>>>>>> 8de69bab9807dc9e6f3fd3bd6227a5c895b516a2
       let dangerObj = {
         air: { score: scoreObj.air, show: true },
         covid: { score: scoreObj.covid, show: true },
         eq: { score: scoreObj.eq, show: true },
-<<<<<<< HEAD
         weather: { score: scoreObj.weather, show: true }
       };
       setDangerData(dangerObj);
@@ -405,18 +333,6 @@ const Home = () => {
   }, [submitData])
 
 
-=======
-        weather: { score: scoreObj.weather, show: true },
-      };
-      setDangerData(dangerObj);
-    };
-    let { city, state_name, county, lat, lng } = submitData;
-    buttonSubmit(city, state_name, county, lat, lng);
-    return function () {
-      exec = false;
-    };
-  }, [submitData]);
->>>>>>> 8de69bab9807dc9e6f3fd3bd6227a5c895b516a2
   const handleAuxButton = (e) => {
     let value = suggestions[e.currentTarget.dataset.index];
     setSubmitData({
@@ -424,23 +340,16 @@ const Home = () => {
       state_name: value.state_name,
       county: value.county,
       lat: value.lat,
-<<<<<<< HEAD
       lng: value.lng
     });
   };
 
 
 
-=======
-      lng: value.lng,
-    });
-  };
->>>>>>> 8de69bab9807dc9e6f3fd3bd6227a5c895b516a2
   const showCard = (attribute) => {
     let showAttribute = dangerData[attribute].show;
     let obj = {
       ...dangerData,
-<<<<<<< HEAD
       [attribute]: { ...dangerData[attribute], show: !showAttribute }
     }
     setDangerData(obj)
@@ -448,12 +357,6 @@ const Home = () => {
 
 
 
-=======
-      [attribute]: { ...dangerData[attribute], show: !showAttribute },
-    };
-    setDangerData(obj);
-  };
->>>>>>> 8de69bab9807dc9e6f3fd3bd6227a5c895b516a2
   return (
     <div className="page">
       <>
@@ -503,16 +406,7 @@ const Home = () => {
             <div className="mapAndFeed" style={{ marginTop: "60px" }}>
               <div style={{ width: "45%", marginLeft: "35px" }}>
                 {allData.mapp && (
-<<<<<<< HEAD
                   <MyMap mapObj={allData.mapp} showCard={showCard} show={dangerData.eq.show} eqData={allData.eq} />
-=======
-                  <MyMap
-                    mapObj={allData.mapp}
-                    showCard={showCard}
-                    show={dangerData.eq.show}
-                    eqData={allData.eq}
-                  />
->>>>>>> 8de69bab9807dc9e6f3fd3bd6227a5c895b516a2
                 )}
               </div>
               <div style={{ width: "50%" }}>
@@ -528,47 +422,19 @@ const Home = () => {
                 marginTop: "60px",
               }}
             >
-<<<<<<< HEAD
               {allData.mapp && <Chart showCard={showCard} show={dangerData.covid.show} data={allData.covid} />}
-=======
-              {allData.mapp && (
-                <Chart
-                  showCard={showCard}
-                  show={dangerData.covid.show}
-                  data={allData.covid}
-                />
-              )}
->>>>>>> 8de69bab9807dc9e6f3fd3bd6227a5c895b516a2
             </div>
             <div
               className="weather"
               style={{ marginTop: "60px", marginBottom: "50px" }}
             >
               {/* <div style = {{display: "flex", justifyContent: "center"}}> */}
-<<<<<<< HEAD
               {allData.weather && <Weather showCard={showCard} show={dangerData.weather.show} weatherObj={allData.weather} />}
-=======
-              {allData.weather && (
-                <Weather
-                  showCard={showCard}
-                  show={dangerData.weather.show}
-                  weatherObj={allData.weather}
-                />
-              )}
->>>>>>> 8de69bab9807dc9e6f3fd3bd6227a5c895b516a2
               {allData.weather && <FiveDay weatherObj={allData.weather} />}
               {/* </div> */}
               {allData.air && (
                 <div>
-<<<<<<< HEAD
                   <BarChart showCard={showCard} show={dangerData.air.show} airObj={allData.air} />
-=======
-                  <BarChart
-                    showCard={showCard}
-                    show={dangerData.air.show}
-                    airObj={allData.air}
-                  />
->>>>>>> 8de69bab9807dc9e6f3fd3bd6227a5c895b516a2
                 </div>
               )}
             </div>

@@ -54,7 +54,7 @@ const FiveDay = (props) => {
           control={<Checkbox onClick={showCard} defaultChecked
           color="default"
           inputProps={{ 'aria-label': 'checkbox with default color' }} size = "small" checked={show} />}
-        />
+        /> 5 Day Forescast
         {show && (
           <Card
             id="card"

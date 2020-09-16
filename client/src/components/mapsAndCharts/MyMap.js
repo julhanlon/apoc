@@ -122,7 +122,7 @@ const MyMap = (props) => {
       <div style={{ height: "670px", width: "100%" }}>
         <FormControlLabel style={{ marginLeft: "30px" }} control={<Checkbox id="checkbox" onClick={showCard} defaultChecked
           color="default"
-          inputProps={{ 'aria-label': 'checkbox with default color' }} size="small" checked={show} />} />
+          inputProps={{ 'aria-label': 'checkbox with default color' }} size="small" checked={show} />} />Earthquakes
         {show && <Card id="mapCard">
           <div style={{ display: "flex", justifyContent: "center" }}>
             <Typography variant="h4" component="h4">

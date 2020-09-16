@@ -46,7 +46,7 @@ const Weather = (props) => {
           control={<Checkbox id="checkbox" onClick={showCard}  defaultChecked
           color="default"
           inputProps={{ 'aria-label': 'checkbox with default color' }} size = "small" checked={show} />}
-        />
+        /> Weather
         {show && (
           <Card
             id="card"

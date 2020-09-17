@@ -1,12 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
+import React from "react";
+import PropTypes from "prop-types";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
 
 function CircularProgressWithLabel(props) {
   return (
-    <Box position="relative" display="inline-flex">
+    <Box position="relative" display="inline-flex" style={{ marginTop: "5%" }}>
       <CircularProgress size="14rem" variant="static" {...props} />
       <Box
         top={0}
@@ -18,9 +18,11 @@ function CircularProgressWithLabel(props) {
         alignItems="center"
         justifyContent="center"
       >
-        <Typography variant="caption" component="div" color="red">{`${Math.round(
-          props.value,
-        )}%`}</Typography>
+        <Typography
+          variant="caption"
+          component="div"
+          color="red"
+        >{`${Math.round(props.value)}%`}</Typography>
       </Box>
     </Box>
   );
@@ -39,7 +41,9 @@ export default function CircularStatic() {
 
   React.useEffect(() => {
     const timer = setInterval(() => {
-      setProgress((prevProgress) => (prevProgress >= 100 ? 10 : prevProgress + 10));
+      setProgress((prevProgress) =>
+        prevProgress >= 100 ? 10 : prevProgress + 10
+      );
     }, 800);
     return () => {
       clearInterval(timer);

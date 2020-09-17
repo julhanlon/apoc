@@ -14,13 +14,9 @@ const SearchChips = (props) => {
     setCities(getFromLocalStorage());
   }, []);
 
-  React.useEffect(() => {
-    localStorage.setItem("mapStorage", JSON.stringify(recentCities));
-  }, [recentCities]);
-
-  const handleDelete = (e) => {
-    var index = e.currentTarget.dataset.index;
+  const handleDelete = (index) => {
     var arr = recentCities;
+
     arr.splice(index, 1);
     setCities(arr);
   };
@@ -29,9 +25,11 @@ const SearchChips = (props) => {
     let { city, state_name, county, lat, lng } = recentCities[
       e.currentTarget.dataset.index
     ];
-    props.buttonSubmit({city, state_name, county, lat, lng});
+    props.buttonSubmit({ city, state_name, county, lat, lng });
   };
 
+  // let uniq = [...new Set(recentCities)];
+  // console.log(uniq);
   let chips = recentCities.map((item, index) => {
     return (
       <div key={index} style={{ size: "sizeSmall" }}>
@@ -41,7 +39,7 @@ const SearchChips = (props) => {
           label={`${item.city}, ${item.state_name}`}
           // icon={<FaceIcon />}
           onClick={handleClick}
-          onDelete={handleDelete}
+          //onDelete={() => handleDelete(index)}
           color="primary"
           variant="outlined"
         />

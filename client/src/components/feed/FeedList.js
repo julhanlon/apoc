@@ -5,8 +5,8 @@ import Typography from "@material-ui/core/Typography";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import API from "../../utils/API";
-import "./FeedList.css"
-import Fire from "../ProfilePage/images/fire.png"
+import "./FeedList.css";
+import Fire from "../ProfilePage/images/fire.png";
 
 const convertDate = (date) => {
   let isoDate = date;
@@ -21,7 +21,7 @@ const FeedList = (props) => {
   useEffect(() => {
     setFeedItems(props.feedData);
   }, [props.feedData]);
-  console.log(props.feedData);
+  // console.log(props.feedData);
 
   function changeText(e) {
     setText(e.target.value);
@@ -51,7 +51,7 @@ const FeedList = (props) => {
       setText("");
     }
   }
-  console.log(feedItems);
+  // console.log(feedItems);
   let location = () => <div>{feedItems[0].location.city}</div>;
   // let feedTitle = props.feedData.map((item, index) => (
   //   <container key={index}>
@@ -59,40 +59,52 @@ const FeedList = (props) => {
   //   </container>
   // ));
   let titleArr = feedItems.map((item, index) => (
-    <div key={index} id = "commentCard">
-    <Card id = "cardd">
-      <div style = {{display: "flex", justifyContent: "space-between"}}>
-        <div style = {{display: "flex", justifyContent: "center"}}>
-        <img id = "feedImage" src={Fire} alt = "icon"/>
-      <Typography variant="p" component="p">
-      <p>{item.author.id ? item.author.id.displayName || "" : ""}</p>
-      </Typography>
+    <div key={index} id="commentCard">
+      <Card id="cardd">
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <img id="feedImage" src={Fire} alt="icon" />
+            <Typography variant="p" component="p">
+              <p>{item.author.id ? item.author.id.displayName || "" : ""}</p>
+            </Typography>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              marginRight: "10px",
+              marginLeft: "10px",
+            }}
+          >
+            <Typography variant="p" component="p">
+              <p>{convertDate(item.date)}</p>
+            </Typography>
+          </div>
         </div>
-      <div style = {{display: "flex", justifyContent: "space-between", marginRight: "10px" , marginLeft: "10px"}}>
-      <Typography variant="p" component="p">
-      <p>{convertDate(item.date)}</p>
-      </Typography>
-      </div>
-      </div>
-    
-      <div style = {{marginLeft: "10px"}}>
-      <Typography variant="p" component="p">
-      <p >{item.text}</p>
-      </Typography>
-      </div>
-    
-    
-    </Card>
-     
+
+        <div style={{ marginLeft: "10px" }}>
+          <Typography variant="p" component="p">
+            <p>{item.text}</p>
+          </Typography>
+        </div>
+      </Card>
     </div>
   ));
 
   return (
     <div style={{ width: "90%", height: "670px" }}>
       <FormControlLabel
-        control={<Checkbox id="checkbox" onClick={showCard} defaultChecked
-        color="default"
-        inputProps={{ 'aria-label': 'checkbox with default color' }} size = "small" checked={show} />}
+        control={
+          <Checkbox
+            id="checkbox"
+            onClick={showCard}
+            defaultChecked
+            color="default"
+            inputProps={{ "aria-label": "checkbox with default color" }}
+            size="small"
+            checked={show}
+          />
+        }
       />
       Feed
       <div>{location}</div>

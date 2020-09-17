@@ -31,9 +31,18 @@
 .QueryBtnsBox {
   width: 90%;
   display: inline-flex;
+  justify-content: flex-start;
   justify-content: space-between;
-  border: solid black 1px;
-
-  padding: 2%;
-  margin: 2%;
+  padding: 0%, 0%, 2%, 2%;
+  margin: auto;
+  /* margin-left: ; */
+}
+.AuxBtnsBox {
+  width: 90%;
+  display: inline-flex;
+  padding: 0%, 0%, 2%, 2%;
+  margin-top: 3%;
+  margin-left: 3%;
+  text-emphasis: bold;
+  /* margin-left: ; */
 }

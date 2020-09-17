@@ -12,11 +12,11 @@
 }
 #topItems {
   border-radius: 20px;
-  height: 380px;
+  height: 360px;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   width: 95%;
-  padding-top: 45px;
-  align-items: center;
+  padding-top: 35px;
+  /* align-items: center; */
 }
 
 #loader {
@@ -25,7 +25,9 @@
 }
 
 #cityName {
-  text-align: center;
+  text-align: flex-start;
+  padding-bottom: 40px;
+  
 }
 
 .QueryBtnsBox {

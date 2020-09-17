@@ -51,7 +51,7 @@ const SearchChips = (props) => {
   let chips = recentCities.map((item, index) => {
     return (
       <div key={index} style={{ size: "sizeSmall" }}>
-        <Chip style = {{marginLeft: "5px"}}
+        <Chip style = {{marginLeft: "8px"}}
         classes={{
           root: classes.root, // class name, e.g. `classes-nesting-root-x`
           label: classes.label, // class name, e.g. `classes-nesting-label-x`

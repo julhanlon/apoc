@@ -133,26 +133,36 @@ const Home = () => {
                 "mapStorage",
                 JSON.stringify(recentSearches)
               );
-            } 
-            else if (recentSearches.length < 5 ) {
+            } else {
+              let index = -1;
+              for (let i = 0; i < recentSearches.length; i++) {
+                const element = recentSearches[i];
+                if (
+                  element.lat === values[2].data.lat &&
+                  element.lng === values[2].data.lng
+                ) {
+                  index = i;
+                  console.log(index);
+                  break;
+                }
+              }
+
+              if (index !== -1) {
+                recentSearches.splice(index, 1);
+              }
               recentSearches.unshift(values[2].data);
+
+              if (recentSearches.length > 5) {
+                recentSearches.pop();
+              }
+
+              // console.log(recentCities);
               localStorage.setItem(
                 "mapStorage",
                 JSON.stringify(recentSearches)
               );
             }
-             else {
-              let index = recentSearches;
-              console.log(values[2].data);
-              console.log(index);
-              // console.log(index == values[2].data);
-              recentSearches.unshift(values[2].data);
-              recentSearches.pop();
-              localStorage.setItem(
-                "mapStorage",
-                JSON.stringify(recentSearches)
-              );
-            }
+
             dataObj.mapp = values[2].data;
           }
           if (values[3].success) dataObj.eq = values[3].data;
@@ -350,6 +360,7 @@ const Home = () => {
       exec = false;
     };
   }, [submitData]);
+
   const handleAuxButton = (e) => {
     let value = suggestions[e.currentTarget.dataset.index];
     setSubmitData({
@@ -379,11 +390,7 @@ const Home = () => {
             buttonSubmit={setSubmitData}
             loadingInfo={loadingInfo}
           />
-          <container style={{ marginLeft: "3%" }} className="QueryBtnsBox">
-            Recent searches:
-            {<SearchChips buttonSubmit={setSubmitData} />}
-            <br />
-          </container>
+
           {suggestions ? (
             <div style={{ marginLeft: "3%" }} className="AuxBtnsBox">
               Did you mean...
@@ -401,6 +408,11 @@ const Home = () => {
         <div id="loader">{loadingInfo ? <Loading /> : null}</div>
         {!loadingInfo ? (
           <>
+            <container style={{ marginLeft: "3%" }} className="QueryBtnsBox">
+              Recent searches:
+              {<SearchChips buttonSubmit={setSubmitData} />}
+              <br />
+            </container>
             <div
               style={{
                 display: "flex",
@@ -434,7 +446,7 @@ const Home = () => {
                   />
                 )}
               </div>
-              <div style={{ width: "45%", marginRight: "40px"}}>
+              <div style={{ width: "45%", marginRight: "40px" }}>
                 {allData.mapp && (
                   <FeedList mapInfo={allData.mapp} feedData={allData.feed} />
                 )}

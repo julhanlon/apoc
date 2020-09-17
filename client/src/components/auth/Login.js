@@ -5,7 +5,9 @@ import { Input, Button } from "@material-ui/core";
 import Header from "../Header";
 import { useUserContext } from "../context/UserContext";
 import ErrorNotice from ".././misc/ErrorNotice";
-import RegisterButton from "./ResigterButton"
+import RegisterButton from "./ResigterButton";
+import { makeStyles } from '@material-ui/core/styles';
+import ParticlesBg from "particles-bg";
 import "./Login.css"
 
 const divStyle = {
@@ -14,7 +16,59 @@ const divStyle = {
   justifyContent: "center",
 };
 
+const useStyles = makeStyles({
+  root: {
+      background: "#cd3239",
+      borderRadius: 15,
+      border: 0,
+      color: 'white',
+      height: 33,
+      padding: '0 15px',
+      boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+  },
+  label: {
+      textTransform: 'capitalize',
+  },
+});
+
+let config = {
+  num: [4, 6],
+  rps: 0.6,
+  radius: [5, 30],
+  life: [1.5, 30],
+  v: [2, 3],
+  tha: [-40, 40],
+  alpha: [0.6, 0],
+  scale: [0.06, 0.14],
+  position: "all",
+  type: "ball",
+  // body: "import some image",
+  color: ["#c9c7c1", "‎#94928e"],
+  // cross: "dead",
+  emitter: "follow",
+  random: 5,
+};
+
+if (Math.random() > 0.85) {
+  config = Object.assign(config, {
+    onParticleUpdate: (ctx, particle) => {
+      ctx.beginPath();
+      ctx.rect(
+        particle.p.x,
+        particle.p.y,
+        particle.radius * 2,
+        particle.radius * 2
+      );
+      ctx.fillStyle = particle.color;
+      ctx.fill();
+      ctx.closePath();
+    },
+  });
+}
+
+
 export default function Login() {
+  const classes = useStyles();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [error, setError] = useState();
@@ -62,7 +116,10 @@ export default function Login() {
                 onChange={(e) => setPassword(e.target.value)}
               />
 
-              <Button variant="contained" color="primary" size="small" type="submit" value="Log in">
+              <Button classes={{
+                            root: classes.root, // class name, e.g. `classes-nesting-root-x`
+                            label: classes.label, // class name, e.g. `classes-nesting-label-x`
+                        }}  variant="contained" size="small" type="submit" value="Log in">
                 Login
      </Button>
             </form>
@@ -76,6 +133,7 @@ export default function Login() {
           <ErrorNotice message={error} clearError={() => setError(undefined)} />
         )}
       </div>
+      <ParticlesBg type="custom" config={config} bg={true} />
     </>
   );
 }

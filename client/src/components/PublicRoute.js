@@ -5,7 +5,7 @@ import Loading from "../components/Loading"
 
 export default ({ component: Component, ...rest }) => {
   const { userData, isAuthLoading } = useUserContext();
-  if (isAuthLoading) return  <Loading/>;
+  if (isAuthLoading) return  <div style = {{display: "flex", justifyContent: "center", marginTop: "50px"}}><Loading/></div>;
   return (
     <Route
       {...rest}

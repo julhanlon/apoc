@@ -63,7 +63,7 @@ module.exports = {
           result.push(eqObj);
         }
       });
-      console.log("n=", result.length, "eq objects");
+      // console.log("n=", result.length, "eq objects");
       return result;
     } catch (error) {
       console.log(error);

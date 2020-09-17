@@ -11,7 +11,7 @@ const maxDays = 60;
 
 const useStyles = makeStyles({
   root: {
-    background: 'linear-gradient(45deg, #f03030 20%, #FF8E53 90%)',
+    background: "#cd3239",
     borderRadius: 15,
     border: 0,
     color: 'white',

@@ -51,18 +51,10 @@ const FiveDay = (props) => {
     <>
       <div style={{ height: "540px", width: "520px" }}>
         <FormControlLabel
-          control={
-            <Checkbox
-              onClick={showCard}
-              defaultChecked
-              color="default"
-              inputProps={{ "aria-label": "checkbox with default color" }}
-              size="small"
-              checked={show}
-            />
-          }
-        />{" "}
-        5 Day Forescast
+          control={<Checkbox onClick={showCard} defaultChecked
+            color="default"
+            inputProps={{ 'aria-label': 'checkbox with default color' }} size="small" checked={show} />}
+        /> 5 Day Forescast
         {show && (
           <Card
             id="card"
@@ -74,15 +66,8 @@ const FiveDay = (props) => {
                 <p>5 Day Forecast</p>
               </Typography>
               <div id="fiveDay">
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    marginTop: "8px",
-                    width: "80%",
-                  }}
-                >
-                  <div>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "8px", width: "80%" }}>
+                  <div >
                     <Typography
                       variant="h5"
                       component="h4"
@@ -95,15 +80,8 @@ const FiveDay = (props) => {
                   </div>
                   {weatherIcon(props.weatherObj.main2)}
                 </div>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    marginTop: "8px",
-                    width: "80%",
-                  }}
-                >
-                  <div>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "8px", width: "80%" }}>
+                  <div >
                     <Typography
                       variant="h5"
                       component="h4"
@@ -116,15 +94,8 @@ const FiveDay = (props) => {
                   </div>
                   {weatherIcon(props.weatherObj.main3)}
                 </div>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    marginTop: "8px",
-                    width: "80%",
-                  }}
-                >
-                  <div>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "8px", width: "80%" }}>
+                  <div >
                     <Typography
                       variant="h5"
                       component="h4"
@@ -137,15 +108,8 @@ const FiveDay = (props) => {
                   </div>
                   {weatherIcon(props.weatherObj.main4)}
                 </div>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    marginTop: "8px",
-                    width: "80%",
-                  }}
-                >
-                  <div>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "8px", width: "80%" }}>
+                  <div >
                     <Typography
                       variant="h5"
                       component="h4"
@@ -158,15 +122,8 @@ const FiveDay = (props) => {
                   </div>
                   {weatherIcon(props.weatherObj.main5)}
                 </div>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    marginTop: "8px",
-                    width: "80%",
-                  }}
-                >
-                  <div>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "8px", width: "80%" }}>
+                  <div >
                     <Typography
                       variant="h5"
                       component="h4"

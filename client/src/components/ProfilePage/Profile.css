@@ -3,11 +3,15 @@
     width: 150px;
     border-radius: 50%;
     border: 2px solid #000;
-    margin: 50px;
+    margin-top: 50px;
 }
-
 
 #profileCard {
     border-radius:20px;
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+#profileFab {
+    margin-left: 160px;
+    margin-bottom: 40px;
 }

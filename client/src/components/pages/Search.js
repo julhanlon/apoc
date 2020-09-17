@@ -1,13 +1,30 @@
 import React, { useState } from "react";
 import { Input, Button } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 
 const divStyle = {
-  marginBottom: "10px",
-  marginLeft: "20px",
+  marginBottom: "30px",
+  marginLeft: "40px",
   marginTop: "60px",
 };
 
+const useStyles = makeStyles({
+  root: {
+    background: "linear-gradient(45deg, #f03030 20%, #FF8E53 90%)",
+    borderRadius: 15,
+    border: 0,
+    color: "white",
+    height: 33,
+    padding: "0 15px",
+    boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
+  },
+  label: {
+    textTransform: "capitalize",
+  },
+});
+
 const Search = (props) => {
+  const classes = useStyles();
   const [input, setInput] = useState({ city: "", state_name: "" });
 
   const handleChange = (e) => {
@@ -50,6 +67,10 @@ const Search = (props) => {
           value={input.state_name}
         />
         <Button
+          classes={{
+            root: classes.root, // class name, e.g. `classes-nesting-root-x`
+            label: classes.label, // class name, e.g. `classes-nesting-label-x`
+          }}
           variant="contained"
           color="primary"
           size="small"

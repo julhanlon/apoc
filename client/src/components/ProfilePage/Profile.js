@@ -6,10 +6,7 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import { Card } from '@material-ui/core';
 import ProfileButtons from "../auth/ProfileButtons";
-
-
 import "./Profile.css"
-
 
 let picArray = ["/static/images/error.png", "/static/images/fire.png", "/static/images/coronavirus.png", "/static/images/skull.png", "/static/images/virus.png"]
 
@@ -40,15 +37,11 @@ const Profile = () => {
         setImageIndex(userImageIndex)
       } catch (err) {
         console.log(err.response)
-        // err.response.data.msg && setError(err.response.data.msg);
+    
       }
     }
     loadProfileInfo();
   }, []);
-
-
-
-
 
 
 
@@ -135,7 +128,7 @@ const Profile = () => {
             <div style={{ display: "flex", justifyContent: "center" }}>
               <img src={editImage} id="profileImage" alt="not working" />
             </div>
-            <Fab onClick={changeImageUp} color="primary" aria-label="add">
+            <Fab id = "profileFab" onClick={changeImageUp} color="primary" size = "small" aria-label="add">
               <AddIcon />
             </Fab>
             {/* <Fab onClick={changeImageDown} color="primary" aria-label="add">

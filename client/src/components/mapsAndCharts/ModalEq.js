@@ -35,7 +35,7 @@ export default function TransitionsModal() {
 
   return (
     <div>
-      <Fab 
+      <Fab id = "mapFab"
         color="primary"
         size="small" onClick={handleOpen}>
         <AddIcon />

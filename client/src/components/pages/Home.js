@@ -408,11 +408,11 @@ const Home = () => {
         <div id="loader">{loadingInfo ? <Loading /> : null}</div>
         {!loadingInfo ? (
           <>
-            <container style={{ marginLeft: "3%" }} className="QueryBtnsBox">
+            <div style={{ marginLeft: "3%" }} className="QueryBtnsBox">
               Recent searches:
               {<SearchChips buttonSubmit={setSubmitData} />}
               <br />
-            </container>
+            </div>
             <div
               style={{
                 display: "flex",

@@ -1,8 +1,26 @@
 import React, { useState } from "react";
 import Chip from "@material-ui/core/Chip";
 import FaceIcon from "@material-ui/icons/Face";
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+  root: {
+      background: "#1ecbe1",
+      borderRadius: 15,
+      border: 0,
+      color: 'white',
+      height: 33,
+      padding: '0 15px',
+      boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+  },
+  label: {
+      textTransform: 'capitalize',
+  },
+});
+
 
 const SearchChips = (props) => {
+  const classes = useStyles();
   const [recentCities, setCities] = useState([]);
 
   React.useEffect(() => {
@@ -33,15 +51,19 @@ const SearchChips = (props) => {
   let chips = recentCities.map((item, index) => {
     return (
       <div key={index} style={{ size: "sizeSmall" }}>
-        <Chip
+        <Chip style = {{marginLeft: "5px"}}
+        classes={{
+          root: classes.root, // class name, e.g. `classes-nesting-root-x`
+          label: classes.label, // class name, e.g. `classes-nesting-label-x`
+      }} 
           size="small"
           data-index={index}
-          label={`${item.city}, ${item.state_name}`}
+          label={`${item.city}`}
           // icon={<FaceIcon />}
           onClick={handleClick}
           //onDelete={() => handleDelete(index)}
-          color="primary"
-          variant="outlined"
+          
+          variant="contained"
         />
       </div>
     );

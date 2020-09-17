@@ -47,14 +47,14 @@ const Landing = () => {
     <LoginButtons/>
     <div style = {{display: "flex" , justifyContent: "center", alignItems: "center", marginTop: "150px" }}>
       <Typography variant="h1" component="h1">
-        <span className="title">APOCALYPSE</span>
-        <span className="title blink">. . . ?</span>
+        <span className="title fade-in">APOCALYPSE</span>
+        <span className="title">. . . ?</span>
       </Typography>
 
       <ParticlesBg type="custom" config={config} bg={true} />
       
     </div>
-    <div style = {{ height: "500px", display: "flex", justifyContent: "center", alignItems: "flex-end"}}>
+    <div style = {{ height: "500px", display: "flex", justifyContent: "center"}}>
       <h5>© Julia and Sosuke</h5>
       </div>
     </>

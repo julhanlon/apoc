@@ -3,8 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import { Button, Fab } from "@material-ui/core";
-import AddIcon from '@material-ui/icons/Add';
+import {Fab } from "@material-ui/core";
+import InfoIcon from "@material-ui/icons/Info";
 import "./ModalEq.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -38,7 +38,7 @@ export default function TransitionsModal() {
       <Fab id = "mapFab"
         color="primary"
         size="small" onClick={handleOpen}>
-        <AddIcon />
+        <InfoIcon />
       </Fab>
       <Modal
         aria-labelledby="transition-modal-title"

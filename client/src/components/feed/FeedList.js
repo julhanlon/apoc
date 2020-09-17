@@ -5,18 +5,19 @@ import Typography from "@material-ui/core/Typography";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import API from "../../utils/API";
+import Fire from "./images/fire.png";
+import Covid from "./images/coronavirus.png";
+import Errors from "./images/error.png";
+import Skull from "./images/skull.png";
+import Virus from "./images/virus.png";
 import "./FeedList.css";
-import Fire from "../ProfilePage/images/fire.png";
-import Covid from "../ProfilePage/images/coronavirus.png";
-import Errors from "../ProfilePage/images/error.png";
-import Skull from "../ProfilePage/images/skull.png";
-import Virus from "../ProfilePage/images/virus.png";
 
 let randomImages = [Fire, Covid, Errors, Skull, Virus]
 
+
 const getRandomImage = () => {
-let newPic =  randomImages[Math.random() * randomImages.length];
-return newPic;
+  let newPic = randomImages[Math.floor(Math.random() * randomImages.length)];
+  return newPic;
 }
 
 const convertDate = (date) => {
@@ -28,12 +29,12 @@ const FeedList = (props) => {
   const [feedItems, setFeedItems] = useState([]);
   const [show, setShow] = useState(true);
   const [text, setText] = useState("");
-  
+
 
   useEffect(() => {
     setFeedItems(props.feedData);
   }, [props.feedData]);
-  
+
 
   function changeText(e) {
     setText(e.target.value);
@@ -63,15 +64,15 @@ const FeedList = (props) => {
       setText("");
     }
   }
- 
+
   let location = () => <div>{feedItems[0].location.city}</div>;
-  
+
   let titleArr = feedItems.map((item, index) => (
     <div key={index} id="commentCard">
       <Card id="cardd">
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <div style={{ display: "flex", justifyContent: "center" }}>
-            <img id="feedImage" src={getRandomImage()} alt="icon" />
+            <img id="feedImage" src={getRandomImage} style = {{height: "30px", width: "30px"}} alt="icon" />
             <Typography variant="p" component="p">
               <p>{item.author.id ? item.author.id.displayName || "" : ""}</p>
             </Typography>
@@ -100,7 +101,7 @@ const FeedList = (props) => {
   ));
 
   return (
-    <div style={{ width: "100%", height: "670px"}}>
+    <div style={{ width: "100%", height: "670px" }}>
       <FormControlLabel
         control={
           <Checkbox
@@ -136,18 +137,18 @@ const FeedList = (props) => {
             >
               {" "}
               {titleArr}
-             
+
             </div>
             <Input
-                id="inputFeed"
-                name="text"
-                type="text"
-                placeholder="add comment"
-                onChange={changeText}
-                value={text}
-              />
-              <Button size="small" onClick={handleSubmit}>
-                Submit
+              id="inputFeed"
+              name="text"
+              type="text"
+              placeholder="add comment"
+              onChange={changeText}
+              value={text}
+            />
+            <Button size="small" onClick={handleSubmit}>
+              Submit
               </Button>
           </CardContent>
         </Card>

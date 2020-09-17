@@ -133,13 +133,15 @@ const Home = () => {
                 "mapStorage",
                 JSON.stringify(recentSearches)
               );
-            } else if (recentSearches.length < 5) {
+            } 
+            else if (recentSearches.length < 5 ) {
               recentSearches.unshift(values[2].data);
               localStorage.setItem(
                 "mapStorage",
                 JSON.stringify(recentSearches)
               );
-            } else {
+            }
+             else {
               let index = recentSearches;
               console.log(values[2].data);
               console.log(index);

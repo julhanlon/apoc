@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import ParticlesBg from "particles-bg";
 import { Typography } from "@material-ui/core";
 import LoginButtons from "../auth/LoginButtons";
@@ -10,12 +10,12 @@ const Landing = () => {
   let config = {
     num: [4, 6],
     rps: 0.6,
-    radius: [5, 40],
-    life: [1.5, 20],
+    radius: [5, 30],
+    life: [1.5, 30],
     v: [2, 3],
     tha: [-40, 40],
     alpha: [0.6, 0],
-    scale: [0.1, 0.2],
+    scale: [0.06, 0.14],
     position: "all",
     type: "ball",
     // body: "import some image",
@@ -52,7 +52,11 @@ const Landing = () => {
       </Typography>
 
       <ParticlesBg type="custom" config={config} bg={true} />
+      
     </div>
+    <div style = {{ height: "500px", display: "flex", justifyContent: "center", alignItems: "flex-end"}}>
+      <h5>© Julia and Sosuke</h5>
+      </div>
     </>
   );
 };

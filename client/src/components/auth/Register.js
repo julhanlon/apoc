@@ -6,10 +6,28 @@ import LoginButtons from "./LoginButtons"
 import { useUserContext } from "../context/UserContext";
 import ErrorNotice from ".././misc/ErrorNotice";
 import { Input, Button } from "@material-ui/core";
+import { makeStyles } from '@material-ui/core/styles';
+import ParticlesBg from "particles-bg";
 import "./Register.css"
+
+const useStyles = makeStyles({
+  root: {
+      background: "#cd3239",
+      borderRadius: 15,
+      border: 0,
+      color: 'white',
+      height: 33,
+      padding: '0 15px',
+      boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+  },
+  label: {
+      textTransform: 'capitalize',
+  },
+});
 
 
 export default function Register() {
+  const classes = useStyles();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [passwordCheck, setPasswordCheck] = useState();
@@ -39,6 +57,43 @@ export default function Register() {
       err.response.data.msg && setError(err.response.data.msg);
     }
   };
+
+  let config = {
+    num: [4, 6],
+    rps: 0.6,
+    radius: [5, 40],
+    life: [1.5, 20],
+    v: [2, 3],
+    tha: [-40, 40],
+    alpha: [0.6, 0],
+    scale: [0.1, 0.2],
+    position: "all",
+    type: "ball",
+    // body: "import some image",
+    color: ["#c9c7c1", "‎#94928e"],
+    // cross: "dead",
+    emitter: "follow",
+    random: 5,
+  };
+
+  if (Math.random() > 0.85) {
+    config = Object.assign(config, {
+      onParticleUpdate: (ctx, particle) => {
+        ctx.beginPath();
+        ctx.rect(
+          particle.p.x,
+          particle.p.y,
+          particle.radius * 2,
+          particle.radius * 2
+        );
+        ctx.fillStyle = particle.color;
+        ctx.fill();
+        ctx.closePath();
+      },
+    });
+  }
+
+
   return (
     <>
     <LoginButtons/>
@@ -73,9 +128,11 @@ export default function Register() {
           type="text"
           onChange={(e) => setDisplayName(e.target.value)}
         />
-        <Button
+        <Button classes={{
+                            root: classes.root, // class name, e.g. `classes-nesting-root-x`
+                            label: classes.label, // class name, e.g. `classes-nesting-label-x`
+                        }}
           variant="contained"
-          color="primary"
           type="submit"
           value="Register"
         >
@@ -85,6 +142,7 @@ export default function Register() {
       </div>
   
     </div>
+    <ParticlesBg type="custom" config={config} bg={true} />
     </>
   );
 }

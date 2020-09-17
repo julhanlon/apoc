@@ -7,6 +7,17 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import API from "../../utils/API";
 import "./FeedList.css";
 import Fire from "../ProfilePage/images/fire.png";
+import Covid from "../ProfilePage/images/coronavirus.png";
+import Errors from "../ProfilePage/images/error.png";
+import Skull from "../ProfilePage/images/skull.png";
+import Virus from "../ProfilePage/images/virus.png";
+
+let randomImages = [Fire, Covid, Errors, Skull, Virus]
+
+const getRandomImage = () => {
+let newPic =  randomImages[Math.random() * randomImages.length];
+return newPic;
+}
 
 const convertDate = (date) => {
   let isoDate = date;
@@ -17,11 +28,12 @@ const FeedList = (props) => {
   const [feedItems, setFeedItems] = useState([]);
   const [show, setShow] = useState(true);
   const [text, setText] = useState("");
+  
 
   useEffect(() => {
     setFeedItems(props.feedData);
   }, [props.feedData]);
-  // console.log(props.feedData);
+  
 
   function changeText(e) {
     setText(e.target.value);
@@ -51,19 +63,15 @@ const FeedList = (props) => {
       setText("");
     }
   }
-  // console.log(feedItems);
+ 
   let location = () => <div>{feedItems[0].location.city}</div>;
-  // let feedTitle = props.feedData.map((item, index) => (
-  //   <container key={index}>
-  //     {item.location.city}, {item.location.state_name}
-  //   </container>
-  // ));
+  
   let titleArr = feedItems.map((item, index) => (
     <div key={index} id="commentCard">
       <Card id="cardd">
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <div style={{ display: "flex", justifyContent: "center" }}>
-            <img id="feedImage" src={Fire} alt="icon" />
+            <img id="feedImage" src={getRandomImage()} alt="icon" />
             <Typography variant="p" component="p">
               <p>{item.author.id ? item.author.id.displayName || "" : ""}</p>
             </Typography>

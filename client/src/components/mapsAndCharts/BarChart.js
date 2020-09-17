@@ -55,13 +55,14 @@ export default (props) => {
           color="default"
           inputProps={{ 'aria-label': 'checkbox with default color' }} size="small" checked={props.show} />} /> Air Quality
     {props.show && <Card id="barCard" style={{ width: "780px", height: "530px" }}>
-
-          <Typography variant="h4" component="h4">
-            <p style={{ textAlign: "center" }}>Air Quality Index</p>
-          </Typography>
-
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <Typography variant="h4" component="h4">
+              <p style={{ textAlign: "center" }}>Air Quality Index</p>
+            </Typography>
+            <Modal style = {{marginTop: "30px", marginRight: "10px" }} />
+          </div>
           <div style={{ display: "flex", marginLeft: "20px" }}>
-            <Modal />
+
             <Button classes={{
               root: classes.root, // class name, e.g. `classes-nesting-root-x`
               label: classes.label, // class name, e.g. `classes-nesting-label-x`

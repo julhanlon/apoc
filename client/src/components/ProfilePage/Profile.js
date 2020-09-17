@@ -89,34 +89,34 @@ const Profile = () => {
     }
   }
 
-  const changeImageDown = async () => {
+  // const changeImageDown = async () => {
 
    
-    if (imageIndex <= 0) {
-      setImageIndex(picArray.length - 1)
-      setEditImage(picArray[picArray.length-1])
-      try {
-        await API.editProfile("profilePic", picArray[picArray.length-1])
+  //   if (imageIndex <= 0) {
+  //     setImageIndex(picArray.length - 1)
+  //     setEditImage(picArray[picArray.length-1])
+  //     try {
+  //       await API.editProfile("profilePic", picArray[picArray.length-1])
     
-      } catch (err) {
-        console.log(err)
+  //     } catch (err) {
+  //       console.log(err)
  
-      }
-    }
-    else {
-      setImageIndex(imageIndex - 1);
-      setEditImage(picArray[imageIndex-1])
-      try {
-        await API.editProfile("profilePic",(picArray[imageIndex-1]))
+  //     }
+  //   }
+  //   else {
+  //     setImageIndex(imageIndex - 1);
+  //     setEditImage(picArray[imageIndex-1])
+  //     try {
+  //       await API.editProfile("profilePic",(picArray[imageIndex-1]))
    
-      } catch (err) {
-        console.log(err)
+  //     } catch (err) {
+  //       console.log(err)
   
-      }
+  //     }
 
-    }
+  //   }
 
-  }
+  // }
 
 
   return (

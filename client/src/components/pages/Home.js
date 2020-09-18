@@ -528,12 +528,12 @@ const Home = () => {
             </div>
             <div
               className="weather"
-              style={{ marginTop: "60px", marginBottom: "50px" }}
+              style={{ marginTop: "60px", marginBottom: "30px" }}
             >
-              {/* <div style = {{display: "flex", justifyContent: "center"}}> */}
+              <div style = {{display: "flex", justifyContent: "center"}}>
               {allData.weather && (
                 <Weather
-                  style={{ width: "20%" }}
+                
                   showCard={showCard}
                   show={dangerData.weather.show}
                   weatherObj={allData.weather}
@@ -541,15 +541,15 @@ const Home = () => {
               )}
               {allData.weather && (
                 <FiveDay
-                  style={{ width: "27%" }}
+                
                   weatherObj={allData.weather}
                 />
               )}
-              {/* </div> */}
+              </div>
               {allData.air && (
                 <div>
                   <BarChart
-                    style={{ width: "43%" }}
+                   
                     showCard={showCard}
                     show={dangerData.air.show}
                     airObj={allData.air}

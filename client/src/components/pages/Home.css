@@ -2,8 +2,7 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
- width: 100%,
-
+  width: 100%;
 }
 
 .mapAndFeed {
@@ -30,7 +29,6 @@
 #cityName {
   text-align: flex-start;
   padding-bottom: 40px;
-  
 }
 
 .QueryBtnsBox {
@@ -51,8 +49,4 @@
   margin-left: 3%;
   text-emphasis: bold;
   /* margin-left: ; */
-}
-
-.page {
-min-height: 100vh;
 }

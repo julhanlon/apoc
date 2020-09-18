@@ -58,7 +58,7 @@ const Weather = (props) => {
         {props.show && (
           <Card
             id="card"
-            style={{ width: "320px", height: "530px" }}
+            style={{ width: "290px", height: "530px" }}
             variant="outlined"
           >
             {/* <FormControlLabel control={<Checkbox onClick={showCard} checked = {show}  />}  /> */}

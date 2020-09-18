@@ -131,6 +131,7 @@ const FeedList = (props) => {
               style={
 
                 {
+                  backgroundColor: "#e3b36f",
                   border: "1px solid",
                   height: "560px",
                   overflow: "scroll",

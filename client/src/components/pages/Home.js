@@ -35,21 +35,19 @@ const useStyles = makeStyles({
   },
 });
 
-
-
 const SuggestionsButton = (props) => {
   const classes = useStyles();
   var array = props.options;
   let newItems = array.map((item, index) => {
     return (
       <Chip
-      classes={{
-        root: classes.root, // class name, e.g. `classes-nesting-root-x`
-        label: classes.label, // class name, e.g. `classes-nesting-label-x`
-      }}
+        classes={{
+          root: classes.root, // class name, e.g. `classes-nesting-root-x`
+          label: classes.label, // class name, e.g. `classes-nesting-label-x`
+        }}
         onClick={props.handleAuxButton}
         variant="contained"
-       size = "small"
+        size="small"
         data-index={index}
         key={index}
         label={item.city}
@@ -91,7 +89,6 @@ const Home = () => {
     let mapStorage = localStorage.getItem("mapStorage");
     if (mapStorage) {
       mapStorage = JSON.parse(mapStorage);
-      console.log(mapStorage.length);
       if (mapStorage.length > 0)
         setSubmitData({
           city: mapStorage[0].city,
@@ -316,7 +313,7 @@ const Home = () => {
       return new Promise((resolve, reject) => {
         API.getFeedData(city, state_name, county)
           .then((res) => {
-            console.log("feed", res.data.data);
+            // console.log("feed", res.data.data);
             resolve(res.data.data);
           })
           .catch((err) => {
@@ -406,7 +403,6 @@ const Home = () => {
     setDangerData(obj);
   };
 
-
   let config = {
     num: [4, 6],
     rps: 0.6,
@@ -442,14 +438,11 @@ const Home = () => {
     });
   }
 
-
-
-
   return (
     <div className="page">
       <>
         <AuthButtons />
-        <Header style = {{marginTop: "30px" }} />
+        <Header style={{ marginTop: "30px" }} />
         <div style={{ marginTop: "60px" }}>
           <Search
             className="search"
@@ -465,7 +458,6 @@ const Home = () => {
                   className="AuxBtnsBox"
                   handleAuxButton={handleAuxButton}
                   options={suggestions}
-                 
                 />
               </>
             </div>
@@ -539,17 +531,24 @@ const Home = () => {
             >
               {/* <div style = {{display: "flex", justifyContent: "center"}}> */}
               {allData.weather && (
-                <Weather style = {{width: "20%"}}
+                <Weather
+                  style={{ width: "20%" }}
                   showCard={showCard}
                   show={dangerData.weather.show}
                   weatherObj={allData.weather}
                 />
               )}
-              {allData.weather && <FiveDay style = {{width: "27%"}} weatherObj={allData.weather} />}
+              {allData.weather && (
+                <FiveDay
+                  style={{ width: "27%" }}
+                  weatherObj={allData.weather}
+                />
+              )}
               {/* </div> */}
               {allData.air && (
                 <div>
-                  <BarChart style = {{width: "43%"}}
+                  <BarChart
+                    style={{ width: "43%" }}
                     showCard={showCard}
                     show={dangerData.air.show}
                     airObj={allData.air}

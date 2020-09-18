@@ -4,26 +4,24 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import { makeStyles } from '@material-ui/core/styles';
-import API from "../../utils/API"
+import { makeStyles } from "@material-ui/core/styles";
+import API from "../../utils/API";
 import "./FeedList.css";
-
 
 const useStyles = makeStyles({
   root: {
     background: "#cd3239",
     borderRadius: 15,
     border: 0,
-    color: 'white',
+    color: "white",
     height: 33,
-    padding: '0 15px',
-    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+    padding: "0 15px",
+    boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
   },
   label: {
-    textTransform: 'capitalize',
+    textTransform: "capitalize",
   },
 });
-
 
 const convertDate = (date) => {
   let isoDate = date;
@@ -36,11 +34,9 @@ const FeedList = (props) => {
   const [show, setShow] = useState(true);
   const [text, setText] = useState("");
 
-
   useEffect(() => {
     setFeedItems(props.feedData);
   }, [props.feedData]);
-
 
   function changeText(e) {
     setText(e.target.value);
@@ -78,7 +74,16 @@ const FeedList = (props) => {
       <Card id="cardd">
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <div style={{ display: "flex", justifyContent: "center" }}>
-            <img id="feedImage" src={item.author.id ? item.author.id.profilePic || "/static/images/fire.png" : "/static/images/fire.png"} style = {{height: "30px", width: "30px"}} alt="icon" />
+            <img
+              id="feedImage"
+              src={
+                item.author.id
+                  ? item.author.id.profilePic || "/static/images/fire.png"
+                  : "/static/images/fire.png"
+              }
+              style={{ height: "30px", width: "30px" }}
+              alt="icon"
+            />
             <Typography variant="p" component="p">
               <p>{item.author.id ? item.author.id.displayName || "" : ""}</p>
             </Typography>
@@ -128,40 +133,39 @@ const FeedList = (props) => {
           <CardContent>
             {/* {feedTitle} */}
             <div
-              style={
-
-                {
-                  backgroundColor: "#e3b36f",
-                  border: "1px solid",
-                  height: "560px",
-                  overflow: "scroll",
-                  // display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                }
-              }
+              style={{
+                backgroundColor: "#e3b36f",
+                border: "1px solid",
+                height: "560px",
+                overflow: "scroll",
+                // display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
             >
               {" "}
               {titleArr}
-
             </div>
-            <div style = {{maringTop: "15px"}}>
-            <Input
-              id="inputFeed"
-              name="text"
-              type="text"
-              placeholder="add comment"
-              onChange={changeText}
-              value={text}
-            />
-            <Button      classes={{
-        root: classes.root, // class name, e.g. `classes-nesting-root-x`
-        label: classes.label, // class name, e.g. `classes-nesting-label-x`
-      }} size="small" onClick={handleSubmit}>
-              Submit
+            <div style={{ maringTop: "15px" }}>
+              <Input
+                id="inputFeed"
+                name="text"
+                type="text"
+                placeholder="add comment"
+                onChange={changeText}
+                value={text}
+              />
+              <Button
+                classes={{
+                  root: classes.root, // class name, e.g. `classes-nesting-root-x`
+                  label: classes.label, // class name, e.g. `classes-nesting-label-x`
+                }}
+                size="small"
+                onClick={handleSubmit}
+              >
+                Submit
               </Button>
             </div>
- 
           </CardContent>
         </Card>
       )}

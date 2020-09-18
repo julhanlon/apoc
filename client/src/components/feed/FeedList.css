@@ -1,34 +1,31 @@
 #commentCard {
-    height: 135px;
-    width: 420px;
-    margin-top: 8px;
-    margin-left: 20px;
+  height: 135px;
+  width: 420px;
+  margin-top: 8px;
+  margin-left: 20px;
 }
 
-
 #cardd {
-    background-color: #ede4df;
-    border-radius: 10px;
-    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-  }
+  background-color: #ede4df;
+  border-radius: 10px;
+  justify-content: center;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
 
+#feedCard {
+  border-radius: 20px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.25), 0 7px 7px rgba(0, 0, 0, 0.22);
+  justify-content: center;
+}
 
-  #feedCard {
-  
-    border-radius: 20px;
-    box-shadow: 0 8px 15px rgba(0,0,0,0.25), 0 7px 7px rgba(0,0,0,0.22);
-  }
+#inputFeed {
+  margin-left: 30px;
+}
 
-
-  #inputFeed {
-      margin-left: 30px;
-  }
-
-
-  #feedImage {
-    height: 30px;
-    width: 30px;
-    border-radius: 50%;
-    border: 1px solid #000;
-    margin: 10px;
+#feedImage {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  border: 1px solid #000;
+  margin: 10px;
 }

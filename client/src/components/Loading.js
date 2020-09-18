@@ -5,7 +5,6 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 
 function CircularProgressWithLabel(props) {
-  const classes = useStyles();
   return (
     <Box position="relative" display="inline-flex" style={{ marginTop: "5%" }}>
       <CircularProgress

@@ -6,6 +6,7 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import { Card } from '@material-ui/core';
 import ProfileButtons from "../auth/ProfileButtons";
+import ParticlesBg from "particles-bg";
 import "./Profile.css"
 
 let picArray = ["/static/images/error.png", "/static/images/fire.png", "/static/images/coronavirus.png", "/static/images/skull.png", "/static/images/virus.png"]
@@ -89,6 +90,41 @@ const Profile = () => {
     }
   }
 
+  let config = {
+    num: [4, 6],
+    rps: 0.6,
+    radius: [5, 30],
+    life: [1.5, 30],
+    v: [2, 3],
+    tha: [-40, 40],
+    alpha: [0.6, 0],
+    scale: [0.06, 0.14],
+    position: "all",
+    type: "ball",
+    // body: "import some image",
+    color: ["#c9c7c1", "‎#94928e"],
+    // cross: "dead",
+    emitter: "follow",
+    random: 5,
+  };
+
+  if (Math.random() > 0.85) {
+    config = Object.assign(config, {
+      onParticleUpdate: (ctx, particle) => {
+        ctx.beginPath();
+        ctx.rect(
+          particle.p.x,
+          particle.p.y,
+          particle.radius * 2,
+          particle.radius * 2
+        );
+        ctx.fillStyle = particle.color;
+        ctx.fill();
+        ctx.closePath();
+      },
+    });
+  }
+
 
   return (
     <div>
@@ -134,6 +170,7 @@ const Profile = () => {
         </div>
 
       </Container>
+      <ParticlesBg type="custom" config={config} bg={true} />
     </div>
   )
 }

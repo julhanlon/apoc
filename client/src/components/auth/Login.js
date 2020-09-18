@@ -39,7 +39,7 @@ let config = {
   v: [2, 3],
   tha: [-40, 40],
   alpha: [0.6, 0],
-  scale: [0.06, 0.14],
+  scale: [0.06, 0.1],
   position: "all",
   type: "ball",
   // body: "import some image",

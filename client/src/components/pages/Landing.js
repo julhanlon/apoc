@@ -2,6 +2,7 @@ import React from "react";
 import ParticlesBg from "particles-bg";
 import { Typography } from "@material-ui/core";
 import LoginButtons from "../auth/LoginButtons";
+import Virus from "./images/virus.png"
 import "./Landing.css"
 
 
@@ -49,6 +50,7 @@ const Landing = () => {
       <Typography variant="h1" component="h1">
         <span className="title fade-in">APOCALYPSE</span>
         <span className="title">. . . ?</span>
+        <span><img src={Virus} className = "covidImage" alt = "not working" /></span>
       </Typography>
 
       <ParticlesBg type="custom" config={config} bg={true} />

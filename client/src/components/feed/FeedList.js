@@ -4,21 +4,26 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import API from "../../utils/API";
-import Fire from "./images/fire.png";
-import Covid from "./images/coronavirus.png";
-import Errors from "./images/error.png";
-import Skull from "./images/skull.png";
-import Virus from "./images/virus.png";
+import { makeStyles } from '@material-ui/core/styles';
+import API from "../../utils/API"
 import "./FeedList.css";
 
-let randomImages = [Fire, Covid, Errors, Skull, Virus]
 
+const useStyles = makeStyles({
+  root: {
+    background: "#cd3239",
+    borderRadius: 15,
+    border: 0,
+    color: 'white',
+    height: 33,
+    padding: '0 15px',
+    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+  },
+  label: {
+    textTransform: 'capitalize',
+  },
+});
 
-const getRandomImage = () => {
-  let newPic = randomImages[Math.floor(Math.random() * randomImages.length)];
-  return newPic;
-}
 
 const convertDate = (date) => {
   let isoDate = date;
@@ -26,6 +31,7 @@ const convertDate = (date) => {
 };
 
 const FeedList = (props) => {
+  const classes = useStyles();
   const [feedItems, setFeedItems] = useState([]);
   const [show, setShow] = useState(true);
   const [text, setText] = useState("");
@@ -123,11 +129,10 @@ const FeedList = (props) => {
             {/* {feedTitle} */}
             <div
               style={
-                // { display: "flex", justifyContent: "space-around" }
 
                 {
                   border: "1px solid",
-                  height: "600px",
+                  height: "560px",
                   overflow: "scroll",
                   // display: "flex",
                   flexDirection: "column",
@@ -139,6 +144,7 @@ const FeedList = (props) => {
               {titleArr}
 
             </div>
+            <div style = {{maringTop: "15px"}}>
             <Input
               id="inputFeed"
               name="text"
@@ -147,9 +153,14 @@ const FeedList = (props) => {
               onChange={changeText}
               value={text}
             />
-            <Button size="small" onClick={handleSubmit}>
+            <Button      classes={{
+        root: classes.root, // class name, e.g. `classes-nesting-root-x`
+        label: classes.label, // class name, e.g. `classes-nesting-label-x`
+      }} size="small" onClick={handleSubmit}>
               Submit
               </Button>
+            </div>
+ 
           </CardContent>
         </Card>
       )}

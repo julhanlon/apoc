@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import Chip from "@material-ui/core/Chip";
-import FaceIcon from "@material-ui/icons/Face";
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
   root: {
-      background: "#1ecbe1",
+      background: "#F08211",
       borderRadius: 15,
       border: 0,
       color: 'white',

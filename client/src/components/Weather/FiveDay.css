@@ -2,6 +2,7 @@ img {
   height: 50px;
   width: auto;
   margin-top: 8px;
+  /* animation: swing 2s infinite ease-in-out; */
 }
 
 #card {
@@ -16,3 +17,12 @@ img {
   align-items: center;
   margin-left: 35px;
 }
+
+
+@keyframes swing {
+  0%, 100% { transform: rotate(-10deg);}
+  20% {transform: scale(.98);}
+  50% {transform: rotate(17deg);}
+  80% {transform: scale(.98);}
+  }
+  

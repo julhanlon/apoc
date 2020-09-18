@@ -14,16 +14,42 @@ import MyMap from "../mapsAndCharts/MyMap";
 import CityName from "../CityName";
 import SearchChips from "../SearchChips";
 import AuthButtons from "../auth/AuthButtons";
+import ParticlesBg from "particles-bg";
+import { makeStyles } from "@material-ui/core/styles";
 import "./Home.css";
+
 const maxDays = 60;
+
+const useStyles = makeStyles({
+  root: {
+    background: "#F0B711",
+    borderRadius: 15,
+    border: 0,
+    color: "white",
+    height: 33,
+    padding: "0 15px",
+    boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
+  },
+  label: {
+    textTransform: "capitalize",
+  },
+});
+
+
+
 const SuggestionsButton = (props) => {
+  const classes = useStyles();
   var array = props.options;
   let newItems = array.map((item, index) => {
     return (
       <Chip
+      classes={{
+        root: classes.root, // class name, e.g. `classes-nesting-root-x`
+        label: classes.label, // class name, e.g. `classes-nesting-label-x`
+      }}
         onClick={props.handleAuxButton}
-        variant="outlined"
-        color="secondary"
+        variant="contained"
+       size = "small"
         data-index={index}
         key={index}
         label={item.city}
@@ -379,11 +405,51 @@ const Home = () => {
     };
     setDangerData(obj);
   };
+
+
+  let config = {
+    num: [4, 6],
+    rps: 0.6,
+    radius: [5, 30],
+    life: [1.5, 30],
+    v: [2, 3],
+    tha: [-40, 40],
+    alpha: [0.6, 0],
+    scale: [0.06, 0.14],
+    position: "all",
+    type: "ball",
+    // body: "import some image",
+    color: ["#c9c7c1", "‎#94928e"],
+    // cross: "dead",
+    emitter: "follow",
+    random: 5,
+  };
+
+  if (Math.random() > 0.85) {
+    config = Object.assign(config, {
+      onParticleUpdate: (ctx, particle) => {
+        ctx.beginPath();
+        ctx.rect(
+          particle.p.x,
+          particle.p.y,
+          particle.radius * 2,
+          particle.radius * 2
+        );
+        ctx.fillStyle = particle.color;
+        ctx.fill();
+        ctx.closePath();
+      },
+    });
+  }
+
+
+
+
   return (
     <div className="page">
       <>
         <AuthButtons />
-        <Header />
+        <Header style = {{marginTop: "30px" }} />
         <div style={{ marginTop: "60px" }}>
           <Search
             className="search"
@@ -392,14 +458,14 @@ const Home = () => {
           />
 
           {suggestions ? (
-            <div style={{ marginLeft: "3%" }} className="AuxBtnsBox">
-              Did you mean...
+            <div style={{ marginLeft: "4%" }} className="AuxBtnsBox">
+              Did you mean:
               <>
                 <SuggestionsButton
                   className="AuxBtnsBox"
                   handleAuxButton={handleAuxButton}
                   options={suggestions}
-                  style={{ marginRight: "3%" }}
+                 
                 />
               </>
             </div>
@@ -494,6 +560,7 @@ const Home = () => {
           </>
         ) : null}
       </>
+      <ParticlesBg type="custom" config={config} bg={true} />
     </div>
   );
 };

@@ -9,7 +9,7 @@ import warning from "../images/warning.png";
 
 const Header = () => {
   return (
-    <div style={{ text: "center", marginBottom: "50px" }} >
+    <div style={{ text: "center", marginBottom: "50px"}} >
       <header >
         <div id="header">
         <Typography variant="h1" component="h1">

@@ -10,7 +10,7 @@ const buttonStyle = {
 
 const useStyles = makeStyles({
   root: {
-    background: "#cd3239",
+    background: "#F01711",
     borderRadius: 15,
     border: 0,
     color: "white",
@@ -52,10 +52,9 @@ const AuthButtons = () => {
               root: classes.root, // class name, e.g. `classes-nesting-root-x`
               label: classes.label, // class name, e.g. `classes-nesting-label-x`
             }}
-            style={{ float: "right", marginRight: "20px" }}
+            style={{ float: "right", marginRight: "20px", marginTop: "10px" }}
             variant="contained"
             size="small"
-            color="primary"
             onClick={logout}
           >
             Log Out
@@ -65,10 +64,9 @@ const AuthButtons = () => {
               root: classes.root, // class name, e.g. `classes-nesting-root-x`
               label: classes.label, // class name, e.g. `classes-nesting-label-x`
             }}
-            style={{ float: "right", marginRight: "20px" }}
+            style={{ float: "right", marginRight: "20px", marginTop: "10px" }}
             variant="contained"
             size="small"
-            color="primary"
             onClick={profile}
           >
             Profile
@@ -77,8 +75,11 @@ const AuthButtons = () => {
       ) : (
         <>
           <Button
+            classes={{
+              root: classes.root, // class name, e.g. `classes-nesting-root-x`
+              label: classes.label, // class name, e.g. `classes-nesting-label-x`
+            }}
             variant="contained"
-            color="secondary"
             size="small"
             style={buttonStyle}
             onClick={register}
@@ -92,7 +93,6 @@ const AuthButtons = () => {
               label: classes.label, // class name, e.g. `classes-nesting-label-x`
             }}
             variant="contained"
-            color="secondary"
             size="small"
             style={buttonStyle}
             onClick={login}

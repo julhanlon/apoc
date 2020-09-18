@@ -175,7 +175,6 @@ export default (props) => {
           </Button>
         </div>
       </div>
-
       <div style={{ height: "500px", display: "flex", justifyContent: "center"}}>
         <ResponsiveLine
           data={data}

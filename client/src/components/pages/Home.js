@@ -439,8 +439,9 @@ const Home = () => {
   }
 
   return (
-    <div className="page">
-      <>
+    <>
+      <div className="page">
+
         <AuthButtons />
         <Header style={{ marginTop: "30px" }} />
         <div style={{ marginTop: "60px" }}>
@@ -558,9 +559,9 @@ const Home = () => {
             </div>
           </>
         ) : null}
-      </>
+      </div>
       <ParticlesBg type="custom" config={config} bg={true} />
-    </div>
+    </>
   );
 };
 export default Home;

@@ -132,7 +132,7 @@ const FeedList = (props) => {
 
                 {
                   border: "1px solid",
-                  height: "550px",
+                  height: "560px",
                   overflow: "scroll",
                   // display: "flex",
                   flexDirection: "column",

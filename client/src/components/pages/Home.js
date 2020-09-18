@@ -14,6 +14,7 @@ import MyMap from "../mapsAndCharts/MyMap";
 import CityName from "../CityName";
 import SearchChips from "../SearchChips";
 import AuthButtons from "../auth/AuthButtons";
+import ParticlesBg from "particles-bg";
 import { makeStyles } from "@material-ui/core/styles";
 import "./Home.css";
 
@@ -404,6 +405,46 @@ const Home = () => {
     };
     setDangerData(obj);
   };
+
+
+  let config = {
+    num: [4, 6],
+    rps: 0.6,
+    radius: [5, 30],
+    life: [1.5, 30],
+    v: [2, 3],
+    tha: [-40, 40],
+    alpha: [0.6, 0],
+    scale: [0.06, 0.14],
+    position: "all",
+    type: "ball",
+    // body: "import some image",
+    color: ["#c9c7c1", "‎#94928e"],
+    // cross: "dead",
+    emitter: "follow",
+    random: 5,
+  };
+
+  if (Math.random() > 0.85) {
+    config = Object.assign(config, {
+      onParticleUpdate: (ctx, particle) => {
+        ctx.beginPath();
+        ctx.rect(
+          particle.p.x,
+          particle.p.y,
+          particle.radius * 2,
+          particle.radius * 2
+        );
+        ctx.fillStyle = particle.color;
+        ctx.fill();
+        ctx.closePath();
+      },
+    });
+  }
+
+
+
+
   return (
     <div className="page">
       <>
@@ -519,6 +560,7 @@ const Home = () => {
           </>
         ) : null}
       </>
+      <ParticlesBg type="custom" config={config} bg={true} />
     </div>
   );
 };

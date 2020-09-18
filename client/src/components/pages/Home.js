@@ -408,11 +408,11 @@ const Home = () => {
         <div id="loader">{loadingInfo ? <Loading /> : null}</div>
         {!loadingInfo ? (
           <>
-            <container style={{ marginLeft: "3%" }} className="QueryBtnsBox">
+            <div style={{ marginLeft: "3%" }} className="QueryBtnsBox">
               Recent searches:
               {<SearchChips buttonSubmit={setSubmitData} />}
               <br />
-            </container>
+            </div>
             <div
               style={{
                 display: "flex",
@@ -473,17 +473,17 @@ const Home = () => {
             >
               {/* <div style = {{display: "flex", justifyContent: "center"}}> */}
               {allData.weather && (
-                <Weather
+                <Weather style = {{width: "20%"}}
                   showCard={showCard}
                   show={dangerData.weather.show}
                   weatherObj={allData.weather}
                 />
               )}
-              {allData.weather && <FiveDay weatherObj={allData.weather} />}
+              {allData.weather && <FiveDay style = {{width: "27%"}} weatherObj={allData.weather} />}
               {/* </div> */}
               {allData.air && (
                 <div>
-                  <BarChart
+                  <BarChart style = {{width: "43%"}}
                     showCard={showCard}
                     show={dangerData.air.show}
                     airObj={allData.air}
@@ -493,7 +493,6 @@ const Home = () => {
             </div>
           </>
         ) : null}
-        {/* </ThemeProvider> */}
       </>
     </div>
   );

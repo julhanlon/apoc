@@ -89,35 +89,6 @@ const Profile = () => {
     }
   }
 
-  // const changeImageDown = async () => {
-
-   
-  //   if (imageIndex <= 0) {
-  //     setImageIndex(picArray.length - 1)
-  //     setEditImage(picArray[picArray.length-1])
-  //     try {
-  //       await API.editProfile("profilePic", picArray[picArray.length-1])
-    
-  //     } catch (err) {
-  //       console.log(err)
- 
-  //     }
-  //   }
-  //   else {
-  //     setImageIndex(imageIndex - 1);
-  //     setEditImage(picArray[imageIndex-1])
-  //     try {
-  //       await API.editProfile("profilePic",(picArray[imageIndex-1]))
-   
-  //     } catch (err) {
-  //       console.log(err)
-  
-  //     }
-
-  //   }
-
-  // }
-
 
   return (
     <div>
@@ -131,9 +102,6 @@ const Profile = () => {
             <Fab id = "profileFab" onClick={changeImageUp} color="primary" size = "small" aria-label="add">
               <AddIcon />
             </Fab>
-            {/* <Fab onClick={changeImageDown} color="primary" aria-label="add">
-              <AddIcon />
-            </Fab> */}
             <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
               <p style={{ marginRight: "10px" }}>Display Name:</p>
               {edit ? <input value={profileInfo.displayName} name="displayName" onChange={handleChange} onBlur={saveChange} /> :
@@ -166,9 +134,6 @@ const Profile = () => {
         </div>
 
       </Container>
-
-
-
     </div>
   )
 }

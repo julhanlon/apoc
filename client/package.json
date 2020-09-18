@@ -16,14 +16,12 @@
     "react": "^16.13.1",
     "react-animated-text": "^0.1.4",
     "react-blink-text": "^1.0.5",
-    "react-d3-speedometer": "^0.12.0",
     "react-dom": "^16.13.1",
     "react-gauge-chart": "^0.2.5",
     "react-leaflet": "^2.7.0",
     "react-loader": "^2.4.7",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
-    "react-simple-maps": "^2.1.2",
     "react-spinners-css": "^1.2.2"
   },
   "scripts": {

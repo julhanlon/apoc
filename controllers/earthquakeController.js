@@ -49,7 +49,7 @@ module.exports = {
           degToRad(eqLat),
           degToRad(eqLng)
         );
-        // console.log(distance);
+     
 
         if (distance <= d) {
           const eqObj = {
@@ -63,11 +63,11 @@ module.exports = {
           result.push(eqObj);
         }
       });
-      // console.log("n=", result.length, "eq objects");
+    
       return result;
     } catch (error) {
       console.log(error);
     }
   },
 };
-//https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp
+

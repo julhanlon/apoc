@@ -59,7 +59,10 @@ export default (props) => {
             <Typography variant="h4" component="h4">
               <p style={{ textAlign: "center" }}>Air Quality Index</p>
             </Typography>
-            <Modal style = {{marginTop: "30px", marginRight: "10px" }} />
+            <div style = {{marginTop: "30px", marginLeft: "10px" }}>
+            <Modal/>
+            </div>
+           
           </div>
           <div style={{ display: "flex", marginLeft: "20px" }}>
 

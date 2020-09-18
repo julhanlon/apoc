@@ -100,7 +100,7 @@ export default (props) => {
         <p style={titleStyle}>Covid Chart</p>
       </Typography>
       <div style={{display: "flex", justifyContent: "space-between" }}>
-        <div style = {{marginLeft: "10px"}}> 
+        <div style = {{marginLeft: "20px"}}> 
         <Button
        classes={{
         root: classes.root, // class name, e.g. `classes-nesting-root-x`
@@ -144,7 +144,7 @@ export default (props) => {
           2 Months
         </Button>
         </div>
-        <div style={{ float: "right", marginRight: "10px" }}>
+        <div style={{ float: "right", marginRight: "20px" }}>
           <Button
             classes={{
               root: classes.root, // class name, e.g. `classes-nesting-root-x`

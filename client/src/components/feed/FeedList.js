@@ -72,7 +72,7 @@ const FeedList = (props) => {
       <Card id="cardd">
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <div style={{ display: "flex", justifyContent: "center" }}>
-            <img id="feedImage" src={getRandomImage} style = {{height: "30px", width: "30px"}} alt="icon" />
+            <img id="feedImage" src={item.author.id ? item.author.id.profilePic || "/static/images/fire.png" : "/static/images/fire.png"} style = {{height: "30px", width: "30px"}} alt="icon" />
             <Typography variant="p" component="p">
               <p>{item.author.id ? item.author.id.displayName || "" : ""}</p>
             </Typography>

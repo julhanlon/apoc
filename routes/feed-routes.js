@@ -21,7 +21,7 @@ router.get("/feed/user", auth, async (req, res) => {
 
 //get all posts based on location
 router.get("/feed/city", auth, async (req, res) => {
-  const { city, state_name, county } = req.query;
+  const { city, state_name, county, profilePic } = req.query;
 
   if (!city || !state_name)
     return res.status(400).json({ msg: "Please enter city and state" });
@@ -34,7 +34,8 @@ router.get("/feed/city", auth, async (req, res) => {
           city: city,
           state_name: state_name,
         },
-      }).populate({ path: "author.id", select: "displayName -_id" });
+        
+      }).populate({ path: "author.id", select: "displayName profilePic -_id" })
       return res.json({ data: feedListData });
     } catch (err) {
       return res.status(500).json({ msg: "no data found" });
@@ -57,7 +58,7 @@ router.get("/feed/city", auth, async (req, res) => {
         city: `${dbCityInfo.data[0].city}`,
         state_name: `${dbCityInfo.data[0].state_name}`,
       },
-    }).populate({ path: "author.id", select: "displayName -_id" });
+    }).populate({ path: "author.id", select: "displayName profilePic -_id" })
     console.log("feedlist data from feeroutes: ", { feedListData });
     return res.json({ data: feedListData });
   } catch (error) {

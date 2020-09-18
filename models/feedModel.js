@@ -1,9 +1,8 @@
 const mongoose = require("mongoose");
 
 const FeedSchema = new mongoose.Schema({
-  // created_time: { type: String, trim: true, required: true },
   text: { type: String, trim: true, required: true },
-  // author: { type: String, required: true },
+  
   location: {
     city: {
       type: String,
@@ -12,7 +11,7 @@ const FeedSchema = new mongoose.Schema({
       type: String,
     },
   },
-  // location: { type: String, required: false },
+
 
   date: {
     type: Date,

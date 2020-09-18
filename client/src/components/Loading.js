@@ -15,7 +15,7 @@ function CircularProgressWithLabel(props) {
   const classes = useStyles();
   return (
     <Box position="relative" display="inline-flex" style={{ marginTop: "5%" }}>
-      <CircularProgress size="14rem" variant="static" {...props} />
+      <CircularProgress size="14rem" color = "secondary" variant="static" {...props} />
       <Box
         top={0}
         left={0}
@@ -29,7 +29,7 @@ function CircularProgressWithLabel(props) {
         <Typography
           variant="caption"
           component="div"
-          color="red"
+          color="default"
         >{`${Math.round(props.value)}%`}</Typography>
       </Box>
     </Box>

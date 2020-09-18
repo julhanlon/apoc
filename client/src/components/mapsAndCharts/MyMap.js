@@ -14,6 +14,22 @@ const useStyles = makeStyles({
   },
 });
 
+const useStyles2 = makeStyles({
+  root: {
+    background: "#F01711",
+    borderRadius: 15,
+    border: 0,
+    color: 'white',
+    height: 33,
+    padding: '0 15px',
+    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+  },
+  label: {
+    textTransform: 'capitalize',
+  },
+});
+
+
 const marks = [
   {
     value: 0,

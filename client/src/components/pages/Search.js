@@ -3,14 +3,14 @@ import { Input, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 const divStyle = {
-  marginBottom: "30px",
+  marginBottom: "20px",
   marginLeft: "40px",
   marginTop: "60px",
 };
 
 const useStyles = makeStyles({
   root: {
-    background: "#cd3239",
+    background: "#F01711",
     borderRadius: 15,
     border: 0,
     color: "white",
@@ -72,7 +72,6 @@ const Search = (props) => {
             label: classes.label, // class name, e.g. `classes-nesting-label-x`
           }}
           variant="contained"
-          color="primary"
           size="small"
           disabled={props.loadingInfo}
           onClick={buttonSubmit}

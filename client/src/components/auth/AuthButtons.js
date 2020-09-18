@@ -11,7 +11,7 @@ const buttonStyle = {
 
 const useStyles = makeStyles({
   root: {
-    background: "#cd3239",
+    background: "#F01711",
     borderRadius: 15,
     border: 0,
     color: 'white',
@@ -50,26 +50,29 @@ const AuthButtons = () => {
         <>     <Button classes={{
           root: classes.root, // class name, e.g. `classes-nesting-root-x`
           label: classes.label, // class name, e.g. `classes-nesting-label-x`
-        }} style={{ float: 'right', marginRight: "20px" }} variant="contained" size="small" color="primary" onClick={logout}>
+        }} style={{ float: 'right', marginRight: "20px", marginTop: "10px" }} variant="contained" size="small" onClick={logout}>
           Log Out
     </Button>
           <Button classes={{
             root: classes.root, // class name, e.g. `classes-nesting-root-x`
             label: classes.label, // class name, e.g. `classes-nesting-label-x`
-          }} style={{ float: 'right', marginRight: "20px" }} variant="contained" size="small" color="primary" onClick={profile}>
+          }} style={{ float: 'right', marginRight: "20px", marginTop: "10px" }} variant="contained" size="small" onClick={profile}>
             Profile
      </Button>
         </>
       ) : (
           <>
-            <Button variant="contained" color="secondary" size="small" style={buttonStyle} onClick={register}>
+            <Button classes={{
+              root: classes.root, // class name, e.g. `classes-nesting-root-x`
+              label: classes.label, // class name, e.g. `classes-nesting-label-x`
+            }} variant="contained" size="small" style={buttonStyle} onClick={register}>
               Register
     </Button>
 
             <Button classes={{
               root: classes.root, // class name, e.g. `classes-nesting-root-x`
               label: classes.label, // class name, e.g. `classes-nesting-label-x`
-            }} variant="contained" color="secondary" size="small" style={buttonStyle} onClick={login}>
+            }} variant="contained"  size="small" style={buttonStyle} onClick={login}>
               Log in
     </Button>
           </>

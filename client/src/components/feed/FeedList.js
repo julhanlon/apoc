@@ -11,7 +11,7 @@ import "./FeedList.css";
 
 const useStyles = makeStyles({
   root: {
-    background: "#cd3239",
+    background: "#F01711",
     borderRadius: 15,
     border: 0,
     color: 'white',
@@ -131,7 +131,6 @@ const FeedList = (props) => {
               style={
 
                 {
-                  backgroundColor: "#e3b36f",
                   border: "1px solid",
                   height: "560px",
                   overflow: "scroll",

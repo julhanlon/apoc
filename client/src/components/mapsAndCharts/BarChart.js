@@ -11,7 +11,7 @@ import "./BarChart.css"
 
 const useStyles = makeStyles({
   root: {
-    background: "#cd3239",
+    background: "#F01711",
     borderRadius: 15,
     border: 0,
     color: 'white',

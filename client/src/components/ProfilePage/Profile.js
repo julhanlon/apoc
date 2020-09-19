@@ -7,12 +7,21 @@ import AddIcon from '@material-ui/icons/Add';
 import { Card } from '@material-ui/core';
 import ProfileButtons from "../auth/ProfileButtons";
 import ParticlesBg from "particles-bg";
+import { makeStyles } from '@material-ui/core/styles';
 import "./Profile.css"
 
-let picArray = ["/static/images/error.png", "/static/images/fire.png", "/static/images/coronavirus.png", "/static/images/skull.png", "/static/images/virus.png"]
+const useStyles = makeStyles({
+  root: {
+      background: "#e0890d",
+  },
+
+});
+
+
+let picArray = ["/static/images/error.png", "/static/images/gasmask.png", "/static/images/warning.png", "/static/images/mask.png", "/static/images/fire.png", "/static/images/coronavirus.png", "/static/images/skull.png", "/static/images/virus.png"]
 
 const Profile = () => {
-
+  const classes = useStyles();
   const [profileInfo, setProfileInfo] = useState({});
   const [edit, setEdit] = useState(false);
   const [editLast, setEditLast] = useState(false);
@@ -98,7 +107,7 @@ const Profile = () => {
     v: [2, 3],
     tha: [-40, 40],
     alpha: [0.6, 0],
-    scale: [0.06, 0.14],
+    scale: [0.06, 0.1],
     position: "all",
     type: "ball",
     // body: "import some image",
@@ -135,7 +144,10 @@ const Profile = () => {
             <div style={{ display: "flex", justifyContent: "center" }}>
               <img src={editImage} id="profileImage" alt="not working" />
             </div>
-            <Fab id = "profileFab" onClick={changeImageUp} color="primary" size = "small" aria-label="add">
+            <Fab classes={{
+                            root: classes.root, // class name, e.g. `classes-nesting-root-x`
+                           
+                        }} id = "profileFab" onClick={changeImageUp} size = "small" aria-label="add">
               <AddIcon />
             </Fab>
             <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>

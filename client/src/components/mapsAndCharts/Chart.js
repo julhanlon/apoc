@@ -107,9 +107,7 @@ export default (props) => {
         label: classes.label, // class name, e.g. `classes-nesting-label-x`
       }}
           variant="contained"
-          color="primary"
           size="small"
-
           style={buttonStyle}
           onClick={changeNumber}
           value={7}
@@ -121,7 +119,6 @@ export default (props) => {
         label: classes.label, // class name, e.g. `classes-nesting-label-x`
       }}
           variant="contained"
-          color="primary"
           size="small"
           style={buttonStyle}
           onClick={changeNumber}
@@ -135,7 +132,6 @@ export default (props) => {
             label: classes.label, // class name, e.g. `classes-nesting-label-x`
           }}
           variant="contained"
-          color="primary"
           size="small"
           style={buttonStyle}
           onClick={changeNumber}
@@ -150,9 +146,7 @@ export default (props) => {
               root: classes.root, // class name, e.g. `classes-nesting-root-x`
               label: classes.label, // class name, e.g. `classes-nesting-label-x`
             }}
-          color = "orange"
             variant="contained"
-            color="primary"
             size="small"
             style={{ marginRight: "10px" }}
             onClick={addArea}
@@ -166,7 +160,6 @@ export default (props) => {
             label: classes.label, // class name, e.g. `classes-nesting-label-x`
           }}
             variant="contained"
-            color="primary"
             size="small"
             onClick={addArea}
             value="false"
